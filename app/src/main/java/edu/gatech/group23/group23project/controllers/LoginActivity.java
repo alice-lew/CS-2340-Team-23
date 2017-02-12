@@ -3,6 +3,8 @@ package edu.gatech.group23.group23project.controllers;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -90,6 +92,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+
             }
         });
 
@@ -102,7 +105,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 finish();
+
             }
         });
 
@@ -201,6 +206,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+            //Context context = view.getContext();
+            Intent intent = new Intent(getApplicationContext(), LoggedInActivity.class);
+            getApplicationContext().startActivity(intent);
+
         }
     }
 

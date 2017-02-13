@@ -206,12 +206,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            //Context context = view.getContext();
-            Intent intent = new Intent(getApplicationContext(), LoggedInActivity.class);
-            getApplicationContext().startActivity(intent);
-
         }
     }
+
+
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -360,8 +358,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                //NOTE TO PROGRAMMER: This is where you would change the scene to say login was successful
-                finish();
+                //Context context = view.getContext();
+                Intent intent = new Intent(getApplicationContext(), LoggedInActivity.class);
+                getApplicationContext().startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

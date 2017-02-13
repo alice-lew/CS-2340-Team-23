@@ -29,6 +29,10 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".LoginActivity1"
+            android:label="@string/title_activity_login1" />
+        <activity android:name=".controllers.MainActivity"></activity>
     </application>
 
 </manifest>

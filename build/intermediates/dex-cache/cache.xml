@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.1_0224a597ee5eab3472922efc239921cab1ca92e0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.1_b25ca4a2c6b230c01da7b61d2fc918d1ab1c01f7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.1.1_348d48a0fc1211290ac87b53ec93b609ddef20a7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.1/support-annotations-25.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.1_adaa7e106ec1dec7fd62de25c0939fe04b2267d4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.1.1_9df95b3acec04c474d686a0701a0d1f8a85316e5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.1_57b66d8c13a0a4e3b2e9774d1041e429fa9c4f5f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.1.1_35f4034fa57609ef4cf1744139ac4df1a9e1c4c4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.1_18a0af5d16cc03a07e5431212313a85011b5ccbb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.1_0332eeb4a429c71697fa66649ac9ee2a43eb0de7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8285b0f30974c1d82917f91f4cb662c3a15a4c06">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a76849ca017b5bb4b0b999cece2a8cd837e38efa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/design/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.1.1_25b35679e55f2167157bcef51d03e1b8445c27ab/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.1_59699462e80b1d866dc342b013e6b417b8921dcf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.1.1_951aad6be8f20eedb4f5dc82918ffded1202f65a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.1_c0d57fb6889a5b6bd8d63efcf658814a9c51dc00/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3826e95ecf6ab65f4c4a84693bdc9651ed1deeb1">
+        <dex dex="/Users/gautum/Desktop/CS-2340-Team-23/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_c04abef478285ffcbc9660e3796bfa316ab75e94/classes.dex" />
+    </item>
+
+</items>

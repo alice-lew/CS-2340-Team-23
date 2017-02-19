@@ -3,23 +3,21 @@ package edu.gatech.group23.group23project.controllers;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
+import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -35,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.gatech.group23.group23project.R;
+import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.User;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -71,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Model.registerUser("test", "user");
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -92,7 +94,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-
             }
         });
 
@@ -102,12 +103,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //button to cancel logging in and return to the welcome screen
         Button cancelButton = (Button) findViewById(R.id.cancelLoginButton);
         cancelButton.setText("CANCEL");
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        cancelButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 finish();
-
             }
         });
 
@@ -130,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
+                    .setAction(android.R.string.ok, new OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
                         public void onClick(View v) {
@@ -208,8 +207,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask.execute((Void) null);
         }
     }
-
-
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -340,8 +337,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
+            for (User aUser : Model.getUserList()) {
+                String[] pieces = aUser.getCredentials().split(":");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
@@ -358,9 +355,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                //Context context = view.getContext();
-                Intent intent = new Intent(getApplicationContext(), LoggedInActivity.class);
-                getApplicationContext().startActivity(intent);
+                //NOTE TO PROGRAMMER: This is where you would change the scene to say login was successful
+                Context context = LoginActivity.this;
+                Intent intent = new Intent(context, LoggedInActivity.class);
+                context.startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

@@ -32,5 +32,14 @@ public class WelcomeActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, RegisterActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 }

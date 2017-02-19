@@ -5,12 +5,19 @@
     android:weightSum="1">
 
     <TextView
-        android:text="Successful Login!"
+        android:text="You are now signed in!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
         android:layout_weight="0.07"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <Button
+        android:text="Edit Profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileEditButton"
+        android:layout_weight="0.07" />
 
     <Button
         android:text="Logout"

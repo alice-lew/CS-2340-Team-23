@@ -15,14 +15,24 @@ import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.User;
 
+/**
+ * The page that lets a user edit their profile
+ *
+ * Created by Noah Blume on 2/19/2017.
+ */
 public class EditProfileActivity extends AppCompatActivity {
 
+    //input fields for the edit profile page
     private EditText emailText;
     private EditText addressText;
     private EditText titleText;
 
+    //gets the instance of the model
     private Model modelInstance = Model.getInstance();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +60,16 @@ public class EditProfileActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptRegister();
+                attemptEditProfile();
             }
         });
     }
 
-    private void attemptRegister() {
+    /**
+     * Checks the input the user entered in the edit profile page, and attempts to edit the user profile
+     * Will alert the user if they failed to properly enter input to one of the input fields
+     */
+    private void attemptEditProfile() {
         emailText.setError(null);
         addressText.setError(null);
         titleText.setError(null);
@@ -80,8 +94,12 @@ public class EditProfileActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onBackPressed() {
+        //makes the hardware back button return to the logged in screen
         Context context = EditProfileActivity.this;
         Intent intent = new Intent(context, LoggedInActivity.class);
         context.startActivity(intent);

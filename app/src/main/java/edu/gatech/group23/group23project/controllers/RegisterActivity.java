@@ -14,8 +14,14 @@ import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.User;
 
+/**
+ * The page where the user may register an account
+ *
+ * Created by Noah Blume on 2/19/2017
+ */
 public class RegisterActivity extends AppCompatActivity {
 
+    //input fields for the registry page
     private EditText nameText;
     private EditText userText;
     private EditText passText;
@@ -24,8 +30,12 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText titleText;
     private Spinner userTypeSpinner;
 
+    //the model singleton object
     private Model modelInstance = Model.getInstance();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +73,10 @@ public class RegisterActivity extends AppCompatActivity {
         userTypeSpinner.setAdapter(adapter);
     }
 
+    /**
+     * Checks the input the user entered in the registry page, and attempts to register the user
+     * Will alert the user if they failed to properly enter input to one of the input fields
+     */
     private void attemptRegister() {
         userText.setError(null);
         passText.setError(null);
@@ -95,8 +109,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onBackPressed() {
+        //makes the hardware back button return to the welcome activity
         Context context = RegisterActivity.this;
         Intent intent = new Intent(context, WelcomeActivity.class);
         context.startActivity(intent);

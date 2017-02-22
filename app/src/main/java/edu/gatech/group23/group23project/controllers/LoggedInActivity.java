@@ -16,13 +16,19 @@ import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 
 /**
+ * The screen users are brought to after logging in
+ *
  * Created by Asher on 2/12/2017.
  */
 
 public class LoggedInActivity extends AppCompatActivity {
 
-    private Model modelInstance = Model.getInstance();
+    private Model modelInstance = Model.getInstance();  //gets the instance of the model
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in);
@@ -53,8 +59,12 @@ public class LoggedInActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onBackPressed() {
+        //changes the hardware back button functionality to return the user to the welcome page
         Context context = LoggedInActivity.this;
         Intent intent = new Intent(context, WelcomeActivity.class);
         context.startActivity(intent);

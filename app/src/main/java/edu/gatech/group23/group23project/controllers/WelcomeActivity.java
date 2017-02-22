@@ -10,8 +10,16 @@ import android.widget.TextView;
 
 import edu.gatech.group23.group23project.R;
 
+/**
+ * The first activity of the application where users can sign in or register
+ *
+ * Created by Noah Blume on 2/10/2017
+ */
 public class WelcomeActivity extends AppCompatActivity {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +51,12 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onBackPressed() {
+        //makes the hardware back button return to the phone's home screen
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

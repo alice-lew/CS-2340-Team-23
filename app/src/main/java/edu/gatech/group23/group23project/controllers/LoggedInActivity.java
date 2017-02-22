@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.gatech.group23.group23project.R;
+import edu.gatech.group23.group23project.model.Model;
 
 /**
  * Created by Asher on 2/12/2017.
@@ -20,7 +21,7 @@ import edu.gatech.group23.group23project.R;
 
 public class LoggedInActivity extends AppCompatActivity {
 
-
+    private Model modelInstance = Model.getInstance();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ public class LoggedInActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                modelInstance.setCurrentUser(null);
                 Context context = view.getContext();
                 Intent intent = new Intent(context, WelcomeActivity.class);
                 context.startActivity(intent);
@@ -49,5 +51,13 @@ public class LoggedInActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Context context = LoggedInActivity.this;
+        Intent intent = new Intent(context, WelcomeActivity.class);
+        context.startActivity(intent);
+        return;
     }
 }

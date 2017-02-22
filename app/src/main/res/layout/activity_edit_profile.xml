@@ -10,4 +10,82 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.gatech.group23.group23project.controllers.EditProfileActivity">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailBox"
+        android:hint="Email"
+        android:background="@android:drawable/editbox_background"
+        android:layout_below="@+id/emailText"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Change Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordBox"
+        android:layout_alignParentStart="true"
+        android:id="@+id/emailText" />
+
+    <TextView
+        android:text="Change Address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addressText"
+        android:layout_below="@+id/emailText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp" />
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancelButton"
+        android:layout_below="@+id/saveButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:layout_below="@+id/addressText"
+        android:layout_alignParentStart="true"
+        android:id="@+id/addressBox"
+        android:background="@android:drawable/editbox_background"
+        android:hint="Address" />
+
+
+    <TextView
+        android:text="Change Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addressBox"
+        android:layout_alignParentStart="true"
+        android:id="@+id/titleText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/titleText"
+        android:layout_alignParentStart="true"
+        android:id="@+id/titleBox"
+        android:hint="Title"
+        android:background="@android:drawable/editbox_background" />
+
+    <Button
+        android:text="Save Changes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveButton"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/titleBox"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

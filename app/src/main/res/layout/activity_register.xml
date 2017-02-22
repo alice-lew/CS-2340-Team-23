@@ -15,10 +15,48 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
+        android:id="@+id/nameBox"
+        android:layout_below="@+id/nameText"
+        android:layout_alignParentStart="true"
+        android:background="@android:drawable/editbox_background"
+        android:hint="Name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
         android:id="@+id/usernameBox"
         android:hint="Username"
         android:background="@android:drawable/editbox_background"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/usernameText"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailBox"
+        android:hint="Email"
+        android:background="@android:drawable/editbox_background"
+        android:layout_below="@+id/emailText"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordBox"
+        android:layout_alignParentStart="true"
+        android:id="@+id/emailText" />
+
+    <TextView
+        android:text="Choose a password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordText"
+        android:layout_below="@+id/usernameBox"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -26,45 +64,101 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:layout_below="@+id/usernameBox"
-        android:layout_alignEnd="@+id/usernameBox"
-        android:layout_marginTop="37dp"
         android:id="@+id/passwordBox"
         android:hint="Password"
-        android:background="@android:drawable/editbox_background" />
+        android:background="@android:drawable/editbox_background"
+        android:layout_below="@+id/passwordText"
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="Choose a password"
+        android:text="Address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/usernameBox"
-        android:layout_marginTop="18dp"
-        android:id="@+id/textView" />
-
-    <TextView
-        android:text="Choose a username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:id="@+id/addressText"
+        android:layout_below="@+id/emailText"
         android:layout_alignParentStart="true"
-        android:id="@+id/textView2" />
-
-    <Button
-        android:text="Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:id="@+id/registerButton"
-        android:layout_below="@+id/passwordBox"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginTop="34dp" />
 
     <Button
         android:text="Cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cancelButton"
-        android:layout_below="@+id/registerButton"
+        android:layout_below="@+id/saveButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:layout_below="@+id/addressText"
+        android:layout_alignParentStart="true"
+        android:id="@+id/addressBox"
+        android:background="@android:drawable/editbox_background"
+        android:hint="Address" />
+
+    <TextView
+        android:text="Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addressBox"
+        android:layout_alignParentStart="true"
+        android:id="@+id/titleText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/titleText"
+        android:layout_alignParentStart="true"
+        android:id="@+id/titleBox"
+        android:hint="Title"
+        android:background="@android:drawable/editbox_background" />
+
+    <TextView
+        android:text="User Type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userTypeText"
+        android:layout_below="@+id/titleBox"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userTypeSpinner"
+        android:layout_below="@+id/userTypeText"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveButton"
+        android:layout_below="@+id/userTypeSpinner"
+        android:layout_marginTop="15dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Enter Your Full Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameText"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+
+
+    <TextView
+        android:text="Choose a username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/usernameText"
+        android:layout_below="@+id/nameBox"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

@@ -56,6 +56,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             "user:pass"
             //"foo@example.com:hello", "bar@example.com:world"
     };
+
+    private static Model modelInstance = Model.getInstance();
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -72,7 +74,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Model.registerUser("test", "user");
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -337,11 +338,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (User aUser : Model.getUserList()) {
+            for (User aUser : modelInstance.getUserList()) {
                 String[] pieces = aUser.getCredentials().split(":");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                    if(pieces[1].equals(mPassword)) {
+                        modelInstance.setCurrentUser(aUser);
+                        return true;
+                    }
                 }
             }
 
@@ -370,6 +374,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Context context = LoginActivity.this;
+        Intent intent = new Intent(context, WelcomeActivity.class);
+        context.startActivity(intent);
+        return;
     }
 }
 

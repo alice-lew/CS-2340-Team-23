@@ -19,7 +19,7 @@ public class WelcomeActivity extends AppCompatActivity {
         TextView welcomeText = (TextView) findViewById(R.id.welcomeText);
         TextView instructionsText = (TextView) findViewById(R.id.welcomeInstructionsText);
         Button loginButton = (Button) findViewById(R.id.loginButton);
-        Button registerButton = (Button) findViewById(R.id.registerButton);
+        Button registerButton = (Button) findViewById(R.id.saveButton);
         welcomeText.setText("Welcome!");
         instructionsText.setText("Please sign in or register an account.");
         loginButton.setText("SIGN IN");
@@ -41,5 +41,14 @@ public class WelcomeActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(startMain);
+        return;
     }
 }

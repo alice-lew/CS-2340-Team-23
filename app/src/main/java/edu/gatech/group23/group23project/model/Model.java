@@ -1,6 +1,8 @@
 package edu.gatech.group23.group23project.model;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 
 /**
  * The model singleton object for the application
@@ -8,7 +10,11 @@ import java.util.ArrayList;
  * Created by Noah Blume on 2/19/2017.
  */
 public class Model {
+    private static HashSet<WaterSourceReport> repSet = new HashSet<>();
+    private static HashSet<User> userSet = new HashSet<>();
+    private static int numRepCreated;
     private static ArrayList<User> userList = new ArrayList<>(); //stores a list of the users
+    private static ArrayList<WaterSourceReport> repList = new ArrayList<>(); //stores a list of the users
     private static Model modelSingleton;    //the model singleton
 
     private User currentUser;    //keeps track of the user who is currently signed in
@@ -30,10 +36,44 @@ public class Model {
     }
 
     /**
+     * An enum of all of the possible water types
+     */
+    public enum WaterType {
+        BOTTLED("Bottled"), WELL("Well"), STREAM("Stream"), LAKE("Lake"), SPRING("Spring"), OTHER("Other");
+
+        private String typeString;
+        WaterType(String s) {
+            typeString = s;
+        }
+
+        public String getTypeString() {
+            return typeString;
+        }
+    }
+
+    /**
+     * An enum of all of the possible water conditions
+     */
+    public enum WaterCondition {
+        WASTE("Waste"), TREATABLECLEAR("Treatable-Clear"), TREATABLEMUDDY("Treatable-Muddy"), POTABLE("Potable");
+
+        private String typeString;
+        WaterCondition(String s) {
+            typeString = s;
+        }
+
+        public String getConditionString() {
+            return typeString;
+        }
+    }
+
+    /**
      * constructor for the model, sets up necessary parts of the model
      */
     private Model() {
-
+        User defaultAdmin = new User("admin", "admin", "admin", "Admin@admin.com", "admin drive", "admin title", UserType.ADMIN);
+        userList.add(defaultAdmin);
+        userSet.add(defaultAdmin);
     }
 
     /**
@@ -61,6 +101,7 @@ public class Model {
     public User registerUser(String name, String user, String pass, String email, String address, String title, UserType type) {
         User newUser = new User(name, user, pass, email, address, title, type);
         userList.add(newUser);
+        userSet.add(newUser);
         return newUser;
     }
 
@@ -102,5 +143,14 @@ public class Model {
      */
     public ArrayList<User> getUserList() {
         return userList;
+    }
+    public ArrayList<WaterSourceReport> getReportList(){ return repList;}
+
+    public WaterSourceReport submitWaterReport(User sub, Date subDate, String lat, String lng, Model.WaterType type, Model.WaterCondition condition) {
+        numRepCreated++;
+        WaterSourceReport newRep = new WaterSourceReport(sub, subDate, lat, lng, type, condition, numRepCreated);
+        repSet.add(newRep);
+        repList.add(newRep);
+        return newRep;
     }
 }

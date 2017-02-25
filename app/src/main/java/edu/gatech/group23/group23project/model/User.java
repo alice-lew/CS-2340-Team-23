@@ -1,6 +1,7 @@
 package edu.gatech.group23.group23project.model;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public class User {
     private String password;                //the user's password
     private String name;                    //the user's name
     private Model.UserType userType;        //the type of user
+    private HashSet<WaterSourceReport> myReports = new HashSet<>();
 
     /**
      * A list of the possible userTypes a user can be
@@ -59,6 +61,14 @@ public class User {
         homeAddress = address;
         title = aTitle;
         userType = type;
+    }
+
+    /**
+     * Gets the user's name for another class
+     * @return the user's name
+     */
+    public String getName() {
+        return name;
     }
 
     /**
@@ -116,4 +126,27 @@ public class User {
     public String getCredentials() {
         return username + ":" + password;
     }
+
+    /**
+     * Gets the user's username and password for another class
+     * @return a String consisting of the user's username and password
+     */
+    public String getUsername() { return username;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false;}
+        if (this == o) { return true;}
+        if (!(o instanceof User)) {
+            return false;
+        }
+        User oUser = (User) o;
+        if (oUser.getUsername() == this.username) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() { return username.hashCode();}
 }

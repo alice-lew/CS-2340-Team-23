@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import edu.gatech.group23.group23project.R;
+import edu.gatech.group23.group23project.model.Model;
 
 /**
  * The first activity of the application where users can sign in or register
@@ -16,6 +17,7 @@ import edu.gatech.group23.group23project.R;
  * Created by Noah Blume on 2/10/2017
  */
 public class WelcomeActivity extends AppCompatActivity {
+    private Model modelInstance = Model.getInstance();
 
     /**
      * {@inheritDoc}

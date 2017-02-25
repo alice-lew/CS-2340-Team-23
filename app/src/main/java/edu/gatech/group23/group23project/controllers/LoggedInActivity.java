@@ -37,6 +37,8 @@ public class LoggedInActivity extends AppCompatActivity {
         //button to cancel logging in and return to the welcome screen
         Button logoutButton = (Button) findViewById(R.id.logoutButton);
         Button profileEditButton = (Button) findViewById(R.id.profileEditButton);
+        Button submitReportButton = (Button) findViewById(R.id.submitReportButton);
+        Button viewReportListButton = (Button) findViewById(R.id.reportListButton);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +55,24 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, EditProfileActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        submitReportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, SubmitReportActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        viewReportListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, ReportListActivity.class);
                 context.startActivity(intent);
             }
         });

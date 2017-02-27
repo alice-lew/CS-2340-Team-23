@@ -39,6 +39,7 @@ public class LoggedInActivity extends AppCompatActivity {
         Button profileEditButton = (Button) findViewById(R.id.profileEditButton);
         Button submitReportButton = (Button) findViewById(R.id.submitReportButton);
         Button viewReportListButton = (Button) findViewById(R.id.reportListButton);
+        Button viewMapButton = (Button) findViewById(R.id.viewMapButton);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +74,15 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ReportListActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        viewMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, WaterMapActivity.class);
                 context.startActivity(intent);
             }
         });

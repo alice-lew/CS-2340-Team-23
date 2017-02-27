@@ -16,8 +16,8 @@ public class WaterSourceReport {
     private Date dateSubmitted;
     private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
     private String reporterName;
-    private String latitude;
-    private String longitude;
+    private double latitude;
+    private double longitude;
     private Model.WaterType waterType;
     private Model.WaterCondition waterCondition;
     private int reportNumber;
@@ -66,7 +66,7 @@ public class WaterSourceReport {
         return Model.WaterCondition.WASTE;
     }
 
-    public WaterSourceReport(User sub, Date subDate, String lat, String lng, Model.WaterType type, Model.WaterCondition condition, int number) {
+    public WaterSourceReport(User sub, Date subDate, double lat, double lng, Model.WaterType type, Model.WaterCondition condition, int number) {
         submitter = sub;
         dateSubmitted = subDate;
         reporterName = submitter.getName();
@@ -79,8 +79,8 @@ public class WaterSourceReport {
 
     public User getSubmitter() { return submitter;}
     public Date getDateSubmitted() { return dateSubmitted;}
-    public String getLatitude() { return latitude;}
-    public String getLongitude() { return longitude;}
+    public double getLatitude() { return latitude;}
+    public double getLongitude() { return longitude;}
     public String getReporterName() { return reporterName;}
     public Model.WaterType getWaterType() { return waterType;}
     public Model.WaterCondition getWaterCondition() { return waterCondition;}
@@ -109,6 +109,10 @@ public class WaterSourceReport {
     public String toString() {
         return "Report number: " + reportNumber + ", Submitted by: " + reporterName
                 + "\nLocated at latitude: " + latitude + ", longitude: " + longitude
-                + "\nWater type: " + waterType.getTypeString() + ", Water Condition: " + waterCondition.getConditionString();
+                + "\nWater Type: " + waterType.getTypeString() + ", Water Condition: " + waterCondition.getConditionString();
+    }
+
+    public String getSnippet() {
+        return "Water Type: " + waterType.getTypeString() + ", Water Condition: " + waterCondition.getConditionString();
     }
 }

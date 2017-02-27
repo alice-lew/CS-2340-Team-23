@@ -85,8 +85,8 @@ public class SubmitReportActivity extends AppCompatActivity {
             latTextBox.setError("You must enter a number.");
         } else {
             date = new java.util.Date();
-            modelInstance.submitWaterReport(modelInstance.getCurrentUser(), date, latTextBox.getText().toString(),
-                    longTextBox.getText().toString(), WaterSourceReport.getTypeFromString((String)typeSpinner.getSelectedItem()),
+            modelInstance.submitWaterReport(modelInstance.getCurrentUser(), date, Double.parseDouble(latTextBox.getText().toString()),
+                    Double.parseDouble(longTextBox.getText().toString()), WaterSourceReport.getTypeFromString((String)typeSpinner.getSelectedItem()),
                     WaterSourceReport.getConditionFromString((String)conditionSpinner.getSelectedItem()));
             Context context = SubmitReportActivity.this;
             Intent intent = new Intent(context, LoggedInActivity.class);

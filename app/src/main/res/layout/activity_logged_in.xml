@@ -34,6 +34,13 @@
         android:layout_weight="0.07" />
 
     <Button
+        android:text="View Availability Map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewMapButton"
+        android:layout_weight="0.07" />
+
+    <Button
         android:text="Logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

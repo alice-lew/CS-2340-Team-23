@@ -146,7 +146,7 @@ public class Model {
     }
     public ArrayList<WaterSourceReport> getReportList(){ return repList;}
 
-    public WaterSourceReport submitWaterReport(User sub, Date subDate, String lat, String lng, Model.WaterType type, Model.WaterCondition condition) {
+    public WaterSourceReport submitWaterReport(User sub, Date subDate, double lat, double lng, Model.WaterType type, Model.WaterCondition condition) {
         numRepCreated++;
         WaterSourceReport newRep = new WaterSourceReport(sub, subDate, lat, lng, type, condition, numRepCreated);
         repSet.add(newRep);

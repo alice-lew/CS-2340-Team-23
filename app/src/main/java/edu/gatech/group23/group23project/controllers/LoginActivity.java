@@ -345,7 +345,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (User aUser : modelInstance.getUserList()) {
+            for (User aUser : modelInstance.getUserSet()) {
                 String[] pieces = aUser.getCredentials().split(":");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.

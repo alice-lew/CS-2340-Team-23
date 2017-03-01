@@ -65,8 +65,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        /*
-          Set up the adapter to display the allowable majors in the spinner
+        /**
+         * Set up the adapter to display the allowable majors in the spinner
          */
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, User.legalUserTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -78,6 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
      * Will alert the user if they failed to properly enter input to one of the input fields
      */
     private void attemptRegister() {
+        nameText.setError(null);
         userText.setError(null);
         passText.setError(null);
         emailText.setError(null);
@@ -98,7 +99,9 @@ public class RegisterActivity extends AppCompatActivity {
             titleText.setError("You must enter your title.");
         } else if (!emailText.getText().toString().contains("@")) {
             emailText.setError("You must enter a valid email address.");
-        }else {
+        } else if (modelInstance.usernameTaken(userText.getText().toString())) {
+            userText.setError("That username is already taken.");
+        } else {
             User newUser = modelInstance.registerUser(nameText.getText().toString(), userText.getText().toString(),
                     passText.getText().toString(), emailText.getText().toString(), addressText.getText().toString(),
                     titleText.getText().toString(), User.getTypeFromString((String) userTypeSpinner.getSelectedItem()));

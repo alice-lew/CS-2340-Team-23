@@ -6,7 +6,6 @@ import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,13 +14,14 @@ import android.widget.Spinner;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
-import edu.gatech.group23.group23project.model.User;
+import edu.gatech.group23.group23project.model.WaterPurityReport;
 import edu.gatech.group23.group23project.model.WaterSourceReport;
 
-public class SubmitReportActivity extends AppCompatActivity {
+public class SubmitPurityReportActivity extends AppCompatActivity {
     private EditText longTextBox;
     private EditText latTextBox;
-    private Spinner typeSpinner;
+    private EditText virusTextBox;
+    private EditText contaminantTextBox;
     private Spinner conditionSpinner;
     private Button cancelButton;
     private Button submitButton;
@@ -35,11 +35,12 @@ public class SubmitReportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_submit_report);
+        setContentView(R.layout.activity_submit_purity_report);
 
         longTextBox = (EditText) findViewById(R.id.longBox);
         latTextBox = (EditText) findViewById(R.id.latBox);
-        typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
+        virusTextBox = (EditText) findViewById(R.id.virusBox);
+        contaminantTextBox = (EditText) findViewById(R.id.contaminantBox);
         conditionSpinner = (Spinner) findViewById(R.id.conditionSpinner);
         cancelButton = (Button) findViewById(R.id.cancelButton);
         submitButton = (Button) findViewById(R.id.submitButton);
@@ -63,35 +64,39 @@ public class SubmitReportActivity extends AppCompatActivity {
         /**
          *  Set up the adapter to display the allowable water types in the spinner
          */
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterTypes);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeSpinner.setAdapter(typeAdapter);
-
-        /**
-         * Set up the adapter to display the allowable water conditions in the spinner
-         */
-        ArrayAdapter<String> conditionAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterConditions);
-        conditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        conditionSpinner.setAdapter(conditionAdapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, WaterPurityReport.legalOverallConditions);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        conditionSpinner.setAdapter(adapter);
     }
 
     private void attemptSubmit() {
         longTextBox.setError(null);
         latTextBox.setError(null);
+        virusTextBox.setError(null);
+        contaminantTextBox.setError(null);
+
         if (longTextBox.getText().length() < 1) {
             longTextBox.setError("You must enter a longitude.");
         } else if (latTextBox.getText().length() < 1) {
             latTextBox.setError("You must enter a longitude.");
+        } else if (virusTextBox.getText().length() < 1) {
+            virusTextBox.setError("You must enter a virus PPM");
+        } else if (contaminantTextBox.getText().length() < 1) {
+            contaminantTextBox.setError("You must enter a contaminant PPM");
         } else if (!isNumeric(longTextBox.getText().toString())) {
             longTextBox.setError("You must enter a number.");
         } else if (!isNumeric(latTextBox.getText().toString())) {
             latTextBox.setError("You must enter a number.");
+        } else if (!isNumeric(virusTextBox.getText().toString())) {
+            virusTextBox.setError("You must enter a number.");
+        } else if (!isNumeric(contaminantTextBox.getText().toString())) {
+            contaminantTextBox.setError("You must enter a number.");
         } else {
             date = new java.util.Date();
-            modelInstance.submitWaterReport(modelInstance.getCurrentUser(), date, Double.parseDouble(latTextBox.getText().toString()),
-                    Double.parseDouble(longTextBox.getText().toString()), WaterSourceReport.getTypeFromString((String)typeSpinner.getSelectedItem()),
-                    WaterSourceReport.getConditionFromString((String)conditionSpinner.getSelectedItem()));
-            Context context = SubmitReportActivity.this;
+            modelInstance.submitWaterPurityReport(modelInstance.getCurrentUser(), date, Double.parseDouble(latTextBox.getText().toString()),
+                    Double.parseDouble(longTextBox.getText().toString()), WaterPurityReport.getOverallConditionFromString((String)conditionSpinner.getSelectedItem()),
+                    Double.parseDouble(virusTextBox.getText().toString()), Double.parseDouble(contaminantTextBox.getText().toString()));
+            Context context = SubmitPurityReportActivity.this;
             Intent intent = new Intent(context, LoggedInActivity.class);
             context.startActivity(intent);
         }
@@ -103,7 +108,7 @@ public class SubmitReportActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //makes the hardware back button return to the welcome activity
-        Context context = SubmitReportActivity.this;
+        Context context = SubmitPurityReportActivity.this;
         Intent intent = new Intent(context, LoggedInActivity.class);
         context.startActivity(intent);
         return;

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_submit_purity_report"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="edu.gatech.group23.group23project.controllers.SubmitPurityReportActivity">
+
+    <TextView
+        android:text="Longitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/longText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/longBox"
+        android:layout_below="@+id/longText"
+        android:layout_alignParentStart="true"
+        android:hint="Longitude" />
+
+    <TextView
+        android:text="Latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/latText"
+        android:layout_below="@+id/longBox"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/submitButton"
+        android:layout_alignParentStart="true"
+        android:id="@+id/cancelButton"
+        android:layout_alignParentEnd="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/conditionSpinner"
+        android:layout_below="@+id/conditionText"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/latBox"
+        android:hint="Latitude"
+        android:layout_below="@+id/latText"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Virus PPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/virusText"
+        android:layout_below="@+id/latBox"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/virusText"
+        android:layout_alignEnd="@+id/latBox"
+        android:id="@+id/virusBox"
+        android:hint="Virus PPM" />
+
+    <TextView
+        android:text="Contaminant PPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/virusBox"
+        android:layout_alignParentStart="true"
+        android:id="@+id/contaminantText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/contaminantText"
+        android:layout_alignParentStart="true"
+        android:id="@+id/contaminantBox"
+        android:hint="Contaminant PPM" />
+
+    <TextView
+        android:text="Water Condition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/conditionText"
+        android:layout_below="@+id/contaminantBox"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitButton"
+        android:layout_below="@+id/conditionSpinner"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

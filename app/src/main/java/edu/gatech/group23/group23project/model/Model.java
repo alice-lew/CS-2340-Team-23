@@ -3,6 +3,8 @@ package edu.gatech.group23.group23project.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * The model singleton object for the application
@@ -10,11 +12,13 @@ import java.util.HashSet;
  * Created by Noah Blume on 2/19/2017.
  */
 public class Model {
+    public static ArrayList<WaterReport> genericRepList = new ArrayList<>();
     private static HashSet<WaterSourceReport> repSet = new HashSet<>();
+    private static HashSet<WaterPurityReport> pRepSet = new HashSet<>();
     private static HashSet<User> userSet = new HashSet<>();
     private static int numRepCreated;
-    private static ArrayList<User> userList = new ArrayList<>(); //stores a list of the users
-    private static ArrayList<WaterSourceReport> repList = new ArrayList<>(); //stores a list of the users
+    private static ArrayList<WaterSourceReport> repList = new ArrayList<>();
+    private static ArrayList<WaterPurityReport> pRepList = new ArrayList<>();
     private static Model modelSingleton;    //the model singleton
 
     private User currentUser;    //keeps track of the user who is currently signed in
@@ -68,11 +72,26 @@ public class Model {
     }
 
     /**
+     * An enum of all of the possible overall water conditions
+     */
+    public enum WaterOverallCondition {
+        SAFE("Safe"), TREATABLE("Treatable"), UNSAFE("Unsafe");
+
+        private String typeString;
+        WaterOverallCondition(String s) {
+            typeString = s;
+        }
+
+        public String getOverallConditionString() {
+            return typeString;
+        }
+    }
+
+    /**
      * constructor for the model, sets up necessary parts of the model
      */
     private Model() {
         User defaultAdmin = new User("admin", "admin", "admin", "Admin@admin.com", "admin drive", "admin title", UserType.ADMIN);
-        userList.add(defaultAdmin);
         userSet.add(defaultAdmin);
     }
 
@@ -100,9 +119,16 @@ public class Model {
      */
     public User registerUser(String name, String user, String pass, String email, String address, String title, UserType type) {
         User newUser = new User(name, user, pass, email, address, title, type);
-        userList.add(newUser);
         userSet.add(newUser);
         return newUser;
+    }
+
+    /**
+     * Gets the set of users for another class
+     * @return the set of registered users
+     */
+    public Set<User> getUserSet() {
+        return userSet;
     }
 
     /**
@@ -128,7 +154,7 @@ public class Model {
      * @return the user asociated with the credentials passed in
      */
     public User getUserWithCredentials(String creds) {
-        for (User u: userList) {
+        for (User u: userSet) {
             if (u.getCredentials().equals(creds)) {
                 return u;
             }
@@ -137,20 +163,30 @@ public class Model {
         return null;
     }
 
-    /**
-     * Gets a list of all registered users
-     * @return the list of registered users
-     */
-    public ArrayList<User> getUserList() {
-        return userList;
-    }
-    public ArrayList<WaterSourceReport> getReportList(){ return repList;}
+    public ArrayList<WaterReport> getReportList(){ return genericRepList;}
+    public ArrayList<WaterSourceReport> getSourceReportList(){ return repList;}
+    public ArrayList<WaterPurityReport> getPurityReportList(){ return pRepList;}
 
     public WaterSourceReport submitWaterReport(User sub, Date subDate, double lat, double lng, Model.WaterType type, Model.WaterCondition condition) {
         numRepCreated++;
         WaterSourceReport newRep = new WaterSourceReport(sub, subDate, lat, lng, type, condition, numRepCreated);
         repSet.add(newRep);
         repList.add(newRep);
+        genericRepList.add(newRep);
         return newRep;
+    }
+
+    public WaterPurityReport submitWaterPurityReport(User sub, Date subDate, double lat, double lng, Model.WaterOverallCondition cond, double vPPM, double cPPM) {
+        numRepCreated++;
+        WaterPurityReport newRep = new WaterPurityReport(sub, subDate, lat, lng, cond, vPPM, cPPM, numRepCreated);
+        pRepSet.add(newRep);
+        pRepList.add(newRep);
+        genericRepList.add(newRep);
+        return newRep;
+    }
+
+    public boolean usernameTaken(String s) {
+        User checkUser = new User("n", s, "p", "e", "a", "t", UserType.BASIC);
+        return userSet.contains(checkUser);
     }
 }

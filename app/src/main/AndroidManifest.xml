@@ -69,7 +69,9 @@
 
         <activity
             android:name=".controllers.WaterMapActivity"
-            android:label="@string/title_activity_water_map"></activity>
+            android:label="@string/title_activity_water_map" />
+        <activity android:name=".controllers.SubmitPurityReportActivity" />
+        <activity android:name=".controllers.PurityReportListActivity"></activity>
     </application>
 
 </manifest>

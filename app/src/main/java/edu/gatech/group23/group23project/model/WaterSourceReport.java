@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Noah Blume on 2/24/2017.
  */
 
-public class WaterSourceReport {
+public class WaterSourceReport extends WaterReport {
     private User submitter;
     private Date dateSubmitted;
     private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");

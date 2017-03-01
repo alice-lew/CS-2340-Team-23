@@ -17,7 +17,7 @@ import edu.gatech.group23.group23project.model.Model;
  * Created by Noah Blume on 2/10/2017
  */
 public class WelcomeActivity extends AppCompatActivity {
-    private Model modelInstance = Model.getInstance();
+    private Model modelInstance = Model.getInstance(); //the singletone model instance
 
     /**
      * {@inheritDoc}
@@ -26,6 +26,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        modelInstance.setCurrentUser(null);
         TextView welcomeText = (TextView) findViewById(R.id.welcomeText);
         TextView instructionsText = (TextView) findViewById(R.id.welcomeInstructionsText);
         Button loginButton = (Button) findViewById(R.id.loginButton);

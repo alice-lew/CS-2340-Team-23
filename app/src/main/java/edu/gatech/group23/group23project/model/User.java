@@ -17,7 +17,7 @@ public class User {
     private String password;                //the user's password
     private String name;                    //the user's name
     private Model.UserType userType;        //the type of user
-    private HashSet<WaterSourceReport> myReports = new HashSet<>();
+    private HashSet<WaterSourceReport> myReports = new HashSet<>();  //a Hashset of reports - may be used later to replace the list
 
     /**
      * A list of the possible userTypes a user can be
@@ -61,6 +61,14 @@ public class User {
         homeAddress = address;
         title = aTitle;
         userType = type;
+    }
+
+    /**
+     * Gets the user's type for another class
+     * @return the user's type
+     */
+    public Model.UserType getUserType() {
+        return userType;
     }
 
     /**
@@ -141,7 +149,7 @@ public class User {
             return false;
         }
         User oUser = (User) o;
-        if (oUser.getUsername() == this.username) {
+        if (oUser.getUsername().equals(this.username)) {
             return true;
         }
         return false;

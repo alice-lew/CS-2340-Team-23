@@ -11,16 +11,16 @@ import java.util.List;
  */
 
 public class WaterPurityReport extends WaterReport {
-    private User submitter;
-    private Date dateSubmitted;
+    //private User submitter;
+    //private Date dateSubmitted;
     private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
-    private String reporterName;
-    private double latitude;
-    private double longitude;
+    //private String reporterName;
+    //private double latitude;
+    //private double longitude;
     private Model.WaterOverallCondition waterOverallCondition;
     private double virusPPM;
     private double contaminantPPM;
-    private int reportNumber;
+    //private int reportNumber;
 
     public static List<String> legalOverallConditions = Arrays.asList(
             Model.WaterOverallCondition.SAFE.getOverallConditionString(),
@@ -43,27 +43,19 @@ public class WaterPurityReport extends WaterReport {
     }
 
     public WaterPurityReport(User sub, Date subDate, double lat, double lng, Model.WaterOverallCondition oCondition, double vPPM, double cPPM, int number) {
-        submitter = sub;
-        dateSubmitted = subDate;
-        reporterName = submitter.getName();
-        latitude = lat;
-        longitude = lng;
+        super(sub, subDate, lat, lng, number);
         waterOverallCondition = oCondition;
         virusPPM = vPPM;
         contaminantPPM = cPPM;
-        reportNumber = number;
     }
 
-    public User getSubmitter() { return submitter;}
-    public Date getDateSubmitted() { return dateSubmitted;}
-    public double getLatitude() { return latitude;}
-    public double getLongitude() { return longitude;}
-    public String getReporterName() { return reporterName;}
     public Model.WaterOverallCondition getWaterOverallCondition() { return waterOverallCondition;}
     public double getVirusPPM() { return virusPPM;}
     public double getContaminantPPM() { return  contaminantPPM;}
-    public int getReportNumber() { return reportNumber;}
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null) { return false;}
@@ -72,25 +64,36 @@ public class WaterPurityReport extends WaterReport {
             return false;
         }
         WaterPurityReport oRep = (WaterPurityReport) o;
-        if (oRep.getReportNumber() == this.reportNumber) {
+        if (oRep.getReportNumber() == getReportNumber()) {
             return true;
         }
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
-        return reportNumber;
+        return getReportNumber();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "Report number: " + reportNumber + ", Submitted by: " + reporterName
-                + "\nLocated at latitude: " + latitude + ", longitude: " + longitude
+        return "Report number: " + getReportNumber() + ", Submitted by: " + getReporterName()
+                + "\nLocated at latitude: " + getLatitude() + ", longitude: " + getLongitude()
                 + "\nWater Condition: " + waterOverallCondition.getOverallConditionString()
-                + "\nVirus PPM: " + virusPPM + ", Contaminant PPM: " + contaminantPPM;
+                + "\nVirus PPM: " + virusPPM + ", Contaminant PPM: " + contaminantPPM
+                + "\nDate submitted: " + sdf.format(getDateSubmitted());
     }
 
+    /**
+     * Gets the snippet about the report for another class
+     * @return a string containing information to be displayed in the map snippet
+     */
     public String getSnippet() {
         return "Water Condition: " + waterOverallCondition.getOverallConditionString()
                 + "\nVirus PPM: " + virusPPM + ", Contaminant PPM: " + contaminantPPM;

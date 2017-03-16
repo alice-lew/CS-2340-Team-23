@@ -99,7 +99,9 @@ public class RegisterActivity extends AppCompatActivity {
             titleText.setError("You must enter your title.");
         } else if (!emailText.getText().toString().contains("@")) {
             emailText.setError("You must enter a valid email address.");
-        } else if (modelInstance.usernameTaken(userText.getText().toString())) {
+        } else if (userText.getText().toString().contains(" ")) {
+            userText.setError("Your username may not contain spaces.");
+        }else if (modelInstance.usernameTaken(userText.getText().toString())) {
             userText.setError("That username is already taken.");
         } else {
             User newUser = modelInstance.registerUser(nameText.getText().toString(), userText.getText().toString(),

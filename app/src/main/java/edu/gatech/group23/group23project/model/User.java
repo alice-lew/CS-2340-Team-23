@@ -10,14 +10,13 @@ import java.util.List;
  * Created by Noah Blume on 2/19/2017.
  */
 public class User {
-    private String emailAddress;            //the user's email address
-    private String homeAddress;             //the user's home address
+    private String email;            //the user's email address
+    private String home;             //the user's home address
     private String title;                   //the user's title
     private String username;                //the user's username
     private String password;                //the user's password
     private String name;                    //the user's name
     private Model.UserType userType;        //the type of user
-    private HashSet<WaterSourceReport> myReports = new HashSet<>();  //a Hashset of reports - may be used later to replace the list
 
     /**
      * A list of the possible userTypes a user can be
@@ -57,8 +56,8 @@ public class User {
         name = aName;
         username = user;
         password = pass;
-        emailAddress = email;
-        homeAddress = address;
+        this.email = email;
+        this.home = address;
         title = aTitle;
         userType = type;
     }
@@ -84,7 +83,7 @@ public class User {
      * @return the user's email
      */
     public String getEmail() {
-        return emailAddress;
+        return this.email;
     }
 
     /**
@@ -92,7 +91,7 @@ public class User {
      * @param email the String that will be set as the user's new email
      */
     public void setEmail(String email) {
-        emailAddress = email;
+        this.email = email;
     }
 
     /**
@@ -100,15 +99,15 @@ public class User {
      * @return the user's home address
      */
     public String getHome() {
-        return homeAddress;
+        return this.home;
     }
 
     /**
      * Changes the user's home address
-     * @param home String that will be set as the user's new homeAddress
+     * @param home String that will be set as the user's new this.home
      */
     public void setHome(String home) {
-        homeAddress = home;
+        this.home = home;
     }
 
     /**
@@ -132,7 +131,7 @@ public class User {
      * @return a String consisting of the user's username and password
      */
     public String getCredentials() {
-        return username + ":" + password;
+        return username + " " + password;
     }
 
     /**
@@ -141,6 +140,9 @@ public class User {
      */
     public String getUsername() { return username;}
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null) { return false;}
@@ -155,6 +157,9 @@ public class User {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() { return username.hashCode();}
 }

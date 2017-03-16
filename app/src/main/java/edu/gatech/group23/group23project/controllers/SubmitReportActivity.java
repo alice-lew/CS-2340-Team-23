@@ -75,6 +75,9 @@ public class SubmitReportActivity extends AppCompatActivity {
         conditionSpinner.setAdapter(conditionAdapter);
     }
 
+    /**
+     * Attempts to submit a new water source report if the information entered is valid
+     */
     private void attemptSubmit() {
         longTextBox.setError(null);
         latTextBox.setError(null);

@@ -12,15 +12,9 @@ import java.util.List;
  */
 
 public class WaterSourceReport extends WaterReport {
-    private User submitter;
-    private Date dateSubmitted;
     private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
-    private String reporterName;
-    private double latitude;
-    private double longitude;
     private Model.WaterType waterType;
     private Model.WaterCondition waterCondition;
-    private int reportNumber;
 
     public static List<String> legalWaterTypes = Arrays.asList(
             Model.WaterType.BOTTLED.getTypeString(),
@@ -67,25 +61,17 @@ public class WaterSourceReport extends WaterReport {
     }
 
     public WaterSourceReport(User sub, Date subDate, double lat, double lng, Model.WaterType type, Model.WaterCondition condition, int number) {
-        submitter = sub;
-        dateSubmitted = subDate;
-        reporterName = submitter.getName();
-        latitude = lat;
-        longitude = lng;
+        super(sub, subDate, lat, lng, number);
         waterType = type;
         waterCondition = condition;
-        reportNumber = number;
     }
 
-    public User getSubmitter() { return submitter;}
-    public Date getDateSubmitted() { return dateSubmitted;}
-    public double getLatitude() { return latitude;}
-    public double getLongitude() { return longitude;}
-    public String getReporterName() { return reporterName;}
     public Model.WaterType getWaterType() { return waterType;}
     public Model.WaterCondition getWaterCondition() { return waterCondition;}
-    public int getReportNumber() { return reportNumber;}
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null) { return false;}
@@ -94,24 +80,35 @@ public class WaterSourceReport extends WaterReport {
             return false;
         }
         WaterSourceReport oRep = (WaterSourceReport) o;
-        if (oRep.getReportNumber() == this.reportNumber) {
+        if (oRep.getReportNumber() == getReportNumber()) {
             return true;
         }
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
-        return reportNumber;
+        return getReportNumber();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "Report number: " + reportNumber + ", Submitted by: " + reporterName
-                + "\nLocated at latitude: " + latitude + ", longitude: " + longitude
-                + "\nWater Type: " + waterType.getTypeString() + ", Water Condition: " + waterCondition.getConditionString();
+        return "Report number: " + getReportNumber() + ", Submitted by: " + getReporterName()
+                + "\nLocated at latitude: " + getLatitude() + ", longitude: " + getLongitude()
+                + "\nWater Type: " + waterType.getTypeString() + ", Water Condition: " + waterCondition.getConditionString()
+                + "\nDate submitted: " + sdf.format(getDateSubmitted());
     }
 
+    /**
+     * Gets the snippet about the report for another class
+     * @return a string containing information to be displayed in the map snippet
+     */
     public String getSnippet() {
         return "Water Type: " + waterType.getTypeString() + ", Water Condition: " + waterCondition.getConditionString();
     }

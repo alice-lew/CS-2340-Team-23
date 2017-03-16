@@ -12,13 +12,13 @@ import java.util.Set;
  * Created by Noah Blume on 2/19/2017.
  */
 public class Model {
-    public static ArrayList<WaterReport> genericRepList = new ArrayList<>();
-    private static HashSet<WaterSourceReport> repSet = new HashSet<>();
-    private static HashSet<WaterPurityReport> pRepSet = new HashSet<>();
-    private static HashSet<User> userSet = new HashSet<>();
-    private static int numRepCreated;
-    private static ArrayList<WaterSourceReport> repList = new ArrayList<>();
-    private static ArrayList<WaterPurityReport> pRepList = new ArrayList<>();
+    public ArrayList<WaterReport> genericRepList = new ArrayList<>();
+    private HashSet<WaterSourceReport> repSet = new HashSet<>();
+    private HashSet<WaterPurityReport> pRepSet = new HashSet<>();
+    private HashSet<User> userSet = new HashSet<>();
+    private int numRepCreated;
+    private ArrayList<WaterSourceReport> repList = new ArrayList<>();
+    private ArrayList<WaterPurityReport> pRepList = new ArrayList<>();
     private static Model modelSingleton;    //the model singleton
 
     private User currentUser;    //keeps track of the user who is currently signed in
@@ -163,10 +163,34 @@ public class Model {
         return null;
     }
 
+    /**
+     * Gets a list of all water reports for another class
+     * @return return a list of all water reports
+     */
     public ArrayList<WaterReport> getReportList(){ return genericRepList;}
+
+    /**
+     * Gets a list of all water source reports for another class
+     * @return return a list of all water source reports
+     */
     public ArrayList<WaterSourceReport> getSourceReportList(){ return repList;}
+
+    /**
+     * Gets a list of all water purity reports for another class
+     * @return return a list of all water purity reports
+     */
     public ArrayList<WaterPurityReport> getPurityReportList(){ return pRepList;}
 
+    /**
+     * Creates a new water source report based on the data passed in
+     * @param sub the submitter of the report
+     * @param subDate the date submitted
+     * @param lat the latitude of the water reported
+     * @param lng the longitude of the water reported
+     * @param type the type of water reported
+     * @param condition the condition of the water reported
+     * @return the new water source report
+     */
     public WaterSourceReport submitWaterReport(User sub, Date subDate, double lat, double lng, Model.WaterType type, Model.WaterCondition condition) {
         numRepCreated++;
         WaterSourceReport newRep = new WaterSourceReport(sub, subDate, lat, lng, type, condition, numRepCreated);
@@ -176,6 +200,17 @@ public class Model {
         return newRep;
     }
 
+    /**
+     * Creates a new water purity report based on the data passed in
+     * @param sub the submitter of the report
+     * @param subDate the date submitted
+     * @param lat the latitude of the water reported
+     * @param lng the longitude of the water reported
+     * @param cond the condition of the water reported
+     * @param vPPM the virusPPM of the water
+     * @param cPPM the contaminantPPM of the water
+     * @return the new water purity report
+     */
     public WaterPurityReport submitWaterPurityReport(User sub, Date subDate, double lat, double lng, Model.WaterOverallCondition cond, double vPPM, double cPPM) {
         numRepCreated++;
         WaterPurityReport newRep = new WaterPurityReport(sub, subDate, lat, lng, cond, vPPM, cPPM, numRepCreated);
@@ -185,6 +220,11 @@ public class Model {
         return newRep;
     }
 
+    /**
+     * Checks if an existing user already has the username passed in
+     * @param s the username being checked
+     * @return whether or not the username is already taken
+     */
     public boolean usernameTaken(String s) {
         User checkUser = new User("n", s, "p", "e", "a", "t", UserType.BASIC);
         return userSet.contains(checkUser);

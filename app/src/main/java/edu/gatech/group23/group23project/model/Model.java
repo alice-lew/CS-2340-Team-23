@@ -27,6 +27,10 @@ public class Model {
     private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private int graphYear;
     private GraphType curGraphType;
+    private double graphMinLat;
+    private double graphMinLng;
+    private double graphMaxLat;
+    private double graphMaxLng;
 
     private User currentUser;    //keeps track of the user who is currently signed in
 
@@ -308,8 +312,12 @@ public class Model {
 
 
 
-    public void setGraphInfo(int year, int typeOrdinal) {
+    public void setGraphInfo(int year, int typeOrdinal, double minLat, double maxLat, double minLng, double maxLng) {
         graphYear = year;
+        graphMinLat = minLat;
+        graphMinLng = minLng;
+        graphMaxLat = maxLat;
+        graphMaxLng = maxLng;
         if (typeOrdinal == 0) {
             curGraphType = GraphType.VIRUS;
         } else {
@@ -319,5 +327,9 @@ public class Model {
 
     public int getGraphYear() {return graphYear;}
     public GraphType getCurGraphType() {return curGraphType;}
+    public double getGraphMinLat() {return graphMinLat;}
+    public double getGraphMinLng() {return graphMinLng;}
+    public double getGraphMaxLat() {return graphMaxLat;}
+    public double getGraphMaxLng() {return graphMaxLng;}
 
 }

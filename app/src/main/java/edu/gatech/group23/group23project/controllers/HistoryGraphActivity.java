@@ -1,5 +1,7 @@
 package edu.gatech.group23.group23project.controllers;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -82,6 +84,10 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
     private void setData() {
         int year = modelInstance.getGraphYear();
+        double minLat = modelInstance.getGraphMinLat();
+        double minLng = modelInstance.getGraphMinLng();
+        double maxLng = modelInstance.getGraphMaxLng();
+        double maxLat = modelInstance.getGraphMaxLat();
         Model.GraphType gType = modelInstance.getCurGraphType();
         List<WaterPurityReport> pReps = modelInstance.getPurityReportList();
         Collections.sort(pReps);
@@ -94,6 +100,8 @@ public class HistoryGraphActivity extends AppCompatActivity {
         if (gType == Model.GraphType.VIRUS) {
             for (WaterPurityReport r: pReps) {
                 //add option for either virus or contaminant ppm
+                double lat = r.getLatitude();
+                double lng = r.getLongitude();
                 cal.setTime(r.getDateSubmitted());
                 int month = cal.get(Calendar.MONTH);
                 int repYear = cal.get(Calendar.YEAR);
@@ -107,7 +115,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
                     totalPPM = 0;
                     numReps = 0;
                 }
-                if (month == i && repYear == year) {
+                if (month == i && repYear == year && lat <= maxLat && lat >= minLat && lng <= maxLng && lng >= minLng) {
                     totalPPM += r.getVirusPPM();
                     numReps++;
                 }
@@ -188,4 +196,15 @@ public class HistoryGraphActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onBackPressed() {
+        //makes the hardware back button return to the logged in screen
+        Context context = HistoryGraphActivity.this;
+        Intent intent = new Intent(context, GraphInfoActivity.class);
+        context.startActivity(intent);
+        return;
+    }
 }

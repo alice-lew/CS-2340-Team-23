@@ -16,15 +16,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/longText" />
+        android:id="@+id/minLongText" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/longBox"
-        android:layout_below="@+id/longText"
+        android:id="@+id/maxLongBox"
+        android:layout_below="@+id/minLongText"
         android:layout_alignParentStart="true"
         android:hint="Longitude" />
 
@@ -32,8 +32,8 @@
         android:text="Latitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/latText"
-        android:layout_below="@+id/longBox"
+        android:id="@+id/minLatText"
+        android:layout_below="@+id/maxLongBox"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -57,9 +57,9 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/latBox"
+        android:id="@+id/maxLatBox"
         android:hint="Latitude"
-        android:layout_below="@+id/latText"
+        android:layout_below="@+id/minLatText"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/virusText"
-        android:layout_below="@+id/latBox"
+        android:layout_below="@+id/maxLatBox"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -76,7 +76,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:layout_below="@+id/virusText"
-        android:layout_alignEnd="@+id/latBox"
+        android:layout_alignEnd="@+id/maxLatBox"
         android:id="@+id/virusBox"
         android:hint="Virus PPM" />
 

@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.WaterPurityReport;
-import edu.gatech.group23.group23project.model.WaterSourceReport;
 
 public class SubmitPurityReportActivity extends AppCompatActivity {
     private EditText longTextBox;
@@ -37,8 +36,8 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_purity_report);
 
-        longTextBox = (EditText) findViewById(R.id.longBox);
-        latTextBox = (EditText) findViewById(R.id.latBox);
+        longTextBox = (EditText) findViewById(R.id.maxLongBox);
+        latTextBox = (EditText) findViewById(R.id.maxLatBox);
         virusTextBox = (EditText) findViewById(R.id.virusBox);
         contaminantTextBox = (EditText) findViewById(R.id.contaminantBox);
         conditionSpinner = (Spinner) findViewById(R.id.conditionSpinner);
@@ -81,7 +80,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         if (longTextBox.getText().length() < 1) {
             longTextBox.setError("You must enter a longitude.");
         } else if (latTextBox.getText().length() < 1) {
-            latTextBox.setError("You must enter a longitude.");
+            latTextBox.setError("You must enter a latitude.");
         } else if (virusTextBox.getText().length() < 1) {
             virusTextBox.setError("You must enter a virus PPM");
         } else if (contaminantTextBox.getText().length() < 1) {

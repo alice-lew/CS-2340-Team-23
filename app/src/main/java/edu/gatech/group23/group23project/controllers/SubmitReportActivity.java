@@ -6,7 +6,6 @@ import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import android.widget.Spinner;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
-import edu.gatech.group23.group23project.model.User;
 import edu.gatech.group23.group23project.model.WaterSourceReport;
 
 public class SubmitReportActivity extends AppCompatActivity {
@@ -37,8 +35,8 @@ public class SubmitReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_report);
 
-        longTextBox = (EditText) findViewById(R.id.longBox);
-        latTextBox = (EditText) findViewById(R.id.latBox);
+        longTextBox = (EditText) findViewById(R.id.maxLongBox);
+        latTextBox = (EditText) findViewById(R.id.maxLatBox);
         typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         conditionSpinner = (Spinner) findViewById(R.id.conditionSpinner);
         cancelButton = (Button) findViewById(R.id.cancelButton);
@@ -84,7 +82,7 @@ public class SubmitReportActivity extends AppCompatActivity {
         if (longTextBox.getText().length() < 1) {
             longTextBox.setError("You must enter a longitude.");
         } else if (latTextBox.getText().length() < 1) {
-            latTextBox.setError("You must enter a longitude.");
+            latTextBox.setError("You must enter a latitude.");
         } else if (!isNumeric(longTextBox.getText().toString())) {
             longTextBox.setError("You must enter a number.");
         } else if (!isNumeric(latTextBox.getText().toString())) {

@@ -11,12 +11,68 @@
     tools:context="edu.gatech.group23.group23project.controllers.GraphInfoActivity">
 
     <TextView
-        android:id="@+id/yearText"
+        android:id="@+id/minLongText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Which year do you want a history graph for?" />
+        android:text="Min Longitude" />
+
+    <EditText
+        android:id="@+id/minLongBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/minLongText"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/maxLongBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/maxLongText"
+        android:ems="10"
+        android:hint="90"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/minLatText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/maxLongBox"
+        android:text="Min Latitude" />
+
+    <EditText
+        android:id="@+id/maxLatBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/MaxLatText"
+        android:ems="10"
+        android:hint="180"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/minLatBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/minLatText"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/yearText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Which year do you want a history graph for?"
+        android:layout_below="@+id/maxLatBox"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/yearTextInput"
@@ -26,8 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/yearText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:id="@+id/ppmSpinner"
@@ -41,10 +96,9 @@
         android:id="@+id/ppmText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:text="What measurement do you want the graph to display?"
         android:layout_below="@+id/yearTextInput"
-        android:layout_marginTop="24dp"
-        android:text="What measurement do you want the graph to display?" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/cancelButton"
@@ -63,6 +117,21 @@
         android:text="View Graph"
         android:layout_below="@+id/ppmSpinner"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="51dp"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/maxLongText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/minLongBox"
+        android:text="Max Longitude" />
+
+    <TextView
+        android:id="@+id/MaxLatText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/minLatBox"
+        android:text="Max Latitude" />
 </RelativeLayout>

@@ -42,6 +42,7 @@ public class LoggedInActivity extends AppCompatActivity {
         Button viewMapButton = (Button) findViewById(R.id.viewMapButton);
         Button submitPurityReportButton = (Button) findViewById(R.id.submitPurityReportButton);
         Button viewPurityReportListButton = (Button) findViewById(R.id.purityReportListButton);
+        Button historyGraphButton = (Button) findViewById(R.id.historyGraphButton);
 
         if (modelInstance.getCurrentUser().getUserType() != Model.UserType.BASIC) {
             submitPurityReportButton.setVisibility(View.VISIBLE);
@@ -49,6 +50,13 @@ public class LoggedInActivity extends AppCompatActivity {
         } else {
             submitPurityReportButton.setVisibility(View.GONE);
             viewPurityReportListButton.setVisibility(View.GONE);
+        }
+
+        if (modelInstance.getCurrentUser().getUserType() == Model.UserType.MANAGER  ||
+                modelInstance.getCurrentUser().getUserType() == Model.UserType.ADMIN) {
+            historyGraphButton.setVisibility(View.VISIBLE);
+        } else {
+            historyGraphButton.setVisibility(View.GONE);
         }
 
 
@@ -112,6 +120,15 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, PurityReportListActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        historyGraphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, GraphInfoActivity.class);
                 context.startActivity(intent);
             }
         });

@@ -71,7 +71,9 @@
             android:name=".controllers.WaterMapActivity"
             android:label="@string/title_activity_water_map" />
         <activity android:name=".controllers.SubmitPurityReportActivity" />
-        <activity android:name=".controllers.PurityReportListActivity"></activity>
+        <activity android:name=".controllers.PurityReportListActivity" />
+        <activity android:name=".controllers.HistoryGraphActivity" />
+        <activity android:name=".controllers.GraphInfoActivity"></activity>
     </application>
 
 </manifest>

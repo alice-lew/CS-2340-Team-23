@@ -3,6 +3,7 @@ package edu.gatech.group23.group23project.model;
 import android.icu.text.SimpleDateFormat;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by Noah Blume on 2/28/2017.
  */
 
-public class WaterPurityReport extends WaterReport {
+public class WaterPurityReport extends WaterReport implements Comparable<WaterPurityReport> {
     //private User submitter;
     //private Date dateSubmitted;
     private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
@@ -21,7 +22,15 @@ public class WaterPurityReport extends WaterReport {
     private double virusPPM;
     private double contaminantPPM;
     //private int reportNumber;
+    private Calendar cal = Calendar.getInstance();
 
+    public int compareTo(WaterPurityReport r) {
+        cal.setTime(getDateSubmitted());
+        int thisMonth = cal.get(Calendar.MONTH);
+        cal.setTime(r.getDateSubmitted());
+        int otherMonth = cal.get(Calendar.MONTH);
+        return thisMonth - otherMonth;
+    }
     public static List<String> legalOverallConditions = Arrays.asList(
             Model.WaterOverallCondition.SAFE.getOverallConditionString(),
             Model.WaterOverallCondition.TREATABLE.getOverallConditionString(),

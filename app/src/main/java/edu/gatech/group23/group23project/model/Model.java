@@ -1,10 +1,14 @@
 package edu.gatech.group23.group23project.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.Exchanger;
 
 /**
  * The model singleton object for the application
@@ -12,16 +16,29 @@ import java.util.Set;
  * Created by Noah Blume on 2/19/2017.
  */
 public class Model {
-    public ArrayList<WaterReport> genericRepList = new ArrayList<>();
-    private HashSet<WaterSourceReport> repSet = new HashSet<>();
-    private HashSet<WaterPurityReport> pRepSet = new HashSet<>();
-    private HashSet<User> userSet = new HashSet<>();
+    public List<WaterReport> genericRepList = new ArrayList<>();
+    private Set<WaterSourceReport> repSet = new HashSet<>();
+    private Set<WaterPurityReport> pRepSet = new HashSet<>();
+    private Set<User> userSet = new HashSet<>();
     private int numRepCreated;
-    private ArrayList<WaterSourceReport> repList = new ArrayList<>();
-    private ArrayList<WaterPurityReport> pRepList = new ArrayList<>();
+    private List<WaterSourceReport> repList = new ArrayList<>();
+    private List<WaterPurityReport> pRepList = new ArrayList<>();
     private static Model modelSingleton;    //the model singleton
+    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    private int graphYear;
+    private GraphType curGraphType;
 
     private User currentUser;    //keeps track of the user who is currently signed in
+
+    /**
+     * An enum of all of the possible graph types
+     */
+    public enum GraphType {
+        VIRUS("Virus PPM"), CONTAMINANT("Contaminant PPM");
+        private String typeString;
+        GraphType(String s) { typeString = s;}
+        public String getTypeString() { return typeString;}
+    }
 
     /**
      * An enum of all of the possible user types
@@ -91,8 +108,67 @@ public class Model {
      * constructor for the model, sets up necessary parts of the model
      */
     private Model() {
-        User defaultAdmin = new User("admin", "admin", "admin", "Admin@admin.com", "admin drive", "admin title", UserType.ADMIN);
-        userSet.add(defaultAdmin);
+        try {
+            User defaultAdmin = new User("admin", "admin", "admin", "Admin@admin.com", "admin drive", "admin title", UserType.ADMIN);
+            userSet.add(defaultAdmin);
+
+
+            String inputString = "10-10-2012";
+            Date date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 12, 12);
+
+            inputString = "10-10-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 200, 200);
+
+            inputString = "10-10-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 20, 20);
+
+            inputString = "09-09-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 25, 25);
+
+            inputString = "08-08-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
+
+            inputString = "07-07-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
+
+            inputString = "06-06-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
+
+            inputString = "05-05-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
+
+          //  inputString = "04-04-2012";
+            //date = dateFormat.parse(inputString);
+            //submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
+
+            inputString = "03-03-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
+
+            inputString = "02-02-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 75, 51);
+
+            inputString = "02-02-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 25, 50);
+
+            inputString = "01-01-2012";
+            date = dateFormat.parse(inputString);
+            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 25, 50);
+
+
+        } catch(Exception e) {
+            System.out.println("Something went wrong");
+        }
     }
 
     /**
@@ -167,19 +243,19 @@ public class Model {
      * Gets a list of all water reports for another class
      * @return return a list of all water reports
      */
-    public ArrayList<WaterReport> getReportList(){ return genericRepList;}
+    public List<WaterReport> getReportList(){ return genericRepList;}
 
     /**
      * Gets a list of all water source reports for another class
      * @return return a list of all water source reports
      */
-    public ArrayList<WaterSourceReport> getSourceReportList(){ return repList;}
+    public List<WaterSourceReport> getSourceReportList(){ return repList;}
 
     /**
      * Gets a list of all water purity reports for another class
      * @return return a list of all water purity reports
      */
-    public ArrayList<WaterPurityReport> getPurityReportList(){ return pRepList;}
+    public List<WaterPurityReport> getPurityReportList(){ return pRepList;}
 
     /**
      * Creates a new water source report based on the data passed in
@@ -229,4 +305,19 @@ public class Model {
         User checkUser = new User("n", s, "p", "e", "a", "t", UserType.BASIC);
         return userSet.contains(checkUser);
     }
+
+
+
+    public void setGraphInfo(int year, int typeOrdinal) {
+        graphYear = year;
+        if (typeOrdinal == 0) {
+            curGraphType = GraphType.VIRUS;
+        } else {
+            curGraphType = GraphType.CONTAMINANT;
+        }
+    }
+
+    public int getGraphYear() {return graphYear;}
+    public GraphType getCurGraphType() {return curGraphType;}
+
 }

@@ -37,6 +37,7 @@ public class ReportListActivity extends AppCompatActivity {
         //makes the hardware back button return to the welcome activity
         Context context = ReportListActivity.this;
         Intent intent = new Intent(context, LoggedInActivity.class);
+        finish();
         context.startActivity(intent);
         return;
     }

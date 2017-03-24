@@ -1,13 +1,14 @@
 package edu.gatech.group23.group23project.model;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Noah Blume on 2/28/2017.
  */
 
-public abstract class WaterReport {
+public abstract class WaterReport implements Serializable {
     private User submitter;
     private Date dateSubmitted;
     private String reporterName;

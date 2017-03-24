@@ -1,5 +1,6 @@
 package edu.gatech.group23.group23project.model;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.concurrent.Exchanger;
  *
  * Created by Noah Blume on 2/19/2017.
  */
-public class Model {
+public class Model implements Serializable {
     public List<WaterReport> genericRepList = new ArrayList<>();
     private Set<WaterSourceReport> repSet = new HashSet<>();
     private Set<WaterPurityReport> pRepSet = new HashSet<>();
@@ -31,6 +32,7 @@ public class Model {
     private double graphMinLng;
     private double graphMaxLat;
     private double graphMaxLng;
+    private SaveHelper saveHelper;
 
     private User currentUser;    //keeps track of the user who is currently signed in
 
@@ -112,67 +114,6 @@ public class Model {
      * constructor for the model, sets up necessary parts of the model
      */
     private Model() {
-        try {
-            User defaultAdmin = new User("admin", "admin", "admin", "Admin@admin.com", "admin drive", "admin title", UserType.ADMIN);
-            userSet.add(defaultAdmin);
-
-
-            String inputString = "10-10-2012";
-            Date date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 12, 12);
-
-            inputString = "10-10-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 200, 200);
-
-            inputString = "10-10-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 20, 20);
-
-            inputString = "09-09-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 25, 25);
-
-            inputString = "08-08-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
-
-            inputString = "07-07-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
-
-            inputString = "06-06-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
-
-            inputString = "05-05-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
-
-          //  inputString = "04-04-2012";
-            //date = dateFormat.parse(inputString);
-            //submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
-
-            inputString = "03-03-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 117, 117);
-
-            inputString = "02-02-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 75, 51);
-
-            inputString = "02-02-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 25, 50);
-
-            inputString = "01-01-2012";
-            date = dateFormat.parse(inputString);
-            submitWaterPurityReport(defaultAdmin, date, 1, 1, WaterOverallCondition.SAFE, 25, 50);
-
-
-        } catch(Exception e) {
-            System.out.println("Something went wrong");
-        }
     }
 
     /**
@@ -184,6 +125,10 @@ public class Model {
             modelSingleton = new Model();
         }
         return modelSingleton;
+    }
+
+    public static void setInstance(Model m) {
+        modelSingleton = m;
     }
 
     /**

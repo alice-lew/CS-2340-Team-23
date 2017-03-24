@@ -118,6 +118,7 @@ public class WaterMapActivity extends FragmentActivity implements OnMapReadyCall
         //changes the hardware back button functionality to return the user to the welcome page
         Context context = WaterMapActivity.this;
         Intent intent = new Intent(context, LoggedInActivity.class);
+        finish();
         context.startActivity(intent);
         return;
     }

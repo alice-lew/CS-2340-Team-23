@@ -204,6 +204,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
         //makes the hardware back button return to the logged in screen
         Context context = HistoryGraphActivity.this;
         Intent intent = new Intent(context, GraphInfoActivity.class);
+        finish();
         context.startActivity(intent);
         return;
     }

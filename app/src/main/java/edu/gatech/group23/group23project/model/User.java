@@ -1,5 +1,6 @@
 package edu.gatech.group23.group23project.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * Created by Noah Blume on 2/19/2017.
  */
-public class User {
+public class User implements Serializable {
     private String email;            //the user's email address
     private String home;             //the user's home address
     private String title;                   //the user's title

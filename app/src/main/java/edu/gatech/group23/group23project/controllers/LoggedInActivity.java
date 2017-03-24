@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.SaveHelper;
+import edu.gatech.group23.group23project.model.User;
 
 /**
  * The screen users are brought to after logging in
@@ -43,6 +46,8 @@ public class LoggedInActivity extends AppCompatActivity {
         Button submitPurityReportButton = (Button) findViewById(R.id.submitPurityReportButton);
         Button viewPurityReportListButton = (Button) findViewById(R.id.purityReportListButton);
         Button historyGraphButton = (Button) findViewById(R.id.historyGraphButton);
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        Button loadButton = (Button) findViewById(R.id.loadButton);
 
         if (modelInstance.getCurrentUser().getUserType() != Model.UserType.BASIC) {
             submitPurityReportButton.setVisibility(View.VISIBLE);
@@ -66,6 +71,7 @@ public class LoggedInActivity extends AppCompatActivity {
                 modelInstance.setCurrentUser(null);
                 Context context = view.getContext();
                 Intent intent = new Intent(context, WelcomeActivity.class);
+                finish();
                 context.startActivity(intent);
             }
         });
@@ -75,6 +81,7 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, EditProfileActivity.class);
+                finish();
                 context.startActivity(intent);
             }
         });
@@ -84,6 +91,7 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, SubmitReportActivity.class);
+                finish();
                 context.startActivity(intent);
             }
         });
@@ -93,6 +101,7 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ReportListActivity.class);
+                finish();
                 context.startActivity(intent);
             }
         });
@@ -102,6 +111,7 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, WaterMapActivity.class);
+                finish();
                 context.startActivity(intent);
             }
         });
@@ -111,6 +121,7 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, SubmitPurityReportActivity.class);
+                finish();
                 context.startActivity(intent);
             }
         });
@@ -120,6 +131,7 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, PurityReportListActivity.class);
+                finish();
                 context.startActivity(intent);
             }
         });
@@ -129,7 +141,31 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, GraphInfoActivity.class);
+                finish();
                 context.startActivity(intent);
+            }
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SaveHelper.saveModel(modelInstance,view.getContext());
+            }
+        });
+
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Model m = SaveHelper.loadModel(view.getContext());
+                User curUser = null;
+                modelInstance.getCurrentUser();
+                if (m != null) {
+                    m.setCurrentUser(curUser);
+                    Model.setInstance(m);
+                    modelInstance = m;
+                } else {
+                    Log.d("Loading", "failed to load");
+                }
             }
         });
 
@@ -143,6 +179,7 @@ public class LoggedInActivity extends AppCompatActivity {
         //changes the hardware back button functionality to return the user to the welcome page
         Context context = LoggedInActivity.this;
         Intent intent = new Intent(context, WelcomeActivity.class);
+        finish();
         context.startActivity(intent);
         return;
     }

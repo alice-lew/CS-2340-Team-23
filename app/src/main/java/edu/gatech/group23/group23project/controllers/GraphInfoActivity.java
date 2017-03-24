@@ -101,6 +101,7 @@ public class GraphInfoActivity extends AppCompatActivity {
                     Double.parseDouble(maxLongTextBox.getText().toString()));
             Context context = GraphInfoActivity.this;
             Intent intent = new Intent(context, HistoryGraphActivity.class);
+            finish();
             context.startActivity(intent);
         }
     }
@@ -122,6 +123,7 @@ public class GraphInfoActivity extends AppCompatActivity {
         //makes the hardware back button return to the logged in screen
         Context context = GraphInfoActivity.this;
         Intent intent = new Intent(context, LoggedInActivity.class);
+        finish();
         context.startActivity(intent);
         return;
     }

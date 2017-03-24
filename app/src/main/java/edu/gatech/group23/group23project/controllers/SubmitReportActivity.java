@@ -46,7 +46,10 @@ public class SubmitReportActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Context context = SubmitReportActivity.this;
+                Intent intent = new Intent(context, LoggedInActivity.class);
                 finish();
+                context.startActivity(intent);
             }
         });
 
@@ -89,11 +92,13 @@ public class SubmitReportActivity extends AppCompatActivity {
             latTextBox.setError("You must enter a number.");
         } else {
             date = new java.util.Date();
+            modelInstance = Model.getInstance();
             modelInstance.submitWaterReport(modelInstance.getCurrentUser(), date, Double.parseDouble(latTextBox.getText().toString()),
                     Double.parseDouble(longTextBox.getText().toString()), WaterSourceReport.getTypeFromString((String)typeSpinner.getSelectedItem()),
                     WaterSourceReport.getConditionFromString((String)conditionSpinner.getSelectedItem()));
             Context context = SubmitReportActivity.this;
             Intent intent = new Intent(context, LoggedInActivity.class);
+            finish();
             context.startActivity(intent);
         }
     }
@@ -106,6 +111,7 @@ public class SubmitReportActivity extends AppCompatActivity {
         //makes the hardware back button return to the welcome activity
         Context context = SubmitReportActivity.this;
         Intent intent = new Intent(context, LoggedInActivity.class);
+        finish();
         context.startActivity(intent);
         return;
     }

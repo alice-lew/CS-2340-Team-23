@@ -48,7 +48,10 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Context context = SubmitPurityReportActivity.this;
+                Intent intent = new Intent(context, LoggedInActivity.class);
                 finish();
+                context.startActivity(intent);
             }
         });
 
@@ -95,11 +98,13 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
             contaminantTextBox.setError("You must enter a number.");
         } else {
             date = new java.util.Date();
+            modelInstance = Model.getInstance();
             modelInstance.submitWaterPurityReport(modelInstance.getCurrentUser(), date, Double.parseDouble(latTextBox.getText().toString()),
                     Double.parseDouble(longTextBox.getText().toString()), WaterPurityReport.getOverallConditionFromString((String)conditionSpinner.getSelectedItem()),
                     Double.parseDouble(virusTextBox.getText().toString()), Double.parseDouble(contaminantTextBox.getText().toString()));
             Context context = SubmitPurityReportActivity.this;
             Intent intent = new Intent(context, LoggedInActivity.class);
+            finish();
             context.startActivity(intent);
         }
     }
@@ -112,6 +117,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         //makes the hardware back button return to the welcome activity
         Context context = SubmitPurityReportActivity.this;
         Intent intent = new Intent(context, LoggedInActivity.class);
+        finish();
         context.startActivity(intent);
         return;
     }

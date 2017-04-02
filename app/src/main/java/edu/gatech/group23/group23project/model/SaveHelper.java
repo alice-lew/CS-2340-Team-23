@@ -1,7 +1,6 @@
 package edu.gatech.group23.group23project.model;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -10,12 +9,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
+ * This class handles the saving for the model
  * Created by Noah Blume on 3/23/2017.
  */
 
-public class SaveHelper {
+class SaveHelper implements Serializable {
 
     /**
      * Saves a serialized copy of the model
@@ -24,7 +25,7 @@ public class SaveHelper {
      */
     public void saveModel(Model m, Context context) {
         try {
-            FileOutputStream fos = context.openFileOutput("model_save", Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput("model_file", Context.MODE_PRIVATE);
             ObjectOutput os = new ObjectOutputStream(fos);
             os.writeObject(m);
             os.close();
@@ -44,7 +45,7 @@ public class SaveHelper {
      */
     public Model loadModel(Context context) {
         try {
-            FileInputStream fis = context.openFileInput("model_save");
+            FileInputStream fis = context.openFileInput("model_file");
             ObjectInputStream is = new ObjectInputStream(fis);
             Model m = (Model) is.readObject();
             is.close();
@@ -52,12 +53,9 @@ public class SaveHelper {
             Toast.makeText(context, "Successfully loaded.",
                     Toast.LENGTH_SHORT).show();
             return m;
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             Toast.makeText(context, "Failed to load.",
                     Toast.LENGTH_SHORT).show();
-        } catch (ClassNotFoundException e) {
-            Toast.makeText(context, "Failed to load.",
-                Toast.LENGTH_SHORT).show();
         }
         return null;
     }

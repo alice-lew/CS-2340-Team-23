@@ -2,8 +2,6 @@ package edu.gatech.group23.group23project.controllers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +25,6 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
     private EditText virusTextBox;
     private EditText contaminantTextBox;
     private Spinner conditionSpinner;
-    private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 
     /**
      * {@inheritDoc}
@@ -64,7 +61,8 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
 
 
         //Set up the adapter to display the allowable water types in the spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, WaterPurityReport.legalOverallConditions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
+                WaterPurityReport.legalOverallConditions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         conditionSpinner.setAdapter(adapter);
     }
@@ -86,20 +84,24 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
             virusTextBox.setError("You must enter a virus PPM");
         } else if (contaminantTextBox.getText().length() < 1) {
             contaminantTextBox.setError("You must enter a contaminant PPM");
-        } else if (!isNumeric(longTextBox.getText().toString())) {
+        } else if (isNotNumeric(longTextBox.getText().toString())) {
             longTextBox.setError("You must enter a number.");
-        } else if (!isNumeric(latTextBox.getText().toString())) {
+        } else if (isNotNumeric(latTextBox.getText().toString())) {
             latTextBox.setError("You must enter a number.");
-        } else if (!isNumeric(virusTextBox.getText().toString())) {
+        } else if (isNotNumeric(virusTextBox.getText().toString())) {
             virusTextBox.setError("You must enter a number.");
-        } else if (!isNumeric(contaminantTextBox.getText().toString())) {
+        } else if (isNotNumeric(contaminantTextBox.getText().toString())) {
             contaminantTextBox.setError("You must enter a number.");
         } else {
             Date date = new java.util.Date();
             Model modelInstance = Model.getInstance();
-            modelInstance.submitWaterPurityReport(modelInstance.getCurrentUser(), date, Double.parseDouble(latTextBox.getText().toString()),
-                    Double.parseDouble(longTextBox.getText().toString()), WaterPurityReport.getOverallConditionFromString((String)conditionSpinner.getSelectedItem()),
-                    Double.parseDouble(virusTextBox.getText().toString()), Double.parseDouble(contaminantTextBox.getText().toString()));
+            modelInstance.submitWaterPurityReport(modelInstance.getCurrentUser(), date,
+                    Double.parseDouble(latTextBox.getText().toString()),
+                    Double.parseDouble(longTextBox.getText().toString()),
+                    WaterPurityReport.getOverallConditionFromString((String)conditionSpinner
+                            .getSelectedItem()),
+                    Double.parseDouble(virusTextBox.getText().toString()),
+                    Double.parseDouble(contaminantTextBox.getText().toString()));
             Context context = SubmitPurityReportActivity.this;
             Intent intent = new Intent(context, LoggedInActivity.class);
             finish();
@@ -124,7 +126,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
      * @param s a string being checked whether or not it's a number
      * @return whether or not the string is a number
      */
-    private boolean isNumeric(String s) {
-        return s.matches("[-+]?\\d*\\.?\\d+");
+    private boolean isNotNumeric(String s) {
+        return !s.matches("[-+]?\\d*\\.?\\d+");
     }
 }

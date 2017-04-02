@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * The model singleton object for the application
@@ -16,13 +15,11 @@ import java.util.Set;
  * Created by Noah Blume on 2/19/2017.
  */
 public class Model implements Serializable {
-    private Collection<WaterReport> genericRepList = new ArrayList<>();
-    private Collection<WaterSourceReport> repSet = new HashSet<>();
-    private Collection<WaterPurityReport> pRepSet = new HashSet<>();
-    private Collection<User> userSet = new HashSet<>();
+    private final Collection<WaterReport> genericRepList = new ArrayList<>();
+    private final Collection<User> userSet = new HashSet<>();
     private int numRepCreated;
-    private List<WaterSourceReport> repList = new ArrayList<>();
-    private List<WaterPurityReport> pRepList = new ArrayList<>();
+    private final List<WaterSourceReport> repList = new ArrayList<>();
+    private final List<WaterPurityReport> pRepList = new ArrayList<>();
     private static Model modelSingleton;    //the model singleton
     private int graphYear;
     private GraphType curGraphType;
@@ -30,7 +27,7 @@ public class Model implements Serializable {
     private double graphMinLng;
     private double graphMaxLat;
     private double graphMaxLng;
-    private SaveHelper saveHelper;
+    private final SaveHelper saveHelper;
 
     private User currentUser;    //keeps track of the user who is currently signed in
 
@@ -38,15 +35,7 @@ public class Model implements Serializable {
      * An enum of all of the possible graph types
      */
     public enum GraphType {
-        VIRUS("Virus PPM"), CONTAMINANT("Contaminant PPM");
-        private String typeString;
-        GraphType(String s) { typeString = s;}
-
-        /**
-         * gets the type of graph as a string for another class
-         * @return the graph type as a string
-         */
-        public String getTypeString() { return typeString;}
+        VIRUS, CONTAMINANT
     }
 
     /**
@@ -55,7 +44,7 @@ public class Model implements Serializable {
     public enum UserType {
         BASIC("Basic User"), WORKER("Worker"), MANAGER("Manager"), ADMIN("Administrator");
 
-        private String typeString;
+        private final String typeString;
         UserType(String s) {
             typeString = s;
         }
@@ -73,9 +62,10 @@ public class Model implements Serializable {
      * An enum of all of the possible water types
      */
     public enum WaterType {
-        BOTTLED("Bottled"), WELL("Well"), STREAM("Stream"), LAKE("Lake"), SPRING("Spring"), OTHER("Other");
+        BOTTLED("Bottled"), WELL("Well"), STREAM("Stream"), LAKE("Lake"), SPRING("Spring"),
+        OTHER("Other");
 
-        private String typeString;
+        private final String typeString;
         WaterType(String s) {
             typeString = s;
         }
@@ -93,9 +83,10 @@ public class Model implements Serializable {
      * An enum of all of the possible water conditions
      */
     public enum WaterCondition {
-        WASTE("Waste"), TREATABLECLEAR("Treatable-Clear"), TREATABLEMUDDY("Treatable-Muddy"), POTABLE("Potable");
+        WASTE("Waste"), TREATABLE_CLEAR("Treatable-Clear"), TREATABLE_MUDDY("Treatable-Muddy"),
+        POTABLE("Potable");
 
-        private String typeString;
+        private final String typeString;
         WaterCondition(String s) {
             typeString = s;
         }
@@ -115,7 +106,7 @@ public class Model implements Serializable {
     public enum WaterOverallCondition {
         SAFE("Safe"), TREATABLE("Treatable"), UNSAFE("Unsafe");
 
-        private String typeString;
+        private final String typeString;
         WaterOverallCondition(String s) {
             typeString = s;
         }
@@ -166,7 +157,8 @@ public class Model implements Serializable {
      * @param type the user's type (basic, manager, worker, or administrator)
      * @return the new user that was created and added to the user list
      */
-    public User registerUser(String name, String user, String pass, String email, String address, String title, UserType type) {
+    public User registerUser(String name, String user, String pass, String email, String address,
+                             String title, UserType type) {
         User newUser = new User(name, user, pass, email, address, title, type);
         userSet.add(newUser);
         return newUser;
@@ -198,22 +190,6 @@ public class Model implements Serializable {
 
 
     /**
-     * Gets the user associated with a certain username and password combo
-     * @param credentialsStr the credentials of the user being looked for
-     * @return the user associated with the credentials passed in
-     */
-    public User getUserWithCredentials(String credentialsStr) {
-        for (User u: userSet) {
-            String credentials = u.getCredentials();
-            if (credentials.equals(credentialsStr)) {
-                return u;
-            }
-        }
-        //the user was not found, returns null - maybe look into a better solution
-        return null;
-    }
-
-    /**
      * Gets a list of all water reports for another class
      * @return return a list of all water reports
      */
@@ -239,15 +215,14 @@ public class Model implements Serializable {
      * @param lng the longitude of the water reported
      * @param type the type of water reported
      * @param condition the condition of the water reported
-     * @return the new water source report
      */
-    public WaterSourceReport submitWaterReport(User sub, Date subDate, double lat, double lng, Model.WaterType type, Model.WaterCondition condition) {
+    public void submitWaterReport(User sub, Date subDate, double lat, double lng,
+                                  Model.WaterType type, Model.WaterCondition condition) {
         numRepCreated++;
-        WaterSourceReport newRep = new WaterSourceReport(sub, subDate, lat, lng, type, condition, numRepCreated);
-        repSet.add(newRep);
+        WaterSourceReport newRep = new WaterSourceReport(sub, subDate, lat, lng, type, condition,
+                numRepCreated);
         repList.add(newRep);
         genericRepList.add(newRep);
-        return newRep;
     }
 
     /**
@@ -259,15 +234,15 @@ public class Model implements Serializable {
      * @param cond the condition of the water reported
      * @param vPPM the virusPPM of the water
      * @param cPPM the contaminantPPM of the water
-     * @return the new water purity report
      */
-    public WaterPurityReport submitWaterPurityReport(User sub, Date subDate, double lat, double lng, Model.WaterOverallCondition cond, double vPPM, double cPPM) {
+    public void submitWaterPurityReport(User sub, Date subDate, double lat, double lng,
+                                        Model.WaterOverallCondition cond, double vPPM,
+                                        double cPPM) {
         numRepCreated++;
-        WaterPurityReport newRep = new WaterPurityReport(sub, subDate, lat, lng, cond, vPPM, cPPM, numRepCreated);
-        pRepSet.add(newRep);
+        WaterPurityReport newRep = new WaterPurityReport(sub, subDate, lat, lng, cond, vPPM, cPPM,
+                numRepCreated);
         pRepList.add(newRep);
         genericRepList.add(newRep);
-        return newRep;
     }
 
     /**
@@ -290,7 +265,8 @@ public class Model implements Serializable {
      * @param minLng the lower end of the longitudes included in the graph
      * @param maxLng the upper end of the longitudes included in the graph
      */
-    public void setGraphInfo(int year, int typeOrdinal, double minLat, double maxLat, double minLng, double maxLng) {
+    public void setGraphInfo(int year, int typeOrdinal, double minLat, double maxLat, double minLng,
+                             double maxLng) {
         graphYear = year;
         graphMinLat = minLat;
         graphMinLng = minLng;
@@ -339,11 +315,77 @@ public class Model implements Serializable {
      */
     public double getGraphMaxLng() {return graphMaxLng;}
 
+    /**
+     * Saves the model by calling saveHelper's saveModel method
+     * @param m the model being saved
+     * @param context the screen the user is currently on
+     */
     public void saveModel(Model m, Context context) {
         saveHelper.saveModel(m, context);
     }
 
+    /**
+     * Loads a previously saved instance of the model by calling the saveHelper's loadModel method
+     * @param context the screen the user is currently on
+     * @return the loaded instance of the model
+     */
     public Model loadModel(Context context) {
         return saveHelper.loadModel(context);
+    }
+
+    /**
+     * Gets the current user's email for another class
+     * @return the current user's email
+     */
+    public CharSequence getCurUserEmail() {
+        return currentUser.getEmail();
+    }
+
+    /**
+     * Gets the current user's title for another class
+     * @return the current user's title
+     */
+    public CharSequence getCurUserTitle() {
+        return currentUser.getTitle();
+    }
+
+    /**
+     * Gets the current user's home address for another class
+     * @return the current user's home address
+     */
+    public CharSequence getCurUserHome() {
+        return currentUser.getHome();
+    }
+
+    /**
+     * Gets the current user's type for another class
+     * @return the current user's type
+     */
+    public UserType getCurUserType() {
+        return currentUser.getUserType();
+    }
+
+    /**
+     * Sets the current user's email address to the passed in string
+     * @param e the new email address
+     */
+    public void setCurUserEmail(String e) {
+        currentUser.setEmail(e);
+    }
+
+    /**
+     * Sets the current user's title to the passed in string
+     * @param t the new title address
+     */
+    public void setCurUserTitle(String t) {
+        currentUser.setTitle(t);
+    }
+
+    /**
+     * Sets the current user's home address to the passed in string
+     * @param h the new home address
+     */
+    public void setCurUserHome(String h) {
+        currentUser.setHome(h);
     }
 }

@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
-import edu.gatech.group23.group23project.model.SaveHelper;
 
 /**
  * The first activity of the application where users can sign in or register
@@ -40,8 +38,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
         modelInstance = Model.getInstance();
         modelInstance.setCurrentUser(null);
-        TextView welcomeText = (TextView) findViewById(R.id.welcomeText);
-        TextView instructionsText = (TextView) findViewById(R.id.welcomeInstructionsText);
         Button loginButton = (Button) findViewById(R.id.loginButton);
         Button registerButton = (Button) findViewById(R.id.saveButton);
         loginButton.setOnClickListener(new View.OnClickListener() {

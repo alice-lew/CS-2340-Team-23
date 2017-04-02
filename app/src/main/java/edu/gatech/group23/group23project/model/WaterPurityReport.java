@@ -8,30 +8,36 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Noah Blume on 2/28/2017.
+ * The water purity report class, created by workers, manager, and admins
+ * Created by Noah Blume on 2/27/2017.
  */
 
 public class WaterPurityReport extends WaterReport implements Comparable<WaterPurityReport> {
     //private User submitter;
     //private Date dateSubmitted;
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+    private final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
     //private String reporterName;
     //private double latitude;
     //private double longitude;
-    private Model.WaterOverallCondition waterOverallCondition;
-    private double virusPPM;
-    private double contaminantPPM;
+    private final Model.WaterOverallCondition waterOverallCondition;
+    private final double virusPPM;
+    private final double contaminantPPM;
     //private int reportNumber;
-    private Calendar cal = Calendar.getInstance();
+    private final Calendar cal = Calendar.getInstance();
 
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int compareTo(WaterPurityReport r) {
-        cal.setTime(getDateSubmitted());
+        cal.setTime(this.getDateSubmitted());
         int thisMonth = cal.get(Calendar.MONTH);
         cal.setTime(r.getDateSubmitted());
         int otherMonth = cal.get(Calendar.MONTH);
         return thisMonth - otherMonth;
     }
-    public static List<String> legalOverallConditions = Arrays.asList(
+    public static final List<String> legalOverallConditions = Arrays.asList(
             Model.WaterOverallCondition.SAFE.getOverallConditionString(),
             Model.WaterOverallCondition.TREATABLE.getOverallConditionString(),
             Model.WaterOverallCondition.UNSAFE.getOverallConditionString()
@@ -63,18 +69,15 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
      * @param cPPM the contaminant ppm of the water
      * @param number the number of the report
      */
-    public WaterPurityReport(User sub, Date subDate, double lat, double lng, Model.WaterOverallCondition oCondition, double vPPM, double cPPM, int number) {
+    public WaterPurityReport(User sub, Date subDate, double lat, double lng,
+                             Model.WaterOverallCondition oCondition, double vPPM, double cPPM,
+                             int number) {
         super(sub, subDate, lat, lng, number);
         waterOverallCondition = oCondition;
         virusPPM = vPPM;
         contaminantPPM = cPPM;
     }
 
-    /**
-     * Gets the overall condition of the water for another class
-     * @return the overall condition
-     */
-    public Model.WaterOverallCondition getWaterOverallCondition() { return waterOverallCondition;}
 
     /**
      * Gets the virus ppm of the water for another class
@@ -120,14 +123,5 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
                 + "\nWater Condition: " + waterOverallCondition.getOverallConditionString()
                 + "\nVirus PPM: " + virusPPM + ", Contaminant PPM: " + contaminantPPM
                 + "\nDate submitted: " + sdf.format(getDateSubmitted());
-    }
-
-    /**
-     * Gets the snippet about the report for another class
-     * @return a string containing information to be displayed in the map snippet
-     */
-    public String getSnippet() {
-        return "Water Condition: " + waterOverallCondition.getOverallConditionString()
-                + "\nVirus PPM: " + virusPPM + ", Contaminant PPM: " + contaminantPPM;
     }
 }

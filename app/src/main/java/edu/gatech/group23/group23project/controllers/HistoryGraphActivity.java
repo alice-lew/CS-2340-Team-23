@@ -29,8 +29,8 @@ import edu.gatech.group23.group23project.model.WaterPurityReport;
  * The screen that displays the history chart of water reports
  */
 public class HistoryGraphActivity extends AppCompatActivity {
-    private Calendar cal = Calendar.getInstance();
-    private Model modelInstance = Model.getInstance();
+    private final Calendar cal = Calendar.getInstance();
+    private final Model modelInstance = Model.getInstance();
     private LineChart mChart;
 
     /**
@@ -187,7 +187,8 @@ public class HistoryGraphActivity extends AppCompatActivity {
             set1.setDrawHorizontalHighlightIndicator(false);
             set1.setFillFormatter(new IFillFormatter() {
                 @Override
-                public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
+                public float getFillLinePosition(ILineDataSet dataSet,
+                                                 LineDataProvider dataProvider) {
                     return -10;
                 }
             });

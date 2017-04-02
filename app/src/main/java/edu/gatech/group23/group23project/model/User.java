@@ -13,15 +13,15 @@ public class User implements Serializable {
     private String email;            //the user's email address
     private String home;             //the user's home address
     private String title;                   //the user's title
-    private String username;                //the user's username
-    private String password;                //the user's password
-    private String name;                    //the user's name
-    private Model.UserType userType;        //the type of user
+    private final String username;                //the user's username
+    private final String password;                //the user's password
+    private final String name;                    //the user's name
+    private final Model.UserType userType;        //the type of user
 
     /**
      * A list of the possible userTypes a user can be
      */
-     public static List<String> legalUserTypes = Arrays.asList(
+     public static final List<String> legalUserTypes = Arrays.asList(
             Model.UserType.BASIC.getTypeString(),
             Model.UserType.WORKER.getTypeString(),
             Model.UserType.MANAGER.getTypeString(),
@@ -53,7 +53,8 @@ public class User implements Serializable {
      * @param aTitle the user's title
      * @param type the user's type
      */
-    public User(String aName, String user, String pass, String email, String address, String aTitle, Model.UserType type) {
+    public User(String aName, String user, String pass, String email, String address, String aTitle,
+                Model.UserType type) {
         name = aName;
         username = user;
         password = pass;
@@ -139,7 +140,7 @@ public class User implements Serializable {
      * Gets the user's username and password for another class
      * @return a String consisting of the user's username and password
      */
-    public String getUsername() { return username;}
+    private String getUsername() { return username;}
 
     /**
      * {@inheritDoc}
@@ -151,7 +152,6 @@ public class User implements Serializable {
         if (!(o instanceof User)) {
             return false;
         }
-        User oUser = (User) o;
         String username = ((User) o).getUsername();
         return (username.equals(this.username));
     }

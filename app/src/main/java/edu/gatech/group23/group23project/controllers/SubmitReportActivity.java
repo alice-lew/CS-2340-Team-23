@@ -2,8 +2,6 @@ package edu.gatech.group23.group23project.controllers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +24,6 @@ public class SubmitReportActivity extends AppCompatActivity {
     private EditText latTextBox;
     private Spinner typeSpinner;
     private Spinner conditionSpinner;
-    private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 
     /**
      * {@inheritDoc}
@@ -62,13 +59,15 @@ public class SubmitReportActivity extends AppCompatActivity {
 
 
         //  Set up the adapter to display the allowable water types in the spinner
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterTypes);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterTypes);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(typeAdapter);
 
 
         // Set up the adapter to display the allowable water conditions in the spinner
-        ArrayAdapter<String> conditionAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterConditions);
+        ArrayAdapter<String> conditionAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterConditions);
         conditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         conditionSpinner.setAdapter(conditionAdapter);
     }
@@ -83,16 +82,19 @@ public class SubmitReportActivity extends AppCompatActivity {
             longTextBox.setError("You must enter a longitude.");
         } else if (latTextBox.getText().length() < 1) {
             latTextBox.setError("You must enter a latitude.");
-        } else if (!isNumeric(longTextBox.getText().toString())) {
+        } else if (isNotNumeric(longTextBox.getText().toString())) {
             longTextBox.setError("You must enter a number.");
-        } else if (!isNumeric(latTextBox.getText().toString())) {
+        } else if (isNotNumeric(latTextBox.getText().toString())) {
             latTextBox.setError("You must enter a number.");
         } else {
             Date date = new java.util.Date();
             Model modelInstance = Model.getInstance();
-            modelInstance.submitWaterReport(modelInstance.getCurrentUser(), date, Double.parseDouble(latTextBox.getText().toString()),
-                    Double.parseDouble(longTextBox.getText().toString()), WaterSourceReport.getTypeFromString((String)typeSpinner.getSelectedItem()),
-                    WaterSourceReport.getConditionFromString((String)conditionSpinner.getSelectedItem()));
+            modelInstance.submitWaterReport(modelInstance.getCurrentUser(), date,
+                    Double.parseDouble(latTextBox.getText().toString()),
+                    Double.parseDouble(longTextBox.getText().toString()),
+                    WaterSourceReport.getTypeFromString((String)typeSpinner.getSelectedItem()),
+                    WaterSourceReport.getConditionFromString((String)conditionSpinner
+                            .getSelectedItem()));
             Context context = SubmitReportActivity.this;
             Intent intent = new Intent(context, LoggedInActivity.class);
             finish();
@@ -117,7 +119,7 @@ public class SubmitReportActivity extends AppCompatActivity {
      * @param s a string being checked whether or not it's a number
      * @return whether or not the string is a number
      */
-    private boolean isNumeric(String s) {
-        return s.matches("[-+]?\\d*\\.?\\d+");
+    private boolean isNotNumeric(String s) {
+        return !s.matches("[-+]?\\d*\\.?\\d+");
     }
 }

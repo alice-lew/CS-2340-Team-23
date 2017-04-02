@@ -26,7 +26,7 @@ public class GraphInfoActivity extends AppCompatActivity {
     private EditText maxLatTextBox;
     private Spinner ppmSpinner;
     private EditText yearTextBox;
-    private Model modelInstance = Model.getInstance();
+    private final Model modelInstance = Model.getInstance();
 
     /**
      * {@inheritDoc}
@@ -82,26 +82,29 @@ public class GraphInfoActivity extends AppCompatActivity {
             minLongTextBox.setError("You must enter a longitude.");
         } else if (minLatTextBox.getText().length() < 1) {
             minLatTextBox.setError("You must enter a latitude.");
-        } else if (!isNumeric(minLongTextBox.getText().toString())) {
+        } else if (isNotNumeric(minLongTextBox.getText().toString())) {
             minLongTextBox.setError("You must enter a number.");
-        } else if (!isNumeric(minLatTextBox.getText().toString())) {
+        } else if (isNotNumeric(minLatTextBox.getText().toString())) {
             minLatTextBox.setError("You must enter a number.");
         } else if (maxLongTextBox.getText().length() < 1) {
             maxLongTextBox.setError("You must enter a longitude.");
         } else if (maxLatTextBox.getText().length() < 1) {
             maxLatTextBox.setError("You must enter a latitude.");
-        } else if (!isNumeric(maxLongTextBox.getText().toString())) {
+        } else if (isNotNumeric(maxLongTextBox.getText().toString())) {
             maxLongTextBox.setError("You must enter a number.");
-        } else if (!isNumeric(maxLatTextBox.getText().toString())) {
+        } else if (isNotNumeric(maxLatTextBox.getText().toString())) {
             maxLatTextBox.setError("You must enter a number.");
         } else if (yearTextBox.getText().length() < 1) {
             yearTextBox.setError("You must enter a year.");
-        } else if (!isNumeric(yearTextBox.getText().toString())) {
+        } else if (isNotNumeric(yearTextBox.getText().toString())) {
             yearTextBox.setError("You must enter a number.");
         } else {
-            modelInstance.setGraphInfo(Math.round(Math.abs(Float.parseFloat(yearTextBox.getText().toString()))),
-                    ppmSpinner.getSelectedItemPosition(), Double.parseDouble(minLatTextBox.getText().toString()),
-                    Double.parseDouble(maxLatTextBox.getText().toString()), Double.parseDouble(minLongTextBox.getText().toString()),
+            modelInstance.setGraphInfo
+                    (Math.round(Math.abs(Float.parseFloat(yearTextBox.getText().toString()))),
+                    ppmSpinner.getSelectedItemPosition(),
+                    Double.parseDouble(minLatTextBox.getText().toString()),
+                    Double.parseDouble(maxLatTextBox.getText().toString()),
+                    Double.parseDouble(minLongTextBox.getText().toString()),
                     Double.parseDouble(maxLongTextBox.getText().toString()));
             Context context = GraphInfoActivity.this;
             Intent intent = new Intent(context, HistoryGraphActivity.class);
@@ -115,8 +118,8 @@ public class GraphInfoActivity extends AppCompatActivity {
      * @param s a string being checked whether or not it's a number
      * @return whether or not the string is a number
      */
-    private boolean isNumeric(String s) {
-        return s.matches("[-+]?\\d*\\.?\\d+");
+    private boolean isNotNumeric(String s) {
+        return !s.matches("[-+]?\\d*\\.?\\d+");
     }
 
     /**

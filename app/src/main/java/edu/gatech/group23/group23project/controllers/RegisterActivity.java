@@ -12,7 +12,6 @@ import android.widget.Spinner;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
-import edu.gatech.group23.group23project.model.SaveHelper;
 import edu.gatech.group23.group23project.model.User;
 
 /**
@@ -32,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Spinner userTypeSpinner;
 
     //the model singleton object
-    private Model modelInstance = Model.getInstance();
+    private final Model modelInstance = Model.getInstance();
 
     /**
      * {@inheritDoc}
@@ -68,7 +67,8 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //Set up the adapter to display the allowable majors in the spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, User.legalUserTypes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
+                User.legalUserTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userTypeSpinner.setAdapter(adapter);
     }
@@ -101,12 +101,19 @@ public class RegisterActivity extends AppCompatActivity {
             emailText.setError("You must enter a valid email address.");
         } else if (userText.getText().toString().contains(" ")) {
             userText.setError("Your username may not contain spaces.");
-        }else if (modelInstance.usernameTaken(userText.getText().toString())) {
+        } else if (modelInstance.usernameTaken(userText.getText().toString())) {
             userText.setError("That username is already taken.");
         } else {
-            User newUser = modelInstance.registerUser(nameText.getText().toString(), userText.getText().toString(),
-                    passText.getText().toString(), emailText.getText().toString(), addressText.getText().toString(),
-                    titleText.getText().toString(), User.getTypeFromString((String) userTypeSpinner.getSelectedItem()));
+            successfullyRegister();
+        }
+    }
+
+    private void successfullyRegister() {
+            User newUser = modelInstance.registerUser(nameText.getText().toString(),
+                    userText.getText().toString(), passText.getText().toString(),
+                    emailText.getText().toString(), addressText.getText().toString(),
+                    titleText.getText().toString(),
+                    User.getTypeFromString((String) userTypeSpinner.getSelectedItem()));
             modelInstance.setCurrentUser(newUser);
 
             modelInstance.saveModel(modelInstance, this);
@@ -115,8 +122,8 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(context, LoggedInActivity.class);
             finish();
             context.startActivity(intent);
-        }
     }
+
 
     /**
      * {@inheritDoc}

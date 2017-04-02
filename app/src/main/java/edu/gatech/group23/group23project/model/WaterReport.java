@@ -5,16 +5,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * The superclass for the 2 types of water reports (is abstract)
  * Created by Noah Blume on 2/28/2017.
  */
 
 public abstract class WaterReport implements Serializable {
-    private User submitter;
-    private Date dateSubmitted;
-    private String reporterName;
-    private double latitude;
-    private double longitude;
-    private int reportNumber;
+    private final Date dateSubmitted;
+    private final String reporterName;
+    private final double latitude;
+    private final double longitude;
+    private final int reportNumber;
 
     /**
      * Constructs a new water report
@@ -24,20 +24,14 @@ public abstract class WaterReport implements Serializable {
      * @param lng the longitude of the water
      * @param repNum the number of the report
      */
-    public WaterReport(User sub, Date date, double lat, double lng, int repNum) {
-        submitter = sub;
+    WaterReport(User sub, Date date, double lat, double lng, int repNum) {
         dateSubmitted = date;
-        reporterName = submitter.getName();
+        reporterName = sub.getName();
         latitude = lat;
         longitude = lng;
         reportNumber = repNum;
     }
 
-    /**
-     * Gets the report's submitter for another class
-     * @return report's submitter
-     */
-    public User getSubmitter() { return submitter;}
 
     /**
      * Gets the report's date submitted for another class
@@ -61,7 +55,7 @@ public abstract class WaterReport implements Serializable {
      * Gets the report's name for another class
      * @return report's name
      */
-    public String getReporterName() { return reporterName;}
+    String getReporterName() { return reporterName;}
 
     /**
      * Gets the report's number for another class
@@ -69,11 +63,4 @@ public abstract class WaterReport implements Serializable {
      */
     public int getReportNumber() { return reportNumber;}
 
-
-
-    /**
-     * Gets the snippet about the report for another class
-     * @return a string containing information to be displayed in the map snippet
-     */
-    public abstract String getSnippet();
 }

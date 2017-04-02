@@ -7,15 +7,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * This is the class for water source reports created by any type of user
  * Created by Noah Blume on 2/24/2017.
  */
 
 public class WaterSourceReport extends WaterReport {
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
-    private Model.WaterType waterType;
-    private Model.WaterCondition waterCondition;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+    private final Model.WaterType waterType;
+    private final Model.WaterCondition waterCondition;
 
-    public static List<String> legalWaterTypes = Arrays.asList(
+    public static final List<String> legalWaterTypes = Arrays.asList(
             Model.WaterType.BOTTLED.getTypeString(),
             Model.WaterType.WELL.getTypeString(),
             Model.WaterType.STREAM.getTypeString(),
@@ -39,10 +40,10 @@ public class WaterSourceReport extends WaterReport {
         return Model.WaterType.BOTTLED;
     }
 
-    public static List<String> legalWaterConditions = Arrays.asList(
+    public static final List<String> legalWaterConditions = Arrays.asList(
             Model.WaterCondition.WASTE.getConditionString(),
-            Model.WaterCondition.TREATABLECLEAR.getConditionString(),
-            Model.WaterCondition.TREATABLEMUDDY.getConditionString(),
+            Model.WaterCondition.TREATABLE_CLEAR.getConditionString(),
+            Model.WaterCondition.TREATABLE_MUDDY.getConditionString(),
             Model.WaterCondition.POTABLE.getConditionString()
     );
 
@@ -71,23 +72,12 @@ public class WaterSourceReport extends WaterReport {
      * @param condition the condition the water is in
      * @param number the number of the report
      */
-    public WaterSourceReport(User sub, Date subDate, double lat, double lng, Model.WaterType type, Model.WaterCondition condition, int number) {
+    public WaterSourceReport(User sub, Date subDate, double lat, double lng, Model.WaterType type,
+                             Model.WaterCondition condition, int number) {
         super(sub, subDate, lat, lng, number);
         waterType = type;
         waterCondition = condition;
     }
-
-    /**
-     * Gets the type of water reported for another class
-     * @return the type of the water
-     */
-    public Model.WaterType getWaterType() { return waterType;}
-
-    /**
-     * gets the condition of the water reported for another class
-     * @return the condition of the water
-     */
-    public Model.WaterCondition getWaterCondition() { return waterCondition;}
 
     /**
      * {@inheritDoc}
@@ -118,15 +108,8 @@ public class WaterSourceReport extends WaterReport {
     public String toString() {
         return "Report number: " + getReportNumber() + ", Submitted by: " + getReporterName()
                 + "\nLocated at latitude: " + getLatitude() + ", longitude: " + getLongitude()
-                + "\nWater Type: " + waterType.getTypeString() + ", Water Condition: " + waterCondition.getConditionString()
+                + "\nWater Type: " + waterType.getTypeString() + ", Water Condition: "
+                + waterCondition.getConditionString()
                 + "\nDate submitted: " + sdf.format(getDateSubmitted());
-    }
-
-    /**
-     * Gets the snippet about the report for another class
-     * @return a string containing information to be displayed in the map snippet
-     */
-    public String getSnippet() {
-        return "Water Type: " + waterType.getTypeString() + ", Water Condition: " + waterCondition.getConditionString();
     }
 }

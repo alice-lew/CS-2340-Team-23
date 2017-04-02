@@ -10,7 +10,6 @@ import android.widget.EditText;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
-import edu.gatech.group23.group23project.model.User;
 
 /**
  * The page that lets a user edit their profile
@@ -25,7 +24,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText titleText;
 
     //gets the instance of the model
-    private Model modelInstance = Model.getInstance();
+    private final Model modelInstance = Model.getInstance();
 
     /**
      * {@inheritDoc}
@@ -35,15 +34,13 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        User curUser = modelInstance.getCurrentUser();
-
         emailText = (EditText) findViewById(R.id.emailBox);
         addressText = (EditText) findViewById(R.id.addressBox);
         titleText = (EditText) findViewById(R.id.titleBox);
 
-        emailText.setText(curUser.getEmail());
-        addressText.setText(curUser.getHome());
-        titleText.setText(curUser.getTitle());
+        emailText.setText(modelInstance.getCurUserEmail());
+        addressText.setText(modelInstance.getCurUserHome());
+        titleText.setText(modelInstance.getCurUserTitle());
 
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +60,8 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks the input the user entered in the edit profile page, and attempts to edit the user profile
+     * Checks the input the user entered in the edit profile page, and attempts to edit the
+     * user profile
      * Will alert the user if they failed to properly enter input to one of the input fields
      */
     private void attemptEditProfile() {
@@ -80,10 +78,9 @@ public class EditProfileActivity extends AppCompatActivity {
         } else if (!emailText.getText().toString().contains("@")) {
             emailText.setError("You must enter a valid email address.");
         }else {
-            User curUser = modelInstance.getCurrentUser();
-            curUser.setEmail(emailText.getText().toString());
-            curUser.setHome(addressText.getText().toString());
-            curUser.setTitle(titleText.getText().toString());
+            modelInstance.setCurUserEmail(emailText.getText().toString());
+            modelInstance.setCurUserHome(addressText.getText().toString());
+            modelInstance.setCurUserTitle(titleText.getText().toString());
 
             Context context = EditProfileActivity.this;
             Intent intent = new Intent(context, LoggedInActivity.class);

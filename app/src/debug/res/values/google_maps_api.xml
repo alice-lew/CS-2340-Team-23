@@ -1,13 +1,14 @@
 <resources>
     <!--
-    TODO: Before you run your application, you need a Google Maps API key.
+    To get a google api key, follow this link, follow the directions and press "Create" at the end:
 
-    To get one, follow this link, follow the directions and press "Create" at the end:
-
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=50:ED:C1:9B:63:3B:D7:83:86:FF:A0:7B:48:95:1E:2B:5D:24:40:CF%3Bedu.gatech.group23.group23project.controllers
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&
+    keyType=CLIENT_SIDE_ANDROID&r=50:ED:C1:9B:63:3B:D7:83:86:FF:A0:7B:48:95:1E:2B:5D:24:40:CF%
+    3Bedu.gatech.group23.group23project.controllers
 
     You can also add your credentials to an existing key, using this line:
-    50:ED:C1:9B:63:3B:D7:83:86:FF:A0:7B:48:95:1E:2B:5D:24:40:CF;edu.gatech.group23.group23project.controllers
+    50:ED:C1:9B:63:3B:D7:83:86:FF:A0:7B:48:95:1E:2B:5D:24:40:CF;
+    edu.gatech.group23.group23project.controllers
 
     Alternatively, follow the directions here:
     https://developers.google.com/maps/documentation/android/start#get-key

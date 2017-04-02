@@ -10,13 +10,12 @@ import android.widget.ListView;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
-import edu.gatech.group23.group23project.model.WaterSourceReport;
 
 /**
  * The screen that lists all of the source reports
  */
 public class ReportListActivity extends AppCompatActivity {
-    private Model modelInstance = Model.getInstance(); //gets the singleton model instance
+    private final Model modelInstance = Model.getInstance(); //gets the singleton model instance
 
     /**
      * {@inheritDoc}
@@ -27,7 +26,8 @@ public class ReportListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report_list);
 
         ListView reportsListView = (ListView) findViewById(R.id.reportsListView);
-        ListAdapter adapter = new ArrayAdapter<WaterSourceReport>(this,R.layout.report_list_view, R.id.reportListTextView, modelInstance.getSourceReportList());
+        ListAdapter adapter = new ArrayAdapter<>(this,R.layout.report_list_view,
+                R.id.reportListTextView, modelInstance.getSourceReportList());
         reportsListView.setAdapter(adapter);
     }
 

@@ -12,7 +12,6 @@ import android.widget.TextView;
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.SaveHelper;
-import edu.gatech.group23.group23project.model.User;
 
 /**
  * The first activity of the application where users can sign in or register
@@ -20,7 +19,6 @@ import edu.gatech.group23.group23project.model.User;
  * Created by Noah Blume on 2/10/2017
  */
 public class WelcomeActivity extends AppCompatActivity {
-    private Model modelInstance; //the singletone model instance
 
     /**
      * {@inheritDoc}
@@ -30,12 +28,12 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        Model modelInstance = Model.getInstance();
         //loads data for the app
-        Model m = SaveHelper.loadModel(this);
+        Model m = modelInstance.loadModel(this);
         if (m != null) {
             m.setCurrentUser(null);
             Model.setInstance(m);
-            modelInstance = m;
         } else {
             Log.d("Loading", "failed to load");
         }
@@ -46,10 +44,6 @@ public class WelcomeActivity extends AppCompatActivity {
         TextView instructionsText = (TextView) findViewById(R.id.welcomeInstructionsText);
         Button loginButton = (Button) findViewById(R.id.loginButton);
         Button registerButton = (Button) findViewById(R.id.saveButton);
-        welcomeText.setText("Welcome!");
-        instructionsText.setText("Please sign in or register an account.");
-        loginButton.setText("SIGN IN");
-        registerButton.setText("REGISTER");
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +76,5 @@ public class WelcomeActivity extends AppCompatActivity {
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         finish();
         startActivity(startMain);
-        return;
     }
 }

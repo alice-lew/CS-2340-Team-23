@@ -32,16 +32,10 @@
         <activity
             android:name=".controllers.LoginActivity"
             android:label="Group23Project">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".controllers.RegisterActivity"
             android:label="Group23Project">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".controllers.LoggedInActivity"
@@ -50,9 +44,6 @@
         <activity
             android:name=".controllers.SubmitReportActivity"
             android:label="Group23Project">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
         </activity>
         <activity android:name=".controllers.ReportListActivity" />
         <!--
@@ -73,7 +64,7 @@
         <activity android:name=".controllers.SubmitPurityReportActivity" />
         <activity android:name=".controllers.PurityReportListActivity" />
         <activity android:name=".controllers.HistoryGraphActivity" />
-        <activity android:name=".controllers.GraphInfoActivity"></activity>
+        <activity android:name=".controllers.GraphInfoActivity" />
     </application>
 
 </manifest>

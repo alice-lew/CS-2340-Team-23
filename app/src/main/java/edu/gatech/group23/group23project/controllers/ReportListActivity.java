@@ -5,15 +5,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
-import edu.gatech.group23.group23project.model.WaterReport;
 import edu.gatech.group23.group23project.model.WaterSourceReport;
 
+/**
+ * The screen that lists all of the source reports
+ */
 public class ReportListActivity extends AppCompatActivity {
-    private ListView reportsListView;       //the List view that shows all of the created reports
     private Model modelInstance = Model.getInstance(); //gets the singleton model instance
 
     /**
@@ -24,8 +26,8 @@ public class ReportListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_list);
 
-        reportsListView = (ListView) findViewById(R.id.reportsListView);
-        ArrayAdapter adapter = new ArrayAdapter<WaterSourceReport>(this,R.layout.report_list_view, R.id.reportListTextView, modelInstance.getSourceReportList());
+        ListView reportsListView = (ListView) findViewById(R.id.reportsListView);
+        ListAdapter adapter = new ArrayAdapter<WaterSourceReport>(this,R.layout.report_list_view, R.id.reportListTextView, modelInstance.getSourceReportList());
         reportsListView.setAdapter(adapter);
     }
 
@@ -39,6 +41,5 @@ public class ReportListActivity extends AppCompatActivity {
         Intent intent = new Intent(context, LoggedInActivity.class);
         finish();
         context.startActivity(intent);
-        return;
     }
 }

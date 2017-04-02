@@ -39,18 +39,30 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
 
     /**
      * Given the string associated with a userType, returns the UserTpe
-     * @param strType the string associated with the userType
+     * @param strCond the string associated with the userType
      * @return the userType associated with the passed in String
      */
-    public static Model.WaterOverallCondition getOverallConditionFromString(String strType) {
+    public static Model.WaterOverallCondition getOverallConditionFromString(String strCond) {
         for (Model.WaterOverallCondition t: Model.WaterOverallCondition.values()) {
-            if (t.getOverallConditionString().equals(strType)) {
+            String conditionString = t.getOverallConditionString();
+            if (conditionString.equals(strCond)) {
                 return t;
             }
         }
         return Model.WaterOverallCondition.SAFE;
     }
 
+    /**
+     * Constructs a new water purity report
+     * @param sub the user who submitted the report
+     * @param subDate the date the report was submitted
+     * @param lat the latitude of the water
+     * @param lng the longitude of the water
+     * @param oCondition the overall condition of the water
+     * @param vPPM the virus pmm of the water
+     * @param cPPM the contaminant ppm of the water
+     * @param number the number of the report
+     */
     public WaterPurityReport(User sub, Date subDate, double lat, double lng, Model.WaterOverallCondition oCondition, double vPPM, double cPPM, int number) {
         super(sub, subDate, lat, lng, number);
         waterOverallCondition = oCondition;
@@ -58,8 +70,22 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
         contaminantPPM = cPPM;
     }
 
+    /**
+     * Gets the overall condition of the water for another class
+     * @return the overall condition
+     */
     public Model.WaterOverallCondition getWaterOverallCondition() { return waterOverallCondition;}
+
+    /**
+     * Gets the virus ppm of the water for another class
+     * @return the virus ppm
+     */
     public double getVirusPPM() { return virusPPM;}
+
+    /**
+     * gets the contaminant ppm for another class
+     * @return the contaminant ppm
+     */
     public double getContaminantPPM() { return  contaminantPPM;}
 
     /**
@@ -73,10 +99,7 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
             return false;
         }
         WaterPurityReport oRep = (WaterPurityReport) o;
-        if (oRep.getReportNumber() == getReportNumber()) {
-            return true;
-        }
-        return false;
+        return (oRep.getReportNumber() == getReportNumber());
     }
 
     /**

@@ -12,20 +12,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.Date;
+
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.WaterSourceReport;
 
+/**
+ * The screen where users may submit source reports
+ */
 public class SubmitReportActivity extends AppCompatActivity {
     private EditText longTextBox;
     private EditText latTextBox;
     private Spinner typeSpinner;
     private Spinner conditionSpinner;
-    private Button cancelButton;
-    private Button submitButton;
-    private Model modelInstance = Model.getInstance();
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-    private java.util.Date date;
 
     /**
      * {@inheritDoc}
@@ -39,8 +40,7 @@ public class SubmitReportActivity extends AppCompatActivity {
         latTextBox = (EditText) findViewById(R.id.maxLatBox);
         typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         conditionSpinner = (Spinner) findViewById(R.id.conditionSpinner);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
-        submitButton = (Button) findViewById(R.id.submitButton);
+        Button submitButton = (Button) findViewById(R.id.submitButton);
 
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -53,25 +53,22 @@ public class SubmitReportActivity extends AppCompatActivity {
             }
         });
 
-        Button registerButton = (Button) findViewById(R.id.submitButton);
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptSubmit();
             }
         });
 
-        /**
-         *  Set up the adapter to display the allowable water types in the spinner
-         */
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterTypes);
+
+        //  Set up the adapter to display the allowable water types in the spinner
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterTypes);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(typeAdapter);
 
-        /**
-         * Set up the adapter to display the allowable water conditions in the spinner
-         */
-        ArrayAdapter<String> conditionAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterConditions);
+
+        // Set up the adapter to display the allowable water conditions in the spinner
+        ArrayAdapter<String> conditionAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, WaterSourceReport.legalWaterConditions);
         conditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         conditionSpinner.setAdapter(conditionAdapter);
     }
@@ -91,8 +88,8 @@ public class SubmitReportActivity extends AppCompatActivity {
         } else if (!isNumeric(latTextBox.getText().toString())) {
             latTextBox.setError("You must enter a number.");
         } else {
-            date = new java.util.Date();
-            modelInstance = Model.getInstance();
+            Date date = new java.util.Date();
+            Model modelInstance = Model.getInstance();
             modelInstance.submitWaterReport(modelInstance.getCurrentUser(), date, Double.parseDouble(latTextBox.getText().toString()),
                     Double.parseDouble(longTextBox.getText().toString()), WaterSourceReport.getTypeFromString((String)typeSpinner.getSelectedItem()),
                     WaterSourceReport.getConditionFromString((String)conditionSpinner.getSelectedItem()));
@@ -113,7 +110,6 @@ public class SubmitReportActivity extends AppCompatActivity {
         Intent intent = new Intent(context, LoggedInActivity.class);
         finish();
         context.startActivity(intent);
-        return;
     }
 
     /**

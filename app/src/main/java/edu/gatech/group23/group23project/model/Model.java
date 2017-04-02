@@ -1,15 +1,14 @@
 package edu.gatech.group23.group23project.model;
 
+import android.content.Context;
+
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.Exchanger;
 
 /**
  * The model singleton object for the application
@@ -17,15 +16,14 @@ import java.util.concurrent.Exchanger;
  * Created by Noah Blume on 2/19/2017.
  */
 public class Model implements Serializable {
-    public List<WaterReport> genericRepList = new ArrayList<>();
-    private Set<WaterSourceReport> repSet = new HashSet<>();
-    private Set<WaterPurityReport> pRepSet = new HashSet<>();
-    private Set<User> userSet = new HashSet<>();
+    private Collection<WaterReport> genericRepList = new ArrayList<>();
+    private Collection<WaterSourceReport> repSet = new HashSet<>();
+    private Collection<WaterPurityReport> pRepSet = new HashSet<>();
+    private Collection<User> userSet = new HashSet<>();
     private int numRepCreated;
     private List<WaterSourceReport> repList = new ArrayList<>();
     private List<WaterPurityReport> pRepList = new ArrayList<>();
     private static Model modelSingleton;    //the model singleton
-    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private int graphYear;
     private GraphType curGraphType;
     private double graphMinLat;
@@ -43,6 +41,11 @@ public class Model implements Serializable {
         VIRUS("Virus PPM"), CONTAMINANT("Contaminant PPM");
         private String typeString;
         GraphType(String s) { typeString = s;}
+
+        /**
+         * gets the type of graph as a string for another class
+         * @return the graph type as a string
+         */
         public String getTypeString() { return typeString;}
     }
 
@@ -57,6 +60,10 @@ public class Model implements Serializable {
             typeString = s;
         }
 
+        /**
+         * gets the type of user as a string for another class
+         * @return the user type as a string
+         */
         public String getTypeString() {
             return typeString;
         }
@@ -73,6 +80,10 @@ public class Model implements Serializable {
             typeString = s;
         }
 
+        /**
+         * gets the type of water as a string for another class
+         * @return the water type as a string
+         */
         public String getTypeString() {
             return typeString;
         }
@@ -89,6 +100,10 @@ public class Model implements Serializable {
             typeString = s;
         }
 
+        /**
+         * gets the water condition as a string for another class
+         * @return the water condition as a string
+         */
         public String getConditionString() {
             return typeString;
         }
@@ -105,6 +120,10 @@ public class Model implements Serializable {
             typeString = s;
         }
 
+        /**
+         * gets the overall water condition as a string for another class
+         * @return the overall water condition as a string
+         */
         public String getOverallConditionString() {
             return typeString;
         }
@@ -114,6 +133,7 @@ public class Model implements Serializable {
      * constructor for the model, sets up necessary parts of the model
      */
     private Model() {
+        saveHelper = new SaveHelper();
     }
 
     /**
@@ -127,6 +147,10 @@ public class Model implements Serializable {
         return modelSingleton;
     }
 
+    /**
+     * Updates the model instance when the application loads
+     * @param m the new model instance
+     */
     public static void setInstance(Model m) {
         modelSingleton = m;
     }
@@ -152,7 +176,7 @@ public class Model implements Serializable {
      * Gets the set of users for another class
      * @return the set of registered users
      */
-    public Set<User> getUserSet() {
+    public Iterable<User> getUserSet() {
         return userSet;
     }
 
@@ -175,12 +199,13 @@ public class Model implements Serializable {
 
     /**
      * Gets the user associated with a certain username and password combo
-     * @param creds the credentials of the user being looked for
-     * @return the user asociated with the credentials passed in
+     * @param credentialsStr the credentials of the user being looked for
+     * @return the user associated with the credentials passed in
      */
-    public User getUserWithCredentials(String creds) {
+    public User getUserWithCredentials(String credentialsStr) {
         for (User u: userSet) {
-            if (u.getCredentials().equals(creds)) {
+            String credentials = u.getCredentials();
+            if (credentials.equals(credentialsStr)) {
                 return u;
             }
         }
@@ -192,7 +217,7 @@ public class Model implements Serializable {
      * Gets a list of all water reports for another class
      * @return return a list of all water reports
      */
-    public List<WaterReport> getReportList(){ return genericRepList;}
+    public Iterable<WaterReport> getReportList(){ return genericRepList;}
 
     /**
      * Gets a list of all water source reports for another class
@@ -256,7 +281,15 @@ public class Model implements Serializable {
     }
 
 
-
+    /**
+     * Sets the values for the graph
+     * @param year the year of the data in the graph
+     * @param typeOrdinal the int corresponding to virus or contaminant ppm
+     * @param minLat the lower end of latitudes included in the graph
+     * @param maxLat the upper end of the latitudes included in the graph
+     * @param minLng the lower end of the longitudes included in the graph
+     * @param maxLng the upper end of the longitudes included in the graph
+     */
     public void setGraphInfo(int year, int typeOrdinal, double minLat, double maxLat, double minLng, double maxLng) {
         graphYear = year;
         graphMinLat = minLat;
@@ -270,11 +303,47 @@ public class Model implements Serializable {
         }
     }
 
+    /**
+     * Gets the year for the graph to display data for
+     * @return return the graphYear
+     */
     public int getGraphYear() {return graphYear;}
+
+    /**
+     * Gets the type of data (virus of containment ppm) for the graph to display data for
+     * @return returns whether to display virus ppm or containment ppm in the graph
+     */
     public GraphType getCurGraphType() {return curGraphType;}
+
+    /**
+     * Gets the minimum latitude of reports for the graph to show
+     * @return return minimum latitude
+     */
     public double getGraphMinLat() {return graphMinLat;}
+
+    /**
+     * Gets the minimum longitude of reports for the graph to show
+     * @return return minimum longitude
+     */
     public double getGraphMinLng() {return graphMinLng;}
+
+    /**
+     * Gets the max latitude of reports for the graph to show
+     * @return return maximum latitude
+     */
     public double getGraphMaxLat() {return graphMaxLat;}
+
+    /**
+     * Gets the maximum longitude of reports for the graph to show
+     * @return return maximum longitude
+     */
     public double getGraphMaxLng() {return graphMaxLng;}
 
+    public void saveModel(Model m, Context context) {
+        saveHelper.saveModel(m, context);
+    }
+
+    public Model loadModel(Context context) {
+        return saveHelper.loadModel(context);
+    }
 }

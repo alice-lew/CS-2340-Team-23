@@ -7,13 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -27,11 +25,17 @@ import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.WaterPurityReport;
 
+/**
+ * The screen that displays the history chart of water reports
+ */
 public class HistoryGraphActivity extends AppCompatActivity {
     private Calendar cal = Calendar.getInstance();
     private Model modelInstance = Model.getInstance();
     private LineChart mChart;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,10 +82,13 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
         mChart.animateXY(2000, 2000);
 
-        // dont forget to refresh the drawing
+        // do not forget to refresh the drawing
         mChart.invalidate();
     }
 
+    /**
+     * Sets the data for the graph to show based on the user's inputs
+     */
     private void setData() {
         int year = modelInstance.getGraphYear();
         double minLat = modelInstance.getGraphMinLat();
@@ -91,7 +98,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
         Model.GraphType gType = modelInstance.getCurGraphType();
         List<WaterPurityReport> pReps = modelInstance.getPurityReportList();
         Collections.sort(pReps);
-        ArrayList<Entry> yVals = new ArrayList<>();
+        ArrayList<Entry> yValues = new ArrayList<>();
         int i = 0;
         float totalPPM = 0;
         int numReps = 0;
@@ -110,12 +117,13 @@ public class HistoryGraphActivity extends AppCompatActivity {
                     if(numReps > 0) {
                         avgPPM = totalPPM / numReps;
                     }
-                    yVals.add(new Entry(i, avgPPM));
+                    yValues.add(new Entry(i, avgPPM));
                     i++;
                     totalPPM = 0;
                     numReps = 0;
                 }
-                if (month == i && repYear == year && lat <= maxLat && lat >= minLat && lng <= maxLng && lng >= minLng) {
+                if ((month == i) && (repYear == year) && (lat <= maxLat) && (lat >= minLat)
+                        && (lng <= maxLng) && (lng >= minLng)) {
                     totalPPM += r.getVirusPPM();
                     numReps++;
                 }
@@ -131,12 +139,12 @@ public class HistoryGraphActivity extends AppCompatActivity {
                     if(numReps > 0) {
                         avgPPM = totalPPM / numReps;
                     }
-                    yVals.add(new Entry(i, avgPPM));
+                    yValues.add(new Entry(i, avgPPM));
                     i++;
                     totalPPM = 0;
                     numReps = 0;
                 }
-                if (month == i && repYear == year) {
+                if ((month == i) && (repYear == year)) {
                     totalPPM += r.getContaminantPPM();
                     numReps++;
                 }
@@ -145,9 +153,9 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
         while (i < 12) {
             if (numReps > 0) {
-                yVals.add(new Entry(i, totalPPM / numReps));
+                yValues.add(new Entry(i, totalPPM / numReps));
             } else {
-                yVals.add(new Entry(i, 0));
+                yValues.add(new Entry(i, 0));
             }
             i++;
             totalPPM = 0;
@@ -155,15 +163,15 @@ public class HistoryGraphActivity extends AppCompatActivity {
 
         LineDataSet set1;
 
-        if (mChart.getData() != null &&
-                mChart.getData().getDataSetCount() > 0) {
+        if ((mChart.getData() != null) &&
+                (mChart.getData().getDataSetCount() > 0)) {
             set1 = (LineDataSet)mChart.getData().getDataSetByIndex(0);
-            set1.setValues(yVals);
+            set1.setValues(yValues);
             mChart.getData().notifyDataChanged();
             mChart.notifyDataSetChanged();
         } else {
-            // create a dataset and give it a type
-            set1 = new LineDataSet(yVals, "DataSet 1");
+            // create a dataSet and give it a type
+            set1 = new LineDataSet(yValues, "DataSet 1");
 
             set1.setMode(LineDataSet.Mode.LINEAR);
             //set1.setCubicIntensity(0.2f);
@@ -184,7 +192,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
                 }
             });
 
-            // create a data object with the datasets
+            // create a data object with the dataSets
             LineData data = new LineData(set1);
             //data.setValueTypeface(mTfLight);
             data.setValueTextSize(15f);
@@ -206,6 +214,5 @@ public class HistoryGraphActivity extends AppCompatActivity {
         Intent intent = new Intent(context, GraphInfoActivity.class);
         finish();
         context.startActivity(intent);
-        return;
     }
 }

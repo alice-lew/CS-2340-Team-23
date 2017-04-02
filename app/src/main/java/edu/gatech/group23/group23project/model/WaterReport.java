@@ -16,6 +16,14 @@ public abstract class WaterReport implements Serializable {
     private double longitude;
     private int reportNumber;
 
+    /**
+     * Constructs a new water report
+     * @param sub the user who submitted the report
+     * @param date the date the report was submitted
+     * @param lat the latitude of the water
+     * @param lng the longitude of the water
+     * @param repNum the number of the report
+     */
     public WaterReport(User sub, Date date, double lat, double lng, int repNum) {
         submitter = sub;
         dateSubmitted = date;

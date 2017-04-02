@@ -4,12 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
@@ -105,6 +102,5 @@ public class EditProfileActivity extends AppCompatActivity {
         Intent intent = new Intent(context, LoggedInActivity.class);
         finish();
         context.startActivity(intent);
-        return;
     }
 }

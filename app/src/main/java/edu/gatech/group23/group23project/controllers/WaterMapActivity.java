@@ -24,10 +24,12 @@ import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.WaterReport;
 import edu.gatech.group23.group23project.model.WaterSourceReport;
 
+/**
+ * The screen that shows a map of all of the water reports
+ */
 public class WaterMapActivity extends FragmentActivity implements OnMapReadyCallback {
     private Model modelInstance = Model.getInstance();  //the singleton model instance
 
-    private GoogleMap mMap; //the map that will be shown
 
     /**
      * {@inheritDoc}
@@ -54,9 +56,8 @@ public class WaterMapActivity extends FragmentActivity implements OnMapReadyCall
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
             @Override
             public View getInfoWindow(Marker arg0) {
@@ -86,10 +87,6 @@ public class WaterMapActivity extends FragmentActivity implements OnMapReadyCall
                 return info;
             }
         });
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         WaterSourceReport current = null;
         LatLng curLL = null;
@@ -101,10 +98,10 @@ public class WaterMapActivity extends FragmentActivity implements OnMapReadyCall
             mO.position(curLL);
             mO.title("Report Number " + r.getReportNumber());
             mO.snippet(r.toString());
-            mMap.addMarker(mO);
+            googleMap.addMarker(mO);
         }
         if (current != null) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(curLL));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(curLL));
         }
     }
 
@@ -120,6 +117,5 @@ public class WaterMapActivity extends FragmentActivity implements OnMapReadyCall
         Intent intent = new Intent(context, LoggedInActivity.class);
         finish();
         context.startActivity(intent);
-        return;
     }
 }

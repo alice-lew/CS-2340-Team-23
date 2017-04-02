@@ -2,7 +2,6 @@ package edu.gatech.group23.group23project.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -22,7 +21,7 @@ public class User implements Serializable {
     /**
      * A list of the possible userTypes a user can be
      */
-    public static List<String> legalUserTypes = Arrays.asList(
+     public static List<String> legalUserTypes = Arrays.asList(
             Model.UserType.BASIC.getTypeString(),
             Model.UserType.WORKER.getTypeString(),
             Model.UserType.MANAGER.getTypeString(),
@@ -36,7 +35,8 @@ public class User implements Serializable {
      */
     public static Model.UserType getTypeFromString(String strType) {
         for (Model.UserType t: Model.UserType.values()) {
-            if (t.getTypeString().equals(strType)) {
+            String type = t.getTypeString();
+            if (type.equals(strType)) {
                 return t;
             }
         }
@@ -83,7 +83,7 @@ public class User implements Serializable {
      * Gets the user's email for another class
      * @return the user's email
      */
-    public String getEmail() {
+    public CharSequence getEmail() {
         return this.email;
     }
 
@@ -99,7 +99,7 @@ public class User implements Serializable {
      * Gets the user's home address for another class
      * @return the user's home address
      */
-    public String getHome() {
+    public CharSequence getHome() {
         return this.home;
     }
 
@@ -115,7 +115,7 @@ public class User implements Serializable {
      * Gets the user's title for another class
      * @return the user's title
      */
-    public String getTitle() {
+    public CharSequence getTitle() {
         return title;
     }
 
@@ -152,10 +152,8 @@ public class User implements Serializable {
             return false;
         }
         User oUser = (User) o;
-        if (oUser.getUsername().equals(this.username)) {
-            return true;
-        }
-        return false;
+        String username = ((User) o).getUsername();
+        return (username.equals(this.username));
     }
 
     /**

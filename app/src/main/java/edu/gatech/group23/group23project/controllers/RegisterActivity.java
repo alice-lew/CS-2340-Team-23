@@ -66,10 +66,9 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * Set up the adapter to display the allowable majors in the spinner
-         */
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, User.legalUserTypes);
+
+        //Set up the adapter to display the allowable majors in the spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, User.legalUserTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userTypeSpinner.setAdapter(adapter);
     }
@@ -110,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
                     titleText.getText().toString(), User.getTypeFromString((String) userTypeSpinner.getSelectedItem()));
             modelInstance.setCurrentUser(newUser);
 
-            SaveHelper.saveModel(modelInstance, this);
+            modelInstance.saveModel(modelInstance, this);
 
             Context context = RegisterActivity.this;
             Intent intent = new Intent(context, LoggedInActivity.class);
@@ -129,6 +128,5 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(context, WelcomeActivity.class);
         finish();
         context.startActivity(intent);
-        return;
     }
 }

@@ -39,7 +39,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:singleLine="true"
                     android:elevation="1dp"
                     android:hint="Username"
                     android:inputType="text" />
@@ -59,8 +58,7 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -75,10 +73,10 @@
                 android:text="SIGN IN" />
 
             <Button
-                android:text="Button"
+                android:id="@+id/cancelLoginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/cancelLoginButton"
+                android:text="Cancel"
                 android:textColor="@color/black"
                 tools:text="CANCEL" />
 

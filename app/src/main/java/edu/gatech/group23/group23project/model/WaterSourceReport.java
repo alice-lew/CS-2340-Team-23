@@ -1,6 +1,5 @@
 package edu.gatech.group23.group23project.model;
 
-import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 
 import java.util.Arrays;
@@ -32,7 +31,8 @@ public class WaterSourceReport extends WaterReport {
      */
     public static Model.WaterType getTypeFromString(String strType) {
         for (Model.WaterType t: Model.WaterType.values()) {
-            if (t.getTypeString().equals(strType)) {
+            String type = t.getTypeString();
+            if (type.equals(strType)) {
                 return t;
             }
         }
@@ -53,20 +53,40 @@ public class WaterSourceReport extends WaterReport {
      */
     public static Model.WaterCondition getConditionFromString(String strCondition) {
         for (Model.WaterCondition t: Model.WaterCondition.values()) {
-            if (t.getConditionString().equals(strCondition)) {
+            String condition = t.getConditionString();
+            if (condition.equals(strCondition)) {
                 return t;
             }
         }
         return Model.WaterCondition.WASTE;
     }
 
+    /**
+     * Constructs a new water source report
+     * @param sub the user who submitted the report
+     * @param subDate the date the report was submitted
+     * @param lat the latitude of the water
+     * @param lng the longitude of the water
+     * @param type the type of water
+     * @param condition the condition the water is in
+     * @param number the number of the report
+     */
     public WaterSourceReport(User sub, Date subDate, double lat, double lng, Model.WaterType type, Model.WaterCondition condition, int number) {
         super(sub, subDate, lat, lng, number);
         waterType = type;
         waterCondition = condition;
     }
 
+    /**
+     * Gets the type of water reported for another class
+     * @return the type of the water
+     */
     public Model.WaterType getWaterType() { return waterType;}
+
+    /**
+     * gets the condition of the water reported for another class
+     * @return the condition of the water
+     */
     public Model.WaterCondition getWaterCondition() { return waterCondition;}
 
     /**
@@ -80,10 +100,7 @@ public class WaterSourceReport extends WaterReport {
             return false;
         }
         WaterSourceReport oRep = (WaterSourceReport) o;
-        if (oRep.getReportNumber() == getReportNumber()) {
-            return true;
-        }
-        return false;
+        return (oRep.getReportNumber() == getReportNumber());
     }
 
     /**

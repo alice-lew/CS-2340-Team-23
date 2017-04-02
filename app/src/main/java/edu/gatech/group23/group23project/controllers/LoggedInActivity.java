@@ -5,13 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
@@ -49,7 +44,8 @@ public class LoggedInActivity extends AppCompatActivity {
         Button saveButton = (Button) findViewById(R.id.saveButton);
         Button loadButton = (Button) findViewById(R.id.loadButton);
 
-        if (modelInstance.getCurrentUser().getUserType() != Model.UserType.BASIC) {
+        Model.UserType curUserType = modelInstance.getCurrentUser().getUserType();
+        if (curUserType != Model.UserType.BASIC) {
             submitPurityReportButton.setVisibility(View.VISIBLE);
             viewPurityReportListButton.setVisibility(View.VISIBLE);
         } else {
@@ -57,8 +53,8 @@ public class LoggedInActivity extends AppCompatActivity {
             viewPurityReportListButton.setVisibility(View.GONE);
         }
 
-        if (modelInstance.getCurrentUser().getUserType() == Model.UserType.MANAGER  ||
-                modelInstance.getCurrentUser().getUserType() == Model.UserType.ADMIN) {
+        if ((curUserType == Model.UserType.MANAGER)  ||
+                (curUserType == Model.UserType.ADMIN)) {
             historyGraphButton.setVisibility(View.VISIBLE);
         } else {
             historyGraphButton.setVisibility(View.GONE);
@@ -149,14 +145,14 @@ public class LoggedInActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SaveHelper.saveModel(modelInstance,view.getContext());
+                modelInstance.saveModel(modelInstance,view.getContext());
             }
         });
 
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Model m = SaveHelper.loadModel(view.getContext());
+                Model m = modelInstance.loadModel(view.getContext());
                 User curUser = null;
                 modelInstance.getCurrentUser();
                 if (m != null) {
@@ -181,6 +177,5 @@ public class LoggedInActivity extends AppCompatActivity {
         Intent intent = new Intent(context, WelcomeActivity.class);
         finish();
         context.startActivity(intent);
-        return;
     }
 }

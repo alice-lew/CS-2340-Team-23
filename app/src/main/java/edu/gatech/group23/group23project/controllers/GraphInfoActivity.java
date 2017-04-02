@@ -15,18 +15,22 @@ import java.util.Arrays;
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 
+/**
+ * The screen that asks the user what data to display on the graph
+ */
 public class GraphInfoActivity extends AppCompatActivity {
 
     private EditText minLongTextBox;
     private EditText minLatTextBox;
     private EditText maxLongTextBox;
     private EditText maxLatTextBox;
-    private Button cancelButton;
-    private Button viewGraphButton;
     private Spinner ppmSpinner;
     private EditText yearTextBox;
     private Model modelInstance = Model.getInstance();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +40,8 @@ public class GraphInfoActivity extends AppCompatActivity {
         minLatTextBox = (EditText) findViewById(R.id.minLatBox);
         maxLongTextBox = (EditText) findViewById(R.id.maxLongBox);
         maxLatTextBox = (EditText) findViewById(R.id.maxLatBox);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
-        viewGraphButton = (Button) findViewById(R.id.viewGraphButton);
+        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        Button viewGraphButton = (Button) findViewById(R.id.viewGraphButton);
         ppmSpinner = (Spinner) findViewById(R.id.ppmSpinner);
         yearTextBox = (EditText) findViewById(R.id.yearTextInput);
 
@@ -47,7 +51,6 @@ public class GraphInfoActivity extends AppCompatActivity {
                 Context context = GraphInfoActivity.this;
                 Intent intent = new Intent(context, LoggedInActivity.class);
                 context.startActivity(intent);
-                return;
             }
         });
 
@@ -58,15 +61,16 @@ public class GraphInfoActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         *  Set up the adapter to display the allowable water types in the spinner
-         */
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+        //Set up the adapter to display the allowable water types in the spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
                 Arrays.asList("Virus PPM", "Contaminant PPM"));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ppmSpinner.setAdapter(adapter);
     }
 
+    /**
+     * Checks to see if the user entered valid input and then shows the graph of the data
+     */
     private void attemptViewGraph() {
         minLongTextBox.setError(null);
         minLatTextBox.setError(null);
@@ -125,6 +129,5 @@ public class GraphInfoActivity extends AppCompatActivity {
         Intent intent = new Intent(context, LoggedInActivity.class);
         finish();
         context.startActivity(intent);
-        return;
     }
 }

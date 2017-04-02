@@ -6,38 +6,38 @@
     android:weightSum="1">
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/welcomeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/welcomeText"
         android:layout_weight="0.03"
-        tools:text="Welcome!"
+        android:text="Welcome!"
+        android:textAlignment="center"
         android:textSize="30sp"
-        android:textAlignment="center" />
+        tools:text="Welcome!" />
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/welcomeInstructionsText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/welcomeInstructionsText"
         android:layout_weight="0.03"
+        android:text="Please login or register an account to continue."
+        android:textAlignment="center"
         android:textSize="14sp"
-        tools:text="Please login or register an acount to continue."
-        android:textAlignment="center" />
+        tools:text="Please login or register an account to continue." />
 
     <Button
-        android:text="Button"
+        android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/loginButton"
         android:layout_weight="0.03"
+        android:text="Login"
         tools:text="Login" />
 
     <Button
-        android:text="Button"
+        android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/saveButton"
         android:layout_weight="0.03"
+        android:text="Register"
         tools:text="Register" />
 </LinearLayout>

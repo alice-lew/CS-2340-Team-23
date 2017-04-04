@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.User;
 
 /**
  * The screen users are brought to after logging in
@@ -151,11 +152,11 @@ public class LoggedInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Model m = modelInstance.loadModel(view.getContext());
-                modelInstance.getCurrentUser();
+                User curU = modelInstance.getCurrentUser();
                 if (m != null) {
                     Model.setInstance(m);
                     modelInstance = m;
-                    modelInstance.setCurrentUser(null);
+                    modelInstance.setCurrentUser(curU);
                 } else {
                     Log.d("Loading", "failed to load");
                 }

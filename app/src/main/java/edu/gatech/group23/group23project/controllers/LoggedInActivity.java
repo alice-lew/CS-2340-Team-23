@@ -11,6 +11,7 @@ import android.widget.Button;
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.User;
+import edu.gatech.group23.group23project.model.UserType;
 
 /**
  * The screen users are brought to after logging in
@@ -43,8 +44,8 @@ public class LoggedInActivity extends AppCompatActivity {
         Button saveButton = (Button) findViewById(R.id.saveButton);
         Button loadButton = (Button) findViewById(R.id.loadButton);
 
-        Model.UserType curUserType = modelInstance.getCurUserType();
-        if (curUserType != Model.UserType.BASIC) {
+        UserType curUserType = modelInstance.getCurUserType();
+        if (curUserType != UserType.BASIC) {
             submitPurityReportButton.setVisibility(View.VISIBLE);
             viewPurityReportListButton.setVisibility(View.VISIBLE);
         } else {
@@ -52,8 +53,8 @@ public class LoggedInActivity extends AppCompatActivity {
             viewPurityReportListButton.setVisibility(View.GONE);
         }
 
-        if ((curUserType == Model.UserType.MANAGER)  ||
-                (curUserType == Model.UserType.ADMIN)) {
+        if ((curUserType == UserType.MANAGER)  ||
+                (curUserType == UserType.ADMIN)) {
             historyGraphButton.setVisibility(View.VISIBLE);
         } else {
             historyGraphButton.setVisibility(View.GONE);

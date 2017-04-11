@@ -194,6 +194,7 @@ public class LoginActivity extends AppCompatActivity {
         /**
          * {@inheritDoc}
          */
+        @SuppressWarnings("FeatureEnvy")
         @Override
         protected Boolean doInBackground(Void... params) {
 

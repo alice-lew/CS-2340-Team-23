@@ -1,6 +1,7 @@
 package edu.gatech.group23.group23project.model;
 
 import android.icu.text.SimpleDateFormat;
+import android.support.annotation.NonNull;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -19,7 +20,7 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
     //private String reporterName;
     //private double latitude;
     //private double longitude;
-    private final Model.WaterOverallCondition waterOverallCondition;
+    private final WaterOverallCondition waterOverallCondition;
     private final double virusPPM;
     private final double contaminantPPM;
     //private int reportNumber;
@@ -30,7 +31,7 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
      * {@inheritDoc}
      */
     @Override
-    public int compareTo(WaterPurityReport r) {
+    public int compareTo(@NonNull WaterPurityReport r) {
         cal.setTime(this.getDateSubmitted());
         int thisMonth = cal.get(Calendar.MONTH);
         cal.setTime(r.getDateSubmitted());
@@ -38,9 +39,9 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
         return thisMonth - otherMonth;
     }
     public static final List<String> legalOverallConditions = Arrays.asList(
-            Model.WaterOverallCondition.SAFE.getOverallConditionString(),
-            Model.WaterOverallCondition.TREATABLE.getOverallConditionString(),
-            Model.WaterOverallCondition.UNSAFE.getOverallConditionString()
+            WaterOverallCondition.SAFE.getOverallConditionString(),
+            WaterOverallCondition.TREATABLE.getOverallConditionString(),
+            WaterOverallCondition.UNSAFE.getOverallConditionString()
     );
 
     /**
@@ -48,14 +49,14 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
      * @param strCond the string associated with the userType
      * @return the userType associated with the passed in String
      */
-    public static Model.WaterOverallCondition getOverallConditionFromString(String strCond) {
-        for (Model.WaterOverallCondition t: Model.WaterOverallCondition.values()) {
+    public static WaterOverallCondition getOverallConditionFromString(String strCond) {
+        for (WaterOverallCondition t: WaterOverallCondition.values()) {
             String conditionString = t.getOverallConditionString();
             if (conditionString.equals(strCond)) {
                 return t;
             }
         }
-        return Model.WaterOverallCondition.SAFE;
+        return WaterOverallCondition.SAFE;
     }
 
     /**
@@ -70,7 +71,7 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
      * @param number the number of the report
      */
     public WaterPurityReport(User sub, Date subDate, double lat, double lng,
-                             Model.WaterOverallCondition oCondition, double vPPM, double cPPM,
+                             WaterOverallCondition oCondition, double vPPM, double cPPM,
                              int number) {
         super(sub, subDate, lat, lng, number);
         waterOverallCondition = oCondition;

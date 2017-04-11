@@ -21,6 +21,7 @@ public class WelcomeActivity extends AppCompatActivity {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("FeatureEnvy")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

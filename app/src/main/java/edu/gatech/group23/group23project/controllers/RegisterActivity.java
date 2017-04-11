@@ -108,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressWarnings("FeatureEnvy")
     private void successfullyRegister() {
             User newUser = modelInstance.registerUser(nameText.getText().toString(),
                     userText.getText().toString(), passText.getText().toString(),

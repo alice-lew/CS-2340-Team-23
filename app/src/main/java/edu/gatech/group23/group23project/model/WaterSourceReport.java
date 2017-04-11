@@ -13,16 +13,16 @@ import java.util.List;
 
 public class WaterSourceReport extends WaterReport {
     private final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
-    private final Model.WaterType waterType;
-    private final Model.WaterCondition waterCondition;
+    private final WaterType waterType;
+    private final WaterCondition waterCondition;
 
     public static final List<String> legalWaterTypes = Arrays.asList(
-            Model.WaterType.BOTTLED.getTypeString(),
-            Model.WaterType.WELL.getTypeString(),
-            Model.WaterType.STREAM.getTypeString(),
-            Model.WaterType.LAKE.getTypeString(),
-            Model.WaterType.SPRING.getTypeString(),
-            Model.WaterType.OTHER.getTypeString()
+            WaterType.BOTTLED.getTypeString(),
+            WaterType.WELL.getTypeString(),
+            WaterType.STREAM.getTypeString(),
+            WaterType.LAKE.getTypeString(),
+            WaterType.SPRING.getTypeString(),
+            WaterType.OTHER.getTypeString()
     );
 
     /**
@@ -30,21 +30,21 @@ public class WaterSourceReport extends WaterReport {
      * @param strType the string associated with the userType
      * @return the userType associated with the passed in String
      */
-    public static Model.WaterType getTypeFromString(String strType) {
-        for (Model.WaterType t: Model.WaterType.values()) {
+    public static WaterType getTypeFromString(String strType) {
+        for (WaterType t: WaterType.values()) {
             String type = t.getTypeString();
             if (type.equals(strType)) {
                 return t;
             }
         }
-        return Model.WaterType.BOTTLED;
+        return WaterType.BOTTLED;
     }
 
     public static final List<String> legalWaterConditions = Arrays.asList(
-            Model.WaterCondition.WASTE.getConditionString(),
-            Model.WaterCondition.TREATABLE_CLEAR.getConditionString(),
-            Model.WaterCondition.TREATABLE_MUDDY.getConditionString(),
-            Model.WaterCondition.POTABLE.getConditionString()
+            WaterCondition.WASTE.getConditionString(),
+            WaterCondition.TREATABLE_CLEAR.getConditionString(),
+            WaterCondition.TREATABLE_MUDDY.getConditionString(),
+            WaterCondition.POTABLE.getConditionString()
     );
 
     /**
@@ -52,14 +52,14 @@ public class WaterSourceReport extends WaterReport {
      * @param strCondition the string associated with the userType
      * @return the userType associated with the passed in String
      */
-    public static Model.WaterCondition getConditionFromString(String strCondition) {
-        for (Model.WaterCondition t: Model.WaterCondition.values()) {
+    public static WaterCondition getConditionFromString(String strCondition) {
+        for (WaterCondition t: WaterCondition.values()) {
             String condition = t.getConditionString();
             if (condition.equals(strCondition)) {
                 return t;
             }
         }
-        return Model.WaterCondition.WASTE;
+        return WaterCondition.WASTE;
     }
 
     /**
@@ -72,8 +72,8 @@ public class WaterSourceReport extends WaterReport {
      * @param condition the condition the water is in
      * @param number the number of the report
      */
-    public WaterSourceReport(User sub, Date subDate, double lat, double lng, Model.WaterType type,
-                             Model.WaterCondition condition, int number) {
+    public WaterSourceReport(User sub, Date subDate, double lat, double lng, WaterType type,
+                             WaterCondition condition, int number) {
         super(sub, subDate, lat, lng, number);
         waterType = type;
         waterCondition = condition;

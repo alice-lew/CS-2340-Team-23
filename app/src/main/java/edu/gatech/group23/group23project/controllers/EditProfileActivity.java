@@ -29,6 +29,7 @@ public class EditProfileActivity extends AppCompatActivity {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("FeatureEnvy")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,7 @@ public class EditProfileActivity extends AppCompatActivity {
      * user profile
      * Will alert the user if they failed to properly enter input to one of the input fields
      */
+    @SuppressWarnings("FeatureEnvy")
     private void attemptEditProfile() {
         emailText.setError(null);
         addressText.setError(null);

@@ -16,16 +16,16 @@ public class User implements Serializable {
     private final String username;                //the user's username
     private final String password;                //the user's password
     private final String name;                    //the user's name
-    private final Model.UserType userType;        //the type of user
+    private final UserType userType;        //the type of user
 
     /**
      * A list of the possible userTypes a user can be
      */
      public static final List<String> legalUserTypes = Arrays.asList(
-            Model.UserType.BASIC.getTypeString(),
-            Model.UserType.WORKER.getTypeString(),
-            Model.UserType.MANAGER.getTypeString(),
-            Model.UserType.ADMIN.getTypeString()
+            UserType.BASIC.getTypeString(),
+            UserType.WORKER.getTypeString(),
+            UserType.MANAGER.getTypeString(),
+            UserType.ADMIN.getTypeString()
     );
 
     /**
@@ -33,14 +33,14 @@ public class User implements Serializable {
      * @param strType the string associated with the userType
      * @return the userType associated with the passed in String
      */
-    public static Model.UserType getTypeFromString(String strType) {
-        for (Model.UserType t: Model.UserType.values()) {
+    public static UserType getTypeFromString(String strType) {
+        for (UserType t: UserType.values()) {
             String type = t.getTypeString();
             if (type.equals(strType)) {
                 return t;
             }
         }
-        return Model.UserType.BASIC;
+        return UserType.BASIC;
     }
 
     /**
@@ -54,7 +54,7 @@ public class User implements Serializable {
      * @param type the user's type
      */
     public User(String aName, String user, String pass, String email, String address, String aTitle,
-                Model.UserType type) {
+                UserType type) {
         name = aName;
         username = user;
         password = pass;
@@ -68,7 +68,7 @@ public class User implements Serializable {
      * Gets the user's type for another class
      * @return the user's type
      */
-    public Model.UserType getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 

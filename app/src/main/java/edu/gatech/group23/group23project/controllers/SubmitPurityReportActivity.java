@@ -70,6 +70,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
     /**
      * Attempts to submit a new water source report if the information entered is valid
      */
+    @SuppressWarnings("FeatureEnvy")
     private void attemptSubmit() {
         longTextBox.setError(null);
         latTextBox.setError(null);

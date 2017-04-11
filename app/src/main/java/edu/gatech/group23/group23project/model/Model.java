@@ -14,7 +14,8 @@ import java.util.List;
  *
  * Created by Noah Blume on 2/19/2017.
  */
-public class Model implements Serializable {
+@SuppressWarnings({"CyclicClassDependency", "ClassWithTooManyDependents"})
+public final class Model implements Serializable {
     private final Collection<WaterReport> genericRepList = new ArrayList<>();
     private final Collection<User> userSet = new HashSet<>();
     private int numRepCreated;
@@ -31,94 +32,6 @@ public class Model implements Serializable {
 
     private User currentUser;    //keeps track of the user who is currently signed in
 
-    /**
-     * An enum of all of the possible graph types
-     */
-    public enum GraphType {
-        VIRUS, CONTAMINANT
-    }
-
-    /**
-     * An enum of all of the possible user types
-     */
-    public enum UserType {
-        BASIC("Basic User"), WORKER("Worker"), MANAGER("Manager"), ADMIN("Administrator");
-
-        private final String typeString;
-        UserType(String s) {
-            typeString = s;
-        }
-
-        /**
-         * gets the type of user as a string for another class
-         * @return the user type as a string
-         */
-        public String getTypeString() {
-            return typeString;
-        }
-    }
-
-    /**
-     * An enum of all of the possible water types
-     */
-    public enum WaterType {
-        BOTTLED("Bottled"), WELL("Well"), STREAM("Stream"), LAKE("Lake"), SPRING("Spring"),
-        OTHER("Other");
-
-        private final String typeString;
-        WaterType(String s) {
-            typeString = s;
-        }
-
-        /**
-         * gets the type of water as a string for another class
-         * @return the water type as a string
-         */
-        public String getTypeString() {
-            return typeString;
-        }
-    }
-
-    /**
-     * An enum of all of the possible water conditions
-     */
-    public enum WaterCondition {
-        WASTE("Waste"), TREATABLE_CLEAR("Treatable-Clear"), TREATABLE_MUDDY("Treatable-Muddy"),
-        POTABLE("Potable");
-
-        private final String typeString;
-        WaterCondition(String s) {
-            typeString = s;
-        }
-
-        /**
-         * gets the water condition as a string for another class
-         * @return the water condition as a string
-         */
-        public String getConditionString() {
-            return typeString;
-        }
-    }
-
-    /**
-     * An enum of all of the possible overall water conditions
-     */
-    public enum WaterOverallCondition {
-        SAFE("Safe"), TREATABLE("Treatable"), UNSAFE("Unsafe");
-
-        private final String typeString;
-        WaterOverallCondition(String s) {
-            typeString = s;
-        }
-
-        /**
-         * gets the overall water condition as a string for another class
-         * @return the overall water condition as a string
-         */
-        public String getOverallConditionString() {
-            return typeString;
-        }
-    }
 
     /**
      * constructor for the model, sets up necessary parts of the model
@@ -217,7 +130,7 @@ public class Model implements Serializable {
      * @param condition the condition of the water reported
      */
     public void submitWaterReport(User sub, Date subDate, double lat, double lng,
-                                  Model.WaterType type, Model.WaterCondition condition) {
+                                  WaterType type, WaterCondition condition) {
         numRepCreated++;
         WaterSourceReport newRep = new WaterSourceReport(sub, subDate, lat, lng, type, condition,
                 numRepCreated);
@@ -236,7 +149,7 @@ public class Model implements Serializable {
      * @param cPPM the contaminantPPM of the water
      */
     public void submitWaterPurityReport(User sub, Date subDate, double lat, double lng,
-                                        Model.WaterOverallCondition cond, double vPPM,
+                                        WaterOverallCondition cond, double vPPM,
                                         double cPPM) {
         numRepCreated++;
         WaterPurityReport newRep = new WaterPurityReport(sub, subDate, lat, lng, cond, vPPM, cPPM,

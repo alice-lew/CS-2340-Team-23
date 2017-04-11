@@ -99,18 +99,25 @@ public class GraphInfoActivity extends AppCompatActivity {
         } else if (isNotNumeric(yearTextBox.getText().toString())) {
             yearTextBox.setError("You must enter a number.");
         } else {
-            modelInstance.setGraphInfo
-                    (Math.round(Math.abs(Float.parseFloat(yearTextBox.getText().toString()))),
-                    ppmSpinner.getSelectedItemPosition(),
-                    Double.parseDouble(minLatTextBox.getText().toString()),
-                    Double.parseDouble(maxLatTextBox.getText().toString()),
-                    Double.parseDouble(minLongTextBox.getText().toString()),
-                    Double.parseDouble(maxLongTextBox.getText().toString()));
-            Context context = GraphInfoActivity.this;
-            Intent intent = new Intent(context, HistoryGraphActivity.class);
-            finish();
-            context.startActivity(intent);
+            setGraphInfo();
         }
+    }
+
+    /**
+     * Has the model set up the info entered for the graph
+     */
+    private void setGraphInfo() {
+        modelInstance.setGraphInfo
+                (Math.round(Math.abs(Float.parseFloat(yearTextBox.getText().toString()))),
+                        ppmSpinner.getSelectedItemPosition(),
+                        Double.parseDouble(minLatTextBox.getText().toString()),
+                        Double.parseDouble(maxLatTextBox.getText().toString()),
+                        Double.parseDouble(minLongTextBox.getText().toString()),
+                        Double.parseDouble(maxLongTextBox.getText().toString()));
+        Context context = GraphInfoActivity.this;
+        Intent intent = new Intent(context, HistoryGraphActivity.class);
+        finish();
+        context.startActivity(intent);
     }
 
     /**

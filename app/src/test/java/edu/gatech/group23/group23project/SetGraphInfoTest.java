@@ -8,7 +8,7 @@ import edu.gatech.group23.group23project.model.Model;
 
 /**
  * A unit test for the model's getInstance method
- * Created by Mbrune on 4/2/2017.
+ * Created by Noah Blume on 4/2/2017.
  */
 public class SetGraphInfoTest {
     private Model model;
@@ -18,7 +18,7 @@ public class SetGraphInfoTest {
     private double minLng;
     private double maxLat;
     private double maxLng;
-    private double epsilon = 0.01;
+    private final double epsilon = 0.01;
 
     /**
      * Sets up values to be used in the unit test

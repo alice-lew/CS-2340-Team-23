@@ -16,6 +16,7 @@ import java.io.Serializable;
  * Created by Noah Blume on 3/23/2017.
  */
 
+@SuppressWarnings("CyclicClassDependency")
 class SaveHelper implements Serializable {
 
     /**

@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import edu.gatech.group23.group23project.R;
+import edu.gatech.group23.group23project.model.GraphType;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.WaterPurityReport;
 
@@ -89,13 +90,14 @@ public class HistoryGraphActivity extends AppCompatActivity {
     /**
      * Sets the data for the graph to show based on the user's inputs
      */
+    @SuppressWarnings({"OverlyLongMethod", "OverlyComplexMethod", "FeatureEnvy"})
     private void setData() {
         int year = modelInstance.getGraphYear();
         double minLat = modelInstance.getGraphMinLat();
         double minLng = modelInstance.getGraphMinLng();
         double maxLng = modelInstance.getGraphMaxLng();
         double maxLat = modelInstance.getGraphMaxLat();
-        Model.GraphType gType = modelInstance.getCurGraphType();
+        GraphType gType = modelInstance.getCurGraphType();
         List<WaterPurityReport> pReps = modelInstance.getPurityReportList();
         Collections.sort(pReps);
         ArrayList<Entry> yValues = new ArrayList<>();
@@ -104,7 +106,7 @@ public class HistoryGraphActivity extends AppCompatActivity {
         int numReps = 0;
 
 
-        if (gType == Model.GraphType.VIRUS) {
+        if (gType == GraphType.VIRUS) {
             for (WaterPurityReport r: pReps) {
                 //add option for either virus or contaminant ppm
                 double lat = r.getLatitude();

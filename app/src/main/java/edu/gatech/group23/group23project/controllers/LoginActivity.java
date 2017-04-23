@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.User;
@@ -212,10 +214,12 @@ public class LoginActivity extends AppCompatActivity {
                     if(pieces[1].equals(mPassword)) {
                         modelInstance = Model.getInstance();
                         modelInstance.setCurrentUser(aUser);
+                        modelInstance.addSecurityLog(mEmail, new Date(), "logged in");
                         return true;
                     }
                 }
             }
+            modelInstance.addSecurityLog(mEmail, new Date(), "failed to log in");
             return false;
         }
 

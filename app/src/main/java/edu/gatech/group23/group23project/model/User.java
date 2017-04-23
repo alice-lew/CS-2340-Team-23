@@ -140,7 +140,7 @@ public class User implements Serializable {
      * Gets the user's username and password for another class
      * @return a String consisting of the user's username and password
      */
-    private String getUsername() { return username;}
+    public String getUsername() { return username;}
 
     /**
      * {@inheritDoc}

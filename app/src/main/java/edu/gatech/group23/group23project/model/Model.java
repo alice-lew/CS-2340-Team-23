@@ -1,6 +1,7 @@
 package edu.gatech.group23.group23project.model;
 
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public final class Model implements Serializable {
     private double graphMaxLat;
     private double graphMaxLng;
     private final SaveHelper saveHelper;
+    private final List<LogObject> securityLogs = new ArrayList<>();
+    private final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
 
     private User currentUser;    //keeps track of the user who is currently signed in
 
@@ -325,5 +328,12 @@ public final class Model implements Serializable {
 
     public List<WaterAdditionalReport> getAdditionalReportList() {
         return aRepList;
+    }
+
+    public List<LogObject> getSecurityLogs() { return securityLogs;}
+
+    public void addSecurityLog(String uid, Date d, String action) {
+        LogObject log = new LogObject(uid + " " + action + " on " + sdf.format(d));
+        securityLogs.add(log);
     }
 }

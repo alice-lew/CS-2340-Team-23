@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.Date;
+
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.User;
@@ -116,7 +118,8 @@ public class RegisterActivity extends AppCompatActivity {
                     titleText.getText().toString(),
                     User.getTypeFromString((String) userTypeSpinner.getSelectedItem()));
             modelInstance.setCurrentUser(newUser);
-
+            modelInstance.addSecurityLog(newUser.getUsername(), new Date(), "registered an account");
+            modelInstance.addSecurityLog(newUser.getUsername(), new Date(), "logged in");
             modelInstance.saveModel(modelInstance, this);
 
             Context context = RegisterActivity.this;

@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Date;
+
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.User;
@@ -43,6 +45,7 @@ public class LoggedInActivity extends AppCompatActivity {
         Button historyGraphButton = (Button) findViewById(R.id.historyGraphButton);
         Button submitAddRep = (Button) findViewById(R.id.additionalReportButton);
         Button additionalRepListButton = (Button) findViewById(R.id.additionalreplist);
+        Button securityLogButton = (Button) findViewById(R.id.securityLogButton);
 
         UserType curUserType = modelInstance.getCurUserType();
         if (curUserType != UserType.BASIC) {
@@ -60,11 +63,19 @@ public class LoggedInActivity extends AppCompatActivity {
             historyGraphButton.setVisibility(View.GONE);
         }
 
+        if (curUserType == UserType.ADMIN) {
+            securityLogButton.setVisibility(View.VISIBLE);
+        } else {
+            securityLogButton.setVisibility(View.GONE);
+        }
+
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                modelInstance.addSecurityLog(modelInstance.getCurrentUser().getUsername(), new Date(), "logged out");
                 modelInstance.setCurrentUser(null);
+                modelInstance.saveModel(modelInstance, LoggedInActivity.this);
                 Context context = view.getContext();
                 Intent intent = new Intent(context, WelcomeActivity.class);
                 context.startActivity(intent);
@@ -152,6 +163,14 @@ public class LoggedInActivity extends AppCompatActivity {
             }
         });
 
+        securityLogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, SecurityLogActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -161,6 +180,9 @@ public class LoggedInActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //changes the hardware back button functionality to return the user to the welcome page
+        modelInstance.addSecurityLog(modelInstance.getCurrentUser().getUsername(), new Date(), "logged out");
+        modelInstance.setCurrentUser(null);
+        modelInstance.saveModel(modelInstance, this);
         Context context = LoggedInActivity.this;
         Intent intent = new Intent(context, WelcomeActivity.class);
         context.startActivity(intent);

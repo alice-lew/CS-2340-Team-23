@@ -15,28 +15,25 @@
     <Button
         android:text="Edit Profile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/profileEditButton"
-        android:layout_weight="0.07" />
+        android:layout_height="35dp"
+        android:id="@+id/profileEditButton" />
 
     <Button
         android:text="Submit Source Report"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/submitReportButton"
-        android:layout_weight="0.07" />
+        android:layout_height="35dp"
+        android:id="@+id/submitReportButton" />
 
     <Button
         android:id="@+id/additionalReportButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.07"
+        android:layout_height="35dp"
         android:text="Submit Additional Report" />
 
     <Button
         android:text="Submit Purity Report"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:id="@+id/submitPurityReportButton"
         android:layout_weight="0.07"
 
@@ -46,21 +43,26 @@
     <Button
         android:text="View Source Reports List"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/reportListButton"
-        android:layout_weight="0.07" />
+        android:layout_height="35dp"
+        android:id="@+id/reportListButton" />
+
+    <Button
+        android:id="@+id/securityLogButton"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="Security Logs" />
 
     <Button
         android:id="@+id/additionalreplist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.07"
-        android:text="View Additional Reports List" />
+        android:layout_height="35dp"
+        android:text="View Additional Reports List"
+        android:layout_weight="0.04" />
 
     <Button
         android:text="View Purity Reports List"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:id="@+id/purityReportListButton"
         android:layout_weight="0.07"
 
@@ -70,14 +72,13 @@
     <Button
         android:text="View Availability Map"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewMapButton"
-        android:layout_weight="0.07" />
+        android:layout_height="35dp"
+        android:id="@+id/viewMapButton" />
 
     <Button
         android:text="View History Graph"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:id="@+id/historyGraphButton"
         android:layout_weight="0.07"
 
@@ -87,8 +88,7 @@
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.07"
+        android:layout_height="35dp"
         android:text="Logout" />
 
 </LinearLayout>

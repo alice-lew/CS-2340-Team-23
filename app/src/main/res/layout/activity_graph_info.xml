@@ -29,7 +29,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/maxLongBox"
+        android:id="@+id/maxLongBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -43,11 +43,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/maxLongBox"
+        android:layout_below="@+id/maxLongBox2"
         android:text="Min Latitude" />
 
     <EditText
-        android:id="@+id/maxLatBox"
+        android:id="@+id/maxLatBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Which year do you want a history graph for?"
-        android:layout_below="@+id/maxLatBox"
+        android:layout_below="@+id/maxLatBox2"
         android:layout_alignParentStart="true" />
 
     <EditText

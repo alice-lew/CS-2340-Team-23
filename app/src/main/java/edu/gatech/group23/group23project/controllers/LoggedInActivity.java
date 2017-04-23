@@ -41,8 +41,8 @@ public class LoggedInActivity extends AppCompatActivity {
         Button submitPurityReportButton = (Button) findViewById(R.id.submitPurityReportButton);
         Button viewPurityReportListButton = (Button) findViewById(R.id.purityReportListButton);
         Button historyGraphButton = (Button) findViewById(R.id.historyGraphButton);
-        Button saveButton = (Button) findViewById(R.id.saveButton);
-        Button loadButton = (Button) findViewById(R.id.loadButton);
+        Button submitAddRep = (Button) findViewById(R.id.additionalReportButton);
+        Button additionalRepListButton = (Button) findViewById(R.id.additionalreplist);
 
         UserType curUserType = modelInstance.getCurUserType();
         if (curUserType != UserType.BASIC) {
@@ -67,7 +67,6 @@ public class LoggedInActivity extends AppCompatActivity {
                 modelInstance.setCurrentUser(null);
                 Context context = view.getContext();
                 Intent intent = new Intent(context, WelcomeActivity.class);
-                finish();
                 context.startActivity(intent);
             }
         });
@@ -77,7 +76,6 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, EditProfileActivity.class);
-                finish();
                 context.startActivity(intent);
             }
         });
@@ -87,7 +85,6 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, SubmitReportActivity.class);
-                finish();
                 context.startActivity(intent);
             }
         });
@@ -97,7 +94,6 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ReportListActivity.class);
-                finish();
                 context.startActivity(intent);
             }
         });
@@ -107,7 +103,6 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, WaterMapActivity.class);
-                finish();
                 context.startActivity(intent);
             }
         });
@@ -117,7 +112,6 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, SubmitPurityReportActivity.class);
-                finish();
                 context.startActivity(intent);
             }
         });
@@ -127,7 +121,6 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, PurityReportListActivity.class);
-                finish();
                 context.startActivity(intent);
             }
         });
@@ -137,32 +130,28 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, GraphInfoActivity.class);
-                finish();
                 context.startActivity(intent);
             }
         });
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        submitAddRep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                modelInstance.saveModel(modelInstance,view.getContext());
+                Context context = view.getContext();
+                Intent intent = new Intent(context, SubmitAdditionalReportActivity.class);
+                context.startActivity(intent);
             }
         });
 
-        loadButton.setOnClickListener(new View.OnClickListener() {
+        additionalRepListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Model m = modelInstance.loadModel(view.getContext());
-                User curU = modelInstance.getCurrentUser();
-                if (m != null) {
-                    Model.setInstance(m);
-                    modelInstance = m;
-                    modelInstance.setCurrentUser(curU);
-                } else {
-                    Log.d("Loading", "failed to load");
-                }
+                Context context = view.getContext();
+                Intent intent = new Intent(context, AdditionalReportListActivity.class);
+                context.startActivity(intent);
             }
         });
+
 
     }
 
@@ -174,7 +163,6 @@ public class LoggedInActivity extends AppCompatActivity {
         //changes the hardware back button functionality to return the user to the welcome page
         Context context = LoggedInActivity.this;
         Intent intent = new Intent(context, WelcomeActivity.class);
-        finish();
         context.startActivity(intent);
     }
 }

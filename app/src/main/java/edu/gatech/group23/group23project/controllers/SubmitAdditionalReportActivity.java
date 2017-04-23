@@ -3,8 +3,8 @@ package edu.gatech.group23.group23project.controllers;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,23 +16,22 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
-import edu.gatech.group23.group23project.model.WaterPurityReport;
 
 /**
- * The screen where one may submit purity reports
+ * The screen where users may submit source reports
  */
-public class SubmitPurityReportActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class SubmitAdditionalReportActivity extends AppCompatActivity implements
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
     private EditText longTextBox;
     private EditText latTextBox;
-    private EditText virusTextBox;
-    private EditText contaminantTextBox;
-    private Spinner conditionSpinner;
+    private Spinner purpleSpinner;
     GoogleApiClient mGoogleApiClient = null;
 
     /**
@@ -41,7 +40,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_submit_purity_report);
+        setContentView(R.layout.activity_submit_additional_report);
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -54,24 +53,32 @@ public class SubmitPurityReportActivity extends AppCompatActivity implements
             mGoogleApiClient.connect();
         }
 
-
         longTextBox = (EditText) findViewById(R.id.maxLongBox2);
         latTextBox = (EditText) findViewById(R.id.maxLatBox2);
-        virusTextBox = (EditText) findViewById(R.id.virusBox);
-        contaminantTextBox = (EditText) findViewById(R.id.contaminantBox);
-        conditionSpinner = (Spinner) findViewById(R.id.conditionSpinner);
+        purpleSpinner = (Spinner) findViewById(R.id.purpleSpinner);
         Button submitButton = (Button) findViewById(R.id.submitButton2);
 
-        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        Button cancelButton = (Button) findViewById(R.id.cancelButton2);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = SubmitPurityReportActivity.this;
+                Context context = SubmitAdditionalReportActivity.this;
                 Intent intent = new Intent(context, LoggedInActivity.class);
                 finish();
                 context.startActivity(intent);
             }
         });
+
+        List<String> yesOrNo = new ArrayList<>();
+        yesOrNo.add("Yes");
+        yesOrNo.add("No");
+
+        // Set up the adapter to display the allowable water conditions in the spinner
+        ArrayAdapter<String> conditionAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, yesOrNo);
+        conditionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        purpleSpinner.setAdapter(conditionAdapter);
+
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,13 +86,6 @@ public class SubmitPurityReportActivity extends AppCompatActivity implements
                 attemptSubmit();
             }
         });
-
-
-        //Set up the adapter to display the allowable water types in the spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
-                WaterPurityReport.legalOverallConditions);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        conditionSpinner.setAdapter(adapter);
     }
 
     @Override
@@ -115,37 +115,22 @@ public class SubmitPurityReportActivity extends AppCompatActivity implements
     private void attemptSubmit() {
         longTextBox.setError(null);
         latTextBox.setError(null);
-        virusTextBox.setError(null);
-        contaminantTextBox.setError(null);
-
         if (longTextBox.getText().length() < 1) {
             longTextBox.setError("You must enter a longitude.");
         } else if (latTextBox.getText().length() < 1) {
             latTextBox.setError("You must enter a latitude.");
-        } else if (virusTextBox.getText().length() < 1) {
-            virusTextBox.setError("You must enter a virus PPM");
-        } else if (contaminantTextBox.getText().length() < 1) {
-            contaminantTextBox.setError("You must enter a contaminant PPM");
         } else if (isNotNumeric(longTextBox.getText().toString())) {
             longTextBox.setError("You must enter a number.");
         } else if (isNotNumeric(latTextBox.getText().toString())) {
             latTextBox.setError("You must enter a number.");
-        } else if (isNotNumeric(virusTextBox.getText().toString())) {
-            virusTextBox.setError("You must enter a number.");
-        } else if (isNotNumeric(contaminantTextBox.getText().toString())) {
-            contaminantTextBox.setError("You must enter a number.");
         } else {
-            Date date = new java.util.Date();
+            Date date = new Date();
             Model modelInstance = Model.getInstance();
-            modelInstance.submitWaterPurityReport(modelInstance.getCurrentUser(), date,
+            modelInstance.submitAdditionalWaterReport(modelInstance.getCurrentUser(), date,
                     Double.parseDouble(latTextBox.getText().toString()),
-                    Double.parseDouble(longTextBox.getText().toString()),
-                    WaterPurityReport.getOverallConditionFromString((String)conditionSpinner
-                            .getSelectedItem()),
-                    Double.parseDouble(virusTextBox.getText().toString()),
-                    Double.parseDouble(contaminantTextBox.getText().toString()));
+                    Double.parseDouble(longTextBox.getText().toString()),purpleSpinner.getSelectedItemPosition());
             modelInstance.saveModel(modelInstance, this);
-            Context context = SubmitPurityReportActivity.this;
+            Context context = SubmitAdditionalReportActivity.this;
             Intent intent = new Intent(context, LoggedInActivity.class);
             finish();
             context.startActivity(intent);
@@ -158,7 +143,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         //makes the hardware back button return to the welcome activity
-        Context context = SubmitPurityReportActivity.this;
+        Context context = SubmitAdditionalReportActivity.this;
         Intent intent = new Intent(context, LoggedInActivity.class);
         finish();
         context.startActivity(intent);

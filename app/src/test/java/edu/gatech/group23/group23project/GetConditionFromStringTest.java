@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 import dalvik.annotation.TestTargetClass;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.WaterCondition;
 import edu.gatech.group23.group23project.model.WaterSourceReport;
 
 /**
@@ -24,8 +25,8 @@ public class GetConditionFromStringTest {
     @Test
     public void testIfWaste() {
         strCondition = "Waste";
-        Model.WaterCondition testCondition = sourceReport.getConditionFromString(strCondition);
-        assertEquals(Model.WaterCondition.WASTE, testCondition);
+        WaterCondition testCondition = sourceReport.getConditionFromString(strCondition);
+        assertEquals(WaterCondition.WASTE, testCondition);
     }
     /**
      * Checks that the Treatable Clear condition of the Water Source works
@@ -33,8 +34,8 @@ public class GetConditionFromStringTest {
     @Test
     public void testIfTC() {
         strCondition = "Treatable-Clear";
-        Model.WaterCondition testCondition = sourceReport.getConditionFromString(strCondition);
-        assertEquals(Model.WaterCondition.TREATABLE_CLEAR, testCondition);
+        WaterCondition testCondition = sourceReport.getConditionFromString(strCondition);
+        assertEquals(WaterCondition.TREATABLE_CLEAR, testCondition);
     }
     /**
      * Checks that the Treatable Muddy condition of the Water Source works
@@ -42,8 +43,8 @@ public class GetConditionFromStringTest {
     @Test
     public void testIfTM() {
         strCondition = "Treatable-Muddy";
-        Model.WaterCondition testCondition = sourceReport.getConditionFromString(strCondition);
-        assertEquals(Model.WaterCondition.TREATABLE_MUDDY, testCondition);
+        WaterCondition testCondition = sourceReport.getConditionFromString(strCondition);
+        assertEquals(WaterCondition.TREATABLE_MUDDY, testCondition);
     }
     /**
      * Checks that the Potable condition of the Water Source works
@@ -51,7 +52,7 @@ public class GetConditionFromStringTest {
     @Test
     public void testIfPotable() {
         strCondition = "Potable";
-        Model.WaterCondition testCondition = sourceReport.getConditionFromString(strCondition);
-        assertEquals(Model.WaterCondition.POTABLE, testCondition);
+        WaterCondition testCondition = sourceReport.getConditionFromString(strCondition);
+        assertEquals(WaterCondition.POTABLE, testCondition);
     }
 }

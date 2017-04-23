@@ -38,8 +38,8 @@ public class GraphInfoActivity extends AppCompatActivity {
 
         minLongTextBox = (EditText) findViewById(R.id.minLongBox);
         minLatTextBox = (EditText) findViewById(R.id.minLatBox);
-        maxLongTextBox = (EditText) findViewById(R.id.maxLongBox);
-        maxLatTextBox = (EditText) findViewById(R.id.maxLatBox);
+        maxLongTextBox = (EditText) findViewById(R.id.maxLongBox2);
+        maxLatTextBox = (EditText) findViewById(R.id.maxLatBox2);
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
         Button viewGraphButton = (Button) findViewById(R.id.viewGraphButton);
         ppmSpinner = (Spinner) findViewById(R.id.ppmSpinner);
@@ -63,7 +63,7 @@ public class GraphInfoActivity extends AppCompatActivity {
 
         //Set up the adapter to display the allowable water types in the spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
-                Arrays.asList("Virus PPM", "Contaminant PPM"));
+                Arrays.asList("Virus PPM", "Contaminant PPM", "Purpleness"));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ppmSpinner.setAdapter(adapter);
     }

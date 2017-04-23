@@ -27,6 +27,13 @@
         android:layout_weight="0.07" />
 
     <Button
+        android:id="@+id/additionalReportButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.07"
+        android:text="Submit Additional Report" />
+
+    <Button
         android:text="Submit Purity Report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +49,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/reportListButton"
         android:layout_weight="0.07" />
+
+    <Button
+        android:id="@+id/additionalreplist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.07"
+        android:text="View Additional Reports List" />
 
     <Button
         android:text="View Purity Reports List"
@@ -69,19 +83,6 @@
 
         android:visibility="gone"
         />
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:textAlignment="center" />
-
-    <Button
-        android:id="@+id/loadButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Load" />
 
     <Button
         android:id="@+id/logoutButton"

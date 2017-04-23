@@ -7,6 +7,7 @@ import org.junit.Test;
 import dalvik.annotation.TestTargetClass;
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.WaterPurityReport;
+import edu.gatech.group23.group23project.model.WaterOverallCondition;
 
 import static org.junit.Assert.assertEquals;
 /**
@@ -22,22 +23,22 @@ public class getOverallConditionTest {
     @Test
     public void safeWaterTest() {
         condition = "Safe";
-        Model.WaterOverallCondition val = waterPurityReport.getOverallConditionFromString(condition);
-        assertEquals(Model.WaterOverallCondition.SAFE, val);
+        WaterOverallCondition val = waterPurityReport.getOverallConditionFromString(condition);
+        assertEquals(WaterOverallCondition.SAFE, val);
     }
     // tests to see if treatable water works
     @Test
     public void treatableWaterTest() {
         condition = "Treatable";
-        Model.WaterOverallCondition val = waterPurityReport.getOverallConditionFromString(condition);
-        assertEquals(Model.WaterOverallCondition.TREATABLE, val);
+        WaterOverallCondition val = waterPurityReport.getOverallConditionFromString(condition);
+        assertEquals(WaterOverallCondition.TREATABLE, val);
     }
     // tests to see if unsafe water works
     @Test
     public void unsafeWaterTest() {
         condition = "Unsafe";
-        Model.WaterOverallCondition val = waterPurityReport.getOverallConditionFromString(condition);
-        assertEquals(Model.WaterOverallCondition.UNSAFE, val);
+        WaterOverallCondition val = waterPurityReport.getOverallConditionFromString(condition);
+        assertEquals(WaterOverallCondition.UNSAFE, val);
     }
 
 

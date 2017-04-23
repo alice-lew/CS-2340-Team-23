@@ -21,6 +21,7 @@ public final class Model implements Serializable {
     private int numRepCreated;
     private final List<WaterSourceReport> repList = new ArrayList<>();
     private final List<WaterPurityReport> pRepList = new ArrayList<>();
+    private final List<WaterAdditionalReport> aRepList = new ArrayList<>();
     private static Model modelSingleton;    //the model singleton
     private int graphYear;
     private GraphType curGraphType;
@@ -139,6 +140,24 @@ public final class Model implements Serializable {
     }
 
     /**
+     * Creates a new water source report based on the data passed in
+     * @param sub the submitter of the report
+     * @param subDate the date submitted
+     * @param lat the latitude of the water reported
+     * @param lng the longitude of the water reported
+     */
+    public void submitAdditionalWaterReport(User sub, Date subDate, double lat, double lng, int yesOrNo) {
+        numRepCreated++;
+        boolean isPurple = false;
+        if (yesOrNo == 0) {
+            isPurple = true;
+        }
+        WaterAdditionalReport newRep = new WaterAdditionalReport(sub, subDate, lat, lng, numRepCreated, isPurple);
+        aRepList.add(newRep);
+        genericRepList.add(newRep);
+    }
+
+    /**
      * Creates a new water purity report based on the data passed in
      * @param sub the submitter of the report
      * @param subDate the date submitted
@@ -187,8 +206,10 @@ public final class Model implements Serializable {
         graphMaxLng = maxLng;
         if (typeOrdinal == 0) {
             curGraphType = GraphType.VIRUS;
-        } else {
+        } else if (typeOrdinal == 1){
             curGraphType = GraphType.CONTAMINANT;
+        } else {
+            curGraphType = GraphType.PURPLENESS;
         }
     }
 
@@ -300,5 +321,9 @@ public final class Model implements Serializable {
      */
     public void setCurUserHome(String h) {
         currentUser.setHome(h);
+    }
+
+    public List<WaterAdditionalReport> getAdditionalReportList() {
+        return aRepList;
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -24,6 +25,7 @@ import java.util.List;
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.GraphType;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.WaterAdditionalReport;
 import edu.gatech.group23.group23project.model.WaterPurityReport;
 
 /**
@@ -98,13 +100,15 @@ public class HistoryGraphActivity extends AppCompatActivity {
         double maxLng = modelInstance.getGraphMaxLng();
         double maxLat = modelInstance.getGraphMaxLat();
         GraphType gType = modelInstance.getCurGraphType();
+        Log.d("graph type", gType.toString());
         List<WaterPurityReport> pReps = modelInstance.getPurityReportList();
         Collections.sort(pReps);
+        List<WaterAdditionalReport> aReps = modelInstance.getAdditionalReportList();
+        Collections.sort(aReps);
         ArrayList<Entry> yValues = new ArrayList<>();
         int i = 0;
         float totalPPM = 0;
         int numReps = 0;
-
 
         if (gType == GraphType.VIRUS) {
             for (WaterPurityReport r: pReps) {
@@ -130,7 +134,16 @@ public class HistoryGraphActivity extends AppCompatActivity {
                     numReps++;
                 }
             }
-        } else {
+            while (i < 12) {
+                if (numReps > 0) {
+                    yValues.add(new Entry(i, totalPPM / numReps));
+                } else {
+                    yValues.add(new Entry(i, 0));
+                }
+                i++;
+                totalPPM = 0;
+            }
+        } else if (gType == GraphType.CONTAMINANT){
             for (WaterPurityReport r: pReps) {
                 //add option for either virus or contaminant ppm
                 cal.setTime(r.getDateSubmitted());
@@ -151,17 +164,43 @@ public class HistoryGraphActivity extends AppCompatActivity {
                     numReps++;
                 }
             }
+            while (i < 12) {
+                if (numReps > 0) {
+                    yValues.add(new Entry(i, totalPPM / numReps));
+                } else {
+                    yValues.add(new Entry(i, 0));
+                }
+                i++;
+                totalPPM = 0;
+            }
+        } else if (gType == GraphType.PURPLENESS) {
+            float numPurple = 0;
+            for (WaterAdditionalReport r: aReps) {
+                Log.d("graphing", "LOOKING AT SOME PURPLENESS REPORT");
+                cal.setTime(r.getDateSubmitted());
+                int month = cal.get(Calendar.MONTH);
+                int repYear = cal.get(Calendar.YEAR);
+                while (month > i) {
+                    yValues.add(new Entry(i, numPurple));
+                    i++;
+                    numPurple = 0;
+                }
+                if ((month == i) && (repYear == year)) {
+                    if (r.isPurple()) {
+                        numPurple += 1;
+                        Log.d("graphing", "found a purple report");
+                    }
+                    numReps++;
+                }
+            }
+            while (i < 12) {
+                yValues.add(new Entry(i, numPurple));
+                i++;
+                numPurple = 0;
+            }
         }
 
-        while (i < 12) {
-            if (numReps > 0) {
-                yValues.add(new Entry(i, totalPPM / numReps));
-            } else {
-                yValues.add(new Entry(i, 0));
-            }
-            i++;
-            totalPPM = 0;
-        }
+
 
         LineDataSet set1;
 

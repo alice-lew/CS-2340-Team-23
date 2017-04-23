@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 import edu.gatech.group23.group23project.model.Model;
 import edu.gatech.group23.group23project.model.User;
+import edu.gatech.group23.group23project.model.UserType;
 
 /**
  * A unit test for the user's getTypeFromString method
@@ -42,10 +43,10 @@ public class GetTypeFromStringTest {
     @Test
     public void correctReturnTest() {
 
-        assertEquals(Model.UserType.ADMIN, User.getTypeFromString(admin));
-        assertEquals(Model.UserType.MANAGER, User.getTypeFromString(manager));
-        assertEquals(Model.UserType.WORKER, User.getTypeFromString(worker));
-        assertEquals(Model.UserType.BASIC, User.getTypeFromString(basic));
-        assertEquals(Model.UserType.BASIC, User.getTypeFromString(badString));
+        assertEquals(UserType.ADMIN, User.getTypeFromString(admin));
+        assertEquals(UserType.MANAGER, User.getTypeFromString(manager));
+        assertEquals(UserType.WORKER, User.getTypeFromString(worker));
+        assertEquals(UserType.BASIC, User.getTypeFromString(basic));
+        assertEquals(UserType.BASIC, User.getTypeFromString(badString));
     }
 }

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/maxLongBox"
+        android:id="@+id/maxLongBox2"
         android:layout_below="@+id/minLongText"
         android:layout_alignParentStart="true"
         android:hint="Longitude" />
@@ -33,14 +33,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/minLatText"
-        android:layout_below="@+id/maxLongBox"
+        android:layout_below="@+id/maxLongBox2"
         android:layout_alignParentStart="true" />
 
     <Button
         android:text="Cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/submitButton"
+        android:layout_below="@+id/submitButton2"
         android:layout_alignParentStart="true"
         android:id="@+id/cancelButton"
         android:layout_alignParentEnd="true" />
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/maxLatBox"
+        android:id="@+id/maxLatBox2"
         android:hint="Latitude"
         android:layout_below="@+id/minLatText"
         android:layout_alignParentStart="true" />
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/virusText"
-        android:layout_below="@+id/maxLatBox"
+        android:layout_below="@+id/maxLatBox2"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -76,7 +76,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:layout_below="@+id/virusText"
-        android:layout_alignEnd="@+id/maxLatBox"
+        android:layout_alignEnd="@+id/maxLatBox2"
         android:id="@+id/virusBox"
         android:hint="Virus PPM" />
 
@@ -110,7 +110,7 @@
         android:text="Submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/submitButton"
+        android:id="@+id/submitButton2"
         android:layout_below="@+id/conditionSpinner"
         android:layout_alignParentStart="true"
         android:layout_marginTop="29dp"

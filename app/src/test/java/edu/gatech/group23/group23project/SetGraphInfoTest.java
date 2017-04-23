@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
+import edu.gatech.group23.group23project.model.GraphType;
 import edu.gatech.group23.group23project.model.Model;
 
 /**
@@ -40,7 +41,7 @@ public class SetGraphInfoTest {
     public void virusPPMTest() {
         typeOrdinal = 0;
         model.setGraphInfo(year, typeOrdinal, minLat, maxLat, minLng, maxLng);
-        assertEquals(Model.GraphType.VIRUS, model.getCurGraphType());
+        assertEquals(GraphType.VIRUS, model.getCurGraphType());
         assertEquals(1000, model.getGraphYear());
         assertEquals(10, model.getGraphMaxLat(), epsilon);
         assertEquals(1, model.getGraphMinLat(), epsilon);
@@ -55,7 +56,7 @@ public class SetGraphInfoTest {
     public void contaminantPPMTest() {
         typeOrdinal = 1;
         model.setGraphInfo(year, typeOrdinal, minLat, maxLat, minLng, maxLng);
-        assertEquals(Model.GraphType.CONTAMINANT, model.getCurGraphType());
+        assertEquals(GraphType.CONTAMINANT, model.getCurGraphType());
         assertEquals(1000, model.getGraphYear());
         assertEquals(10, model.getGraphMaxLat(), epsilon);
         assertEquals(1, model.getGraphMinLat(), epsilon);

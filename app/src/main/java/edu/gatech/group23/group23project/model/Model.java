@@ -157,9 +157,9 @@ public class Model implements Serializable {
      * @param type the user's type (basic, manager, worker, or administrator)
      * @return the new user that was created and added to the user list
      */
-    public User registerUser(String name, String user, String pass, String email, String address,
+    public User registerUser(String name, String user, String pass, String pRec, String email, String address,
                              String title, UserType type) {
-        User newUser = new User(name, user, pass, email, address, title, type);
+        User newUser = new User(name, user, pass, pRec, email, address, title, type);
         userSet.add(newUser);
         return newUser;
     }
@@ -251,7 +251,7 @@ public class Model implements Serializable {
      * @return whether or not the username is already taken
      */
     public boolean usernameTaken(String s) {
-        User checkUser = new User("n", s, "p", "e", "a", "t", UserType.BASIC);
+        User checkUser = new User("n", s, "p", "pR", "e", "a", "t", UserType.BASIC);
         return userSet.contains(checkUser);
     }
 

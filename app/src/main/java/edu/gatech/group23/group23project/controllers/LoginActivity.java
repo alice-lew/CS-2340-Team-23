@@ -27,6 +27,7 @@ import edu.gatech.group23.group23project.model.User;
 /**
  * A login screen that offers login via email/password.
  */
+
 public class LoginActivity extends AppCompatActivity {
 
     /**
@@ -77,6 +78,20 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+
+        Button mForgotPasswordButton = (Button) findViewById(R.id.forgotPassword);
+
+
+        mForgotPasswordButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = LoginActivity.this;
+                Intent intent = new Intent(context, ForgotPasswordActivity.class);
+                finish();
+                context.startActivity(intent);
             }
         });
 

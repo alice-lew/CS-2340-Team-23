@@ -28,7 +28,8 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -69,16 +70,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/black"
-                android:text="SIGN IN" />
+                android:text="SIGN IN"
+                android:textColor="@color/black" />
+            
+            <Button
+                android:id="@+id/forgotPassword"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Forgot Password?"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/cancelLoginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="5.35"
                 android:text="Cancel"
                 android:textColor="@color/black"
                 tools:text="CANCEL" />
+
+
 
         </LinearLayout>
     </ScrollView>

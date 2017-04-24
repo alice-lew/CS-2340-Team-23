@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText emailText;
     private EditText addressText;
     private EditText titleText;
+    private EditText passRecoveryText;
     private Spinner userTypeSpinner;
 
     //the model singleton object
@@ -47,7 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
         emailText = (EditText) findViewById(R.id.emailBox);
         addressText = (EditText) findViewById(R.id.addressBox);
         titleText = (EditText) findViewById(R.id.titleBox);
+        passRecoveryText = (EditText) findViewById(R.id.passRecoveryBox);
         userTypeSpinner = (Spinner) findViewById(R.id.userTypeSpinner);
+
 
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
         passText.setError(null);
         emailText.setError(null);
         addressText.setError(null);
+        passRecoveryText.setError(null);
         titleText.setError(null);
 
         if (nameText.getText().length() < 1) {
@@ -101,7 +105,10 @@ public class RegisterActivity extends AppCompatActivity {
             emailText.setError("You must enter a valid email address.");
         } else if (userText.getText().toString().contains(" ")) {
             userText.setError("Your username may not contain spaces.");
-        } else if (modelInstance.usernameTaken(userText.getText().toString())) {
+        } else if (passRecoveryText.getText().length() < 1) {
+            userText.setError("You must enter an answer.");
+        }
+        else if (modelInstance.usernameTaken(userText.getText().toString())) {
             userText.setError("That username is already taken.");
         } else {
             successfullyRegister();
@@ -111,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void successfullyRegister() {
             User newUser = modelInstance.registerUser(nameText.getText().toString(),
                     userText.getText().toString(), passText.getText().toString(),
+                    passRecoveryText.getText().toString(),
                     emailText.getText().toString(), addressText.getText().toString(),
                     titleText.getText().toString(),
                     User.getTypeFromString((String) userTypeSpinner.getSelectedItem()));

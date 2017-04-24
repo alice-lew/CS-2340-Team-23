@@ -16,6 +16,7 @@ public class User implements Serializable {
     private final String username;                //the user's username
     private final String password;                //the user's password
     private final String name;                    //the user's name
+    private final String passRecovery;                  // answer to recover a password
     private final Model.UserType userType;        //the type of user
 
     /**
@@ -53,13 +54,14 @@ public class User implements Serializable {
      * @param aTitle the user's title
      * @param type the user's type
      */
-    public User(String aName, String user, String pass, String email, String address, String aTitle,
-                Model.UserType type) {
+    public User(String aName, String user, String pass, String pRec,
+                String email, String address, String aTitle, Model.UserType type) {
         name = aName;
         username = user;
         password = pass;
         this.email = email;
         this.home = address;
+        passRecovery = pRec;
         title = aTitle;
         userType = type;
     }
@@ -141,6 +143,9 @@ public class User implements Serializable {
      * @return a String consisting of the user's username and password
      */
     private String getUsername() { return username;}
+
+    public String getEmailRecovery() {return username + " " + passRecovery; }
+
 
     /**
      * {@inheritDoc}

@@ -46,6 +46,7 @@ public class LoggedInActivity extends AppCompatActivity {
         Button submitAddRep = (Button) findViewById(R.id.additionalReportButton);
         Button additionalRepListButton = (Button) findViewById(R.id.additionalreplist);
         Button securityLogButton = (Button) findViewById(R.id.securityLogButton);
+        Button banButton = (Button) findViewById(R.id.BanScreenButton);
 
         UserType curUserType = modelInstance.getCurUserType();
         if (curUserType != UserType.BASIC) {
@@ -65,8 +66,10 @@ public class LoggedInActivity extends AppCompatActivity {
 
         if (curUserType == UserType.ADMIN) {
             securityLogButton.setVisibility(View.VISIBLE);
+            banButton.setVisibility(View.VISIBLE);
         } else {
             securityLogButton.setVisibility(View.GONE);
+            banButton.setVisibility(View.GONE);
         }
 
 
@@ -168,6 +171,15 @@ public class LoggedInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, SecurityLogActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        banButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, BanActivity.class);
                 context.startActivity(intent);
             }
         });

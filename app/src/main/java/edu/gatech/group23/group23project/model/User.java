@@ -17,6 +17,7 @@ public class User implements Serializable {
     private final String password;                //the user's password
     private final String name;                    //the user's name
     private final UserType userType;        //the type of user
+    private boolean isBanned = false;
 
     /**
      * A list of the possible userTypes a user can be
@@ -161,4 +162,16 @@ public class User implements Serializable {
      */
     @Override
     public int hashCode() { return username.hashCode();}
+
+    public void ban() {
+        isBanned = true;
+    }
+
+    public void unban() {
+        isBanned = false;
+    }
+
+    public boolean getIsBanned() {
+        return isBanned;
+    }
 }

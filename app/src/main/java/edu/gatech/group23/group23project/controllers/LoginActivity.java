@@ -18,6 +18,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
      * Gets an instance of the model.
      */
     private Model modelInstance = Model.getInstance();
+    private User attemptedUser = null;
 
 
     /**
@@ -206,16 +208,19 @@ public class LoginActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 return false;
             }
-
+            attemptedUser = null;
             for (User aUser : modelInstance.getUserSet()) {
                 String[] pieces = aUser.getCredentials().split(" ");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
                     if(pieces[1].equals(mPassword)) {
-                        modelInstance = Model.getInstance();
-                        modelInstance.setCurrentUser(aUser);
-                        modelInstance.addSecurityLog(mEmail, new Date(), "logged in");
-                        return true;
+                        if (!aUser.getIsBanned()) {
+                            modelInstance = Model.getInstance();
+                            modelInstance.setCurrentUser(aUser);
+                            modelInstance.addSecurityLog(mEmail, new Date(), "logged in");
+                            return true;
+                        }
+                        attemptedUser = aUser;
                     }
                 }
             }
@@ -235,9 +240,12 @@ public class LoginActivity extends AppCompatActivity {
                 Context context = LoginActivity.this;
                 Intent intent = new Intent(context, LoggedInActivity.class);
                 context.startActivity(intent);
-            } else {
+            } else if (attemptedUser == null){
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+            } else {
+                mEmailView.setError("This user is banned.");
+                mEmailView.requestFocus();
             }
         }
 

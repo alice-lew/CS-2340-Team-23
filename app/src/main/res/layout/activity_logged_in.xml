@@ -53,6 +53,13 @@
         android:text="Security Logs" />
 
     <Button
+        android:id="@+id/BanScreenButton"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_weight="0.01"
+        android:text="Ban and Unban Users" />
+
+    <Button
         android:id="@+id/additionalreplist"
         android:layout_width="match_parent"
         android:layout_height="35dp"

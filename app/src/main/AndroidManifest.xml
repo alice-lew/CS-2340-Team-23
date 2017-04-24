@@ -35,17 +35,17 @@
         </activity>
         <activity
             android:name=".controllers.LoginActivity"
-            android:label="Group23Project"></activity>
+            android:label="Group23Project" />
         <activity
             android:name=".controllers.RegisterActivity"
-            android:label="Group23Project"></activity>
+            android:label="Group23Project" />
         <activity
             android:name=".controllers.LoggedInActivity"
             android:label="@string/app_name" />
         <activity android:name=".controllers.EditProfileActivity" />
         <activity
             android:name=".controllers.SubmitReportActivity"
-            android:label="Group23Project"></activity>
+            android:label="Group23Project" />
         <activity android:name=".controllers.ReportListActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -69,7 +69,8 @@
         <activity android:name=".controllers.GraphInfoActivity" />
         <activity android:name=".controllers.SubmitAdditionalReportActivity" />
         <activity android:name=".controllers.AdditionalReportListActivity" />
-        <activity android:name=".controllers.SecurityLogActivity"></activity>
+        <activity android:name=".controllers.SecurityLogActivity" />
+        <activity android:name=".controllers.BanActivity"></activity>
     </application>
 
 </manifest>

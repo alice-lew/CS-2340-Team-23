@@ -40,6 +40,7 @@ public class BanActivity extends AppCompatActivity {
                 for (User u: userSet) {
                     if (u.getUsername().equals(toUnban) && u.getIsBanned()) {
                         u.unban();
+                        u.resetLoginAttempts();
                         modelInstance.addSecurityLog(modelInstance.getCurrentUser().getUsername(), new Date(), "unbanned " + toUnban);
                         Toast.makeText(BanActivity.this, "User was unbanned.",
                                 Toast.LENGTH_SHORT).show();

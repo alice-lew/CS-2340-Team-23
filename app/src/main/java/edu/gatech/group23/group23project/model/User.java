@@ -2,6 +2,7 @@ package edu.gatech.group23.group23project.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class User implements Serializable {
     private final String name;                    //the user's name
     private final UserType userType;        //the type of user
     private boolean isBanned = false;
+    private int loginAttempts = 0;
 
     /**
      * A list of the possible userTypes a user can be
@@ -173,5 +175,17 @@ public class User implements Serializable {
 
     public boolean getIsBanned() {
         return isBanned;
+    }
+
+    public void incrementLoginAttempts() {
+        loginAttempts++;
+        if(loginAttempts >= 3) {
+            ban();
+            Model.getInstance().addSecurityLog(username, new Date(), "was locked out because of 3 failed login attempts");
+        }
+    }
+
+    public void resetLoginAttempts() {
+        loginAttempts = 0;
     }
 }

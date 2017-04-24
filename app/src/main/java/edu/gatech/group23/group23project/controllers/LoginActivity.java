@@ -215,12 +215,15 @@ public class LoginActivity extends AppCompatActivity {
                     // Account exists, return true if the password matches.
                     if(pieces[1].equals(mPassword)) {
                         if (!aUser.getIsBanned()) {
+                            aUser.resetLoginAttempts();
                             modelInstance = Model.getInstance();
                             modelInstance.setCurrentUser(aUser);
                             modelInstance.addSecurityLog(mEmail, new Date(), "logged in");
                             return true;
                         }
                         attemptedUser = aUser;
+                    } else {
+                        aUser.incrementLoginAttempts();
                     }
                 }
             }
@@ -244,6 +247,7 @@ public class LoginActivity extends AppCompatActivity {
                 modelInstance.addSecurityLog(mEmail, new Date(), "failed to log in");
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+                modelInstance.saveModel(modelInstance, LoginActivity.this);
             } else {
                 modelInstance.addSecurityLog(mEmail, new Date(), "tried to log in while banned");
                 mEmailView.setError("This user is banned.");

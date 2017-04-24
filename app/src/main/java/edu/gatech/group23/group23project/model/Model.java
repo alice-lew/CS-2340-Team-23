@@ -16,25 +16,25 @@ import java.util.List;
  * Created by Noah Blume on 2/19/2017.
  */
 @SuppressWarnings({"CyclicClassDependency", "ClassWithTooManyDependents"})
-public final class Model implements Serializable {
-    private final Collection<WaterReport> genericRepList = new ArrayList<>();
-    private final Collection<User> userSet = new HashSet<>();
+public final class Model implements Serializable, ModelInterface {
+    private final Collection<WaterReportInterface> genericRepList = new ArrayList<>();
+    private final Collection<UserInterface> userSet = new HashSet<>();
     private int numRepCreated;
     private final List<WaterSourceReport> repList = new ArrayList<>();
     private final List<WaterPurityReport> pRepList = new ArrayList<>();
     private final List<WaterAdditionalReport> aRepList = new ArrayList<>();
-    private static Model modelSingleton;    //the model singleton
+    private static ModelInterface modelSingleton;    //the model singleton
     private int graphYear;
     private GraphType curGraphType;
     private double graphMinLat;
     private double graphMinLng;
     private double graphMaxLat;
     private double graphMaxLng;
-    private final SaveHelper saveHelper;
-    private final List<LogObject> securityLogs = new ArrayList<>();
+    private final SaveHelperInterface saveHelper;
+    private final List<LogObjectInterface> securityLogs = new ArrayList<>();
     private final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
 
-    private User currentUser;    //keeps track of the user who is currently signed in
+    private UserInterface currentUser;    //keeps track of the user who is currently signed in
 
 
     /**
@@ -48,7 +48,7 @@ public final class Model implements Serializable {
      * Gets the instance of the model for another class.
      * @return an instance of the model
      */
-    public static Model getInstance() {
+    public static ModelInterface getInstance() {
         if (modelSingleton == null) {
             modelSingleton = new Model();
         }
@@ -59,7 +59,7 @@ public final class Model implements Serializable {
      * Updates the model instance when the application loads
      * @param m the new model instance
      */
-    public static void setInstance(Model m) {
+    public static void setInstance(ModelInterface m) {
         modelSingleton = m;
     }
 
@@ -74,9 +74,9 @@ public final class Model implements Serializable {
      * @param type the user's type (basic, manager, worker, or administrator)
      * @return the new user that was created and added to the user list
      */
-    public User registerUser(String name, String user, String pass, String email, String address,
+    public UserInterface registerUser(String name, String user, String pass, String email, String address,
                              String title, UserType type) {
-        User newUser = new User(name, user, pass, email, address, title, type);
+        UserInterface newUser = new User(name, user, pass, email, address, title, type);
         userSet.add(newUser);
         return newUser;
     }
@@ -85,7 +85,7 @@ public final class Model implements Serializable {
      * Gets the set of users for another class
      * @return the set of registered users
      */
-    public Iterable<User> getUserSet() {
+    public Iterable<UserInterface> getUserSet() {
         return userSet;
     }
 
@@ -93,7 +93,7 @@ public final class Model implements Serializable {
      * Gets the current user for another class
      * @return the current user
      */
-    public User getCurrentUser() {
+    public UserInterface getCurrentUser() {
         return currentUser;
     }
 
@@ -101,7 +101,7 @@ public final class Model implements Serializable {
      * Changes the current user
      * @param u the user to be set as the new current user
      */
-    public void setCurrentUser(User u) {
+    public void setCurrentUser(UserInterface u) {
         currentUser = u;
     }
 
@@ -110,7 +110,7 @@ public final class Model implements Serializable {
      * Gets a list of all water reports for another class
      * @return return a list of all water reports
      */
-    public Iterable<WaterReport> getReportList(){ return genericRepList;}
+    public Iterable<WaterReportInterface> getReportList(){ return genericRepList;}
 
     /**
      * Gets a list of all water source reports for another class
@@ -133,7 +133,7 @@ public final class Model implements Serializable {
      * @param type the type of water reported
      * @param condition the condition of the water reported
      */
-    public void submitWaterReport(User sub, Date subDate, double lat, double lng,
+    public void submitWaterReport(UserInterface sub, Date subDate, double lat, double lng,
                                   WaterType type, WaterCondition condition) {
         numRepCreated++;
         WaterSourceReport newRep = new WaterSourceReport(sub, subDate, lat, lng, type, condition,
@@ -149,7 +149,7 @@ public final class Model implements Serializable {
      * @param lat the latitude of the water reported
      * @param lng the longitude of the water reported
      */
-    public void submitAdditionalWaterReport(User sub, Date subDate, double lat, double lng, int yesOrNo) {
+    public void submitAdditionalWaterReport(UserInterface sub, Date subDate, double lat, double lng, int yesOrNo) {
         numRepCreated++;
         boolean isPurple = false;
         if (yesOrNo == 0) {
@@ -170,7 +170,7 @@ public final class Model implements Serializable {
      * @param vPPM the virusPPM of the water
      * @param cPPM the contaminantPPM of the water
      */
-    public void submitWaterPurityReport(User sub, Date subDate, double lat, double lng,
+    public void submitWaterPurityReport(UserInterface sub, Date subDate, double lat, double lng,
                                         WaterOverallCondition cond, double vPPM,
                                         double cPPM) {
         numRepCreated++;
@@ -186,7 +186,7 @@ public final class Model implements Serializable {
      * @return whether or not the username is already taken
      */
     public boolean usernameTaken(String s) {
-        User checkUser = new User("n", s, "p", "e", "a", "t", UserType.BASIC);
+        UserInterface checkUser = new User("n", s, "p", "e", "a", "t", UserType.BASIC);
         return userSet.contains(checkUser);
     }
 
@@ -257,7 +257,7 @@ public final class Model implements Serializable {
      * @param m the model being saved
      * @param context the screen the user is currently on
      */
-    public void saveModel(Model m, Context context) {
+    public void saveModel(ModelInterface m, Context context) {
         saveHelper.saveModel(m, context);
     }
 
@@ -266,7 +266,7 @@ public final class Model implements Serializable {
      * @param context the screen the user is currently on
      * @return the loaded instance of the model
      */
-    public Model loadModel(Context context) {
+    public ModelInterface loadModel(Context context) {
         return saveHelper.loadModel(context);
     }
 
@@ -330,10 +330,10 @@ public final class Model implements Serializable {
         return aRepList;
     }
 
-    public List<LogObject> getSecurityLogs() { return securityLogs;}
+    public List<LogObjectInterface> getSecurityLogs() { return securityLogs;}
 
     public void addSecurityLog(String uid, Date d, String action) {
-        LogObject log = new LogObject(uid + " " + action + " on " + sdf.format(d));
+        LogObjectInterface log = new LogObject(uid + " " + action + " on " + sdf.format(d));
         securityLogs.add(log);
     }
 }

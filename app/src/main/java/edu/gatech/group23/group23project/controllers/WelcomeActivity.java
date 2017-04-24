@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 
 /**
  * The first activity of the application where users can sign in or register
@@ -27,9 +28,9 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        Model modelInstance = Model.getInstance();
+        ModelInterface modelInstance = Model.getInstance();
         //loads data for the app
-        Model m = modelInstance.loadModel(this);
+        ModelInterface m = modelInstance.loadModel(this);
         if (m != null) {
             m.setCurrentUser(null);
             Model.setInstance(m);

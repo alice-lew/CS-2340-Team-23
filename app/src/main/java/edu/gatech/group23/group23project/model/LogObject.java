@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by Mbrune on 4/23/2017.
  */
 
-public class LogObject implements Serializable {
+public class LogObject implements Serializable, LogObjectInterface {
     private String logMessage;
 
     public LogObject(String m) {

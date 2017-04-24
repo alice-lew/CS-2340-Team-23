@@ -10,12 +10,13 @@ import android.widget.ListView;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 
 /**
  * The screen that lists all of the source reports
  */
 public class ReportListActivity extends AppCompatActivity {
-    private final Model modelInstance = Model.getInstance(); //gets the singleton model instance
+    private final ModelInterface modelInstance = Model.getInstance(); //gets the singleton model instance
 
     /**
      * {@inheritDoc}

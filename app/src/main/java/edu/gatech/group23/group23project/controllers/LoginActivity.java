@@ -24,7 +24,9 @@ import java.util.Date;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 import edu.gatech.group23.group23project.model.User;
+import edu.gatech.group23.group23project.model.UserInterface;
 
 
 /**
@@ -35,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Gets an instance of the model.
      */
-    private Model modelInstance = Model.getInstance();
-    private User attemptedUser = null;
+    private ModelInterface modelInstance = Model.getInstance();
+    private UserInterface attemptedUser = null;
 
 
     /**
@@ -209,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
             attemptedUser = null;
-            for (User aUser : modelInstance.getUserSet()) {
+            for (UserInterface aUser : modelInstance.getUserSet()) {
                 String[] pieces = aUser.getCredentials().split(" ");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.

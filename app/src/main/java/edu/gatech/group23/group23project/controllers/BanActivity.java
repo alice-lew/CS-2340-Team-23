@@ -14,11 +14,13 @@ import java.util.Set;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 import edu.gatech.group23.group23project.model.User;
+import edu.gatech.group23.group23project.model.UserInterface;
 import edu.gatech.group23.group23project.model.UserType;
 
 public class BanActivity extends AppCompatActivity {
-    private Model modelInstance = Model.getInstance();
+    private ModelInterface modelInstance = Model.getInstance();
     private EditText banInput;
     private EditText unbanInput;
 
@@ -36,8 +38,8 @@ public class BanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String toUnban = unbanInput.getText().toString();
-                Iterable<User> userSet = modelInstance.getUserSet();
-                for (User u: userSet) {
+                Iterable<UserInterface> userSet = modelInstance.getUserSet();
+                for (UserInterface u: userSet) {
                     if (u.getUsername().equals(toUnban) && u.getIsBanned()) {
                         u.unban();
                         u.resetLoginAttempts();
@@ -57,8 +59,8 @@ public class BanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String toBan = banInput.getText().toString();
-                Iterable<User> userSet = modelInstance.getUserSet();
-                for (User u: userSet) {
+                Iterable<UserInterface> userSet = modelInstance.getUserSet();
+                for (UserInterface u: userSet) {
                     if (u.getUsername().equals(toBan) && !u.getIsBanned() && u.getUserType() != UserType.ADMIN.ADMIN) {
                         u.ban();
                         modelInstance.addSecurityLog(modelInstance.getCurrentUser().getUsername(), new Date(), "banned " + toBan);

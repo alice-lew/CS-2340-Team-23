@@ -12,6 +12,7 @@ import java.util.Date;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 import edu.gatech.group23.group23project.model.User;
 import edu.gatech.group23.group23project.model.UserType;
 
@@ -23,7 +24,7 @@ import edu.gatech.group23.group23project.model.UserType;
 
 public class LoggedInActivity extends AppCompatActivity {
 
-    private Model modelInstance = Model.getInstance();  //gets the instance of the model
+    private ModelInterface modelInstance = Model.getInstance();  //gets the instance of the model
 
     /**
      * {@inheritDoc}

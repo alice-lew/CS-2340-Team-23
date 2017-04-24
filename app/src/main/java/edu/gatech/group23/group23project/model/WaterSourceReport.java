@@ -72,7 +72,7 @@ public class WaterSourceReport extends WaterReport {
      * @param condition the condition the water is in
      * @param number the number of the report
      */
-    public WaterSourceReport(User sub, Date subDate, double lat, double lng, WaterType type,
+    public WaterSourceReport(UserInterface sub, Date subDate, double lat, double lng, WaterType type,
                              WaterCondition condition, int number) {
         super(sub, subDate, lat, lng, number);
         waterType = type;

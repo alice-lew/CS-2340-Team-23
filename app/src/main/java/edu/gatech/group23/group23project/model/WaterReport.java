@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by Noah Blume on 2/28/2017.
  */
 
-public abstract class WaterReport implements Serializable {
+public abstract class WaterReport implements Serializable, WaterReportInterface {
     private final Date dateSubmitted;
     private final String reporterName;
     private final double latitude;
@@ -24,7 +24,7 @@ public abstract class WaterReport implements Serializable {
      * @param lng the longitude of the water
      * @param repNum the number of the report
      */
-    WaterReport(User sub, Date date, double lat, double lng, int repNum) {
+    WaterReport(UserInterface sub, Date date, double lat, double lng, int repNum) {
         dateSubmitted = date;
         reporterName = sub.getName();
         latitude = lat;
@@ -55,7 +55,7 @@ public abstract class WaterReport implements Serializable {
      * Gets the report's name for another class
      * @return report's name
      */
-    String getReporterName() { return reporterName;}
+    public String getReporterName() { return reporterName;}
 
     /**
      * Gets the report's number for another class

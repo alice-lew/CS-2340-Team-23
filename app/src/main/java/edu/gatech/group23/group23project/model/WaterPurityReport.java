@@ -70,7 +70,7 @@ public class WaterPurityReport extends WaterReport implements Comparable<WaterPu
      * @param cPPM the contaminant ppm of the water
      * @param number the number of the report
      */
-    public WaterPurityReport(User sub, Date subDate, double lat, double lng,
+    public WaterPurityReport(UserInterface sub, Date subDate, double lat, double lng,
                              WaterOverallCondition oCondition, double vPPM, double cPPM,
                              int number) {
         super(sub, subDate, lat, lng, number);

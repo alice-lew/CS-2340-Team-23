@@ -21,6 +21,7 @@ import java.util.Random;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 import edu.gatech.group23.group23project.model.WaterPurityReport;
 
 /**
@@ -136,7 +137,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity implements
             contaminantTextBox.setError("You must enter a number.");
         } else {
             Date date = new java.util.Date();
-            Model modelInstance = Model.getInstance();
+            ModelInterface modelInstance = Model.getInstance();
             modelInstance.submitWaterPurityReport(modelInstance.getCurrentUser(), date,
                     Double.parseDouble(latTextBox.getText().toString()),
                     Double.parseDouble(longTextBox.getText().toString()),

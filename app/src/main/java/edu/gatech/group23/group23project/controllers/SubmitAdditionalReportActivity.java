@@ -23,6 +23,7 @@ import java.util.Random;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 
 /**
  * The screen where users may submit source reports
@@ -125,7 +126,7 @@ public class SubmitAdditionalReportActivity extends AppCompatActivity implements
             latTextBox.setError("You must enter a number.");
         } else {
             Date date = new Date();
-            Model modelInstance = Model.getInstance();
+            ModelInterface modelInstance = Model.getInstance();
             modelInstance.submitAdditionalWaterReport(modelInstance.getCurrentUser(), date,
                     Double.parseDouble(latTextBox.getText().toString()),
                     Double.parseDouble(longTextBox.getText().toString()),purpleSpinner.getSelectedItemPosition());

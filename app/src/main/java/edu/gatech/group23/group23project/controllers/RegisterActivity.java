@@ -14,7 +14,9 @@ import java.util.Date;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 import edu.gatech.group23.group23project.model.User;
+import edu.gatech.group23.group23project.model.UserInterface;
 
 /**
  * The page where the user may register an account
@@ -33,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Spinner userTypeSpinner;
 
     //the model singleton object
-    private final Model modelInstance = Model.getInstance();
+    private final ModelInterface modelInstance = Model.getInstance();
 
     /**
      * {@inheritDoc}
@@ -112,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @SuppressWarnings("FeatureEnvy")
     private void successfullyRegister() {
-            User newUser = modelInstance.registerUser(nameText.getText().toString(),
+            UserInterface newUser = modelInstance.registerUser(nameText.getText().toString(),
                     userText.getText().toString(), passText.getText().toString(),
                     emailText.getText().toString(), addressText.getText().toString(),
                     titleText.getText().toString(),

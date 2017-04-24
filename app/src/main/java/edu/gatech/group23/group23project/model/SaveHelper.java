@@ -17,14 +17,14 @@ import java.io.Serializable;
  */
 
 @SuppressWarnings("CyclicClassDependency")
-class SaveHelper implements Serializable {
+class SaveHelper implements Serializable, SaveHelperInterface {
 
     /**
      * Saves a serialized copy of the model
      * @param m the model object
      * @param context the context for the screen the user is currently at
      */
-    public void saveModel(Model m, Context context) {
+    public void saveModel(ModelInterface m, Context context) {
         try {
             FileOutputStream fos = context.openFileOutput("model_file", Context.MODE_PRIVATE);
             ObjectOutput os = new ObjectOutputStream(fos);
@@ -44,7 +44,7 @@ class SaveHelper implements Serializable {
      * @param context context the context for the screen the user is currently at
      * @return the model object that was loaded
      */
-    public Model loadModel(Context context) {
+    public ModelInterface loadModel(Context context) {
         try {
             FileInputStream fis = context.openFileInput("model_file");
             ObjectInputStream is = new ObjectInputStream(fis);

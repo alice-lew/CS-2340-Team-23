@@ -21,13 +21,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 import edu.gatech.group23.group23project.model.WaterReport;
+import edu.gatech.group23.group23project.model.WaterReportInterface;
 
 /**
  * The screen that shows a map of all of the water reports
  */
 public class WaterMapActivity extends FragmentActivity implements OnMapReadyCallback {
-    private final Model modelInstance = Model.getInstance();  //the singleton model instance
+    private final ModelInterface modelInstance = Model.getInstance();  //the singleton model instance
 
 
     /**
@@ -88,7 +90,7 @@ public class WaterMapActivity extends FragmentActivity implements OnMapReadyCall
         });
 
         LatLng curLL = null;
-        for(WaterReport r: modelInstance.getReportList()) {
+        for(WaterReportInterface r: modelInstance.getReportList()) {
             double lat = r.getLatitude();
             double lng = r.getLongitude();
             MarkerOptions mO = new MarkerOptions();

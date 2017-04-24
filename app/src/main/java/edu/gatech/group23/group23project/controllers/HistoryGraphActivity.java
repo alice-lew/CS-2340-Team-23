@@ -25,6 +25,7 @@ import java.util.List;
 import edu.gatech.group23.group23project.R;
 import edu.gatech.group23.group23project.model.GraphType;
 import edu.gatech.group23.group23project.model.Model;
+import edu.gatech.group23.group23project.model.ModelInterface;
 import edu.gatech.group23.group23project.model.WaterAdditionalReport;
 import edu.gatech.group23.group23project.model.WaterPurityReport;
 
@@ -33,7 +34,7 @@ import edu.gatech.group23.group23project.model.WaterPurityReport;
  */
 public class HistoryGraphActivity extends AppCompatActivity {
     private final Calendar cal = Calendar.getInstance();
-    private final Model modelInstance = Model.getInstance();
+    private final ModelInterface modelInstance = Model.getInstance();
     private LineChart mChart;
 
     /**

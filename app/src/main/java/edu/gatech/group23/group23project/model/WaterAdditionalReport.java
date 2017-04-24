@@ -38,7 +38,7 @@ public class WaterAdditionalReport extends WaterReport implements Comparable<Wat
      * @param lng the longitude of the water
      * @param number the number of the report
      */
-    public WaterAdditionalReport(User sub, Date subDate, double lat, double lng, int number, boolean isPurple) {
+    public WaterAdditionalReport(UserInterface sub, Date subDate, double lat, double lng, int number, boolean isPurple) {
         super(sub, subDate, lat, lng, number);
         if (isPurple) {
             isTheWaterPurple = "Yes";

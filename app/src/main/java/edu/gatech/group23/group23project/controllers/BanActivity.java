@@ -40,8 +40,10 @@ public class BanActivity extends AppCompatActivity {
                 for (User u: userSet) {
                     if (u.getUsername().equals(toUnban) && u.getIsBanned()) {
                         u.unban();
+                        modelInstance.addSecurityLog(modelInstance.getCurrentUser().getUsername(), new Date(), "unbanned " + toUnban);
                         Toast.makeText(BanActivity.this, "User was unbanned.",
                                 Toast.LENGTH_SHORT).show();
+                        modelInstance.saveModel(modelInstance, BanActivity.this);
                         return;
                     }
                 }
@@ -58,8 +60,10 @@ public class BanActivity extends AppCompatActivity {
                 for (User u: userSet) {
                     if (u.getUsername().equals(toBan) && !u.getIsBanned() && u.getUserType() != UserType.ADMIN.ADMIN) {
                         u.ban();
+                        modelInstance.addSecurityLog(modelInstance.getCurrentUser().getUsername(), new Date(), "banned " + toBan);
                         Toast.makeText(BanActivity.this, "User was banned.",
                                 Toast.LENGTH_SHORT).show();
+                        modelInstance.saveModel(modelInstance, BanActivity.this);
                         return;
                     }
                 }

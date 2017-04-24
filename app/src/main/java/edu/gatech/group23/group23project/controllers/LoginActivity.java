@@ -224,7 +224,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             }
-            modelInstance.addSecurityLog(mEmail, new Date(), "failed to log in");
             return false;
         }
 
@@ -235,15 +234,18 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
+            showProgress(false);
 
             if (success) {
                 Context context = LoginActivity.this;
                 Intent intent = new Intent(context, LoggedInActivity.class);
                 context.startActivity(intent);
             } else if (attemptedUser == null){
+                modelInstance.addSecurityLog(mEmail, new Date(), "failed to log in");
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             } else {
+                modelInstance.addSecurityLog(mEmail, new Date(), "tried to log in while banned");
                 mEmailView.setError("This user is banned.");
                 mEmailView.requestFocus();
             }

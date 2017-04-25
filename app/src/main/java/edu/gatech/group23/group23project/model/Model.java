@@ -188,7 +188,6 @@ public class Model implements Serializable {
         currentUser = u;
     }
 
-
     /**
      * Gets a list of all water reports for another class
      * @return return a list of all water reports
@@ -387,5 +386,13 @@ public class Model implements Serializable {
      */
     public void setCurUserHome(String h) {
         currentUser.setHome(h);
+    }
+
+    /**
+     * Sets the current password to a new password
+     * @param np the new pasword
+     */
+    public void setNewPass(String np) {
+        currentUser.setPass(np);
     }
 }

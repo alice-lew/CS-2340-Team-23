@@ -77,7 +77,7 @@ public class EditProfileActivity extends AppCompatActivity {
             titleText.setError("You must enter your title.");
         } else if (!emailText.getText().toString().contains("@")) {
             emailText.setError("You must enter a valid email address.");
-        }else {
+        } else {
             modelInstance.setCurUserEmail(emailText.getText().toString());
             modelInstance.setCurUserHome(addressText.getText().toString());
             modelInstance.setCurUserTitle(titleText.getText().toString());

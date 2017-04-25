@@ -2,6 +2,8 @@ package edu.gatech.group23.group23project;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertEquals;
 
 import edu.gatech.group23.group23project.model.Model;

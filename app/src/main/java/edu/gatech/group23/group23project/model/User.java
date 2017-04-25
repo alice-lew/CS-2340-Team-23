@@ -14,7 +14,7 @@ public class User implements Serializable {
     private String home;             //the user's home address
     private String title;                   //the user's title
     private final String username;                //the user's username
-    private final String password;                //the user's password
+    private String password;                //the user's password
     private final String name;                    //the user's name
     private final String passRecovery;                  // answer to recover a password
     private final Model.UserType userType;        //the type of user
@@ -96,6 +96,14 @@ public class User implements Serializable {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * Changes the user's password
+     * @param newPass the String that will be set as the user's new email
+     */
+    public void setPass(String newPass) {
+        this.password = newPass;
     }
 
     /**
